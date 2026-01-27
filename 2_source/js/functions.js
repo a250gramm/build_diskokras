@@ -561,7 +561,6 @@ class DatabaseRenderer {
             colInfo = parsed.colInfo;
             
             if (cleanKey.startsWith('div_')) {
-            if (cleanKey.startsWith('div_')) {
                 const suffix = cleanKey.replace('div_', '');
                 // Если суффикс начинается с цифры (например, "2-col"), добавляем префикс "content-"
                 if (suffix && /^\d/.test(suffix)) {
