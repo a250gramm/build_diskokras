@@ -1,0 +1,31 @@
+{
+  "index":{
+    "seo":  ["Главная DISKOKRAS", "Описание", "Ключевые слова"],
+    "section":["header", "main_action", "list_orders", "footer"]
+  },
+  "shino":{
+    "seo":  ["Шиномонтаж", "Описание", "Ключевые слова"],
+    "section":["header", "turn", "main_action", "list_orders", "footer"]
+  },
+  "pokras":{
+    "seo":  ["Покраска дисков", "Описание", "Ключевые слова"],
+    "section":["header", "main_action", "list_orders", "footer"]
+  },
+  "hranenie":{
+    "seo":  ["Храненеи шин", "Описание", "Ключевые слова"],
+    "section":["header", "main_action", "list_orders", "footer"]
+  },
+  "geo":{
+    "seo":  ["Геометрия", "Описание", "Ключевые слова"],
+    "section":["header", "main_action", "list_orders", "footer"]
+  },
+  "deliv":{
+    "seo":  ["Доставка", "Описание", "Ключевые слова"],
+    "section":["header", "main_action", "list_orders", "footer"]
+  },
+  "poss_point":{
+    "seo":  ["Касса", "Описание", "Ключевые слова"],
+    "section":["header", "main_action", "list_orders", "footer"]
+  }
+}
+

@@ -1,0 +1,30 @@
+{
+"nav": {
+    "margin":   ["0","px"],
+    "padding":  ["0","px"],
+    "border":   ["2px solid", "1", "lime.150"]
+    },
+"a": {
+    "bg-color": ["lime",100],
+    "margin":   ["0","px"],
+    "padding":  ["4","px"],
+    "border":   ["1px solid", "1", "btn.bg-color.150"]
+    },
+"img": {
+    "bg-color": ["black",100],
+    "border":   ["1px solid", "1", "black.100"]
+    },
+"text": {
+    "bg-color": ["cyan",100],
+    "margin":   ["0","px"],
+    "padding":  ["10","px"],
+    "border":   ["1px solid", "1", "text.bg-color.150"]
+    },
+"icon": {
+    "bg-color": ["red",50],
+    "border":   ["1px solid", "1", "red.100"],
+    "display": "block",
+    "width": "20px",
+    "height": "20px"
+    }
+}

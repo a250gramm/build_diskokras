@@ -1,0 +1,34 @@
+{
+
+    "header-S-L-C":{
+        "gap": [10, 10, 5, "px"]
+    },
+    "turn-S-L-C":{
+        "gap": [10, 10, 5, "px"]
+    },
+    "main_action-S-L-C":{
+        "gap": [10, 10, 5, "px"]
+    },
+    "list_orders-S-L-C":{
+        "gap": [10, 10, 5, "px"]
+    },
+    "footer-S-L-C":{
+        "gap": [10, 10, 5, "px"]
+    },
+    "header-S":{
+        "bg-color*":  ["lightgray",100],
+        "border":    ["1px solid", "0 0 1 0", "black.100"]
+    },
+    "header-S-L":{
+        "bg-color": ["red",0],
+        "border*":   ["1px solid", "0 0 1 0", "black.100"]
+    },
+    "footer-S":{
+        "bg-color":  ["gray_10",100],
+        "border":    ["1px solid", "0 0 1 0", "black.100"]
+    },
+
+    "header.2.1.1": {
+        "width*": ["100%", "100%", "100%"]
+    }
+}

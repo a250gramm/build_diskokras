@@ -1,0 +1,130 @@
+[
+  {
+    "id": "pay_met_0",
+    "cat": "Другое ",
+    "sub_cat": "Другое",
+    "id_wallet": "",
+    "percent": 0.0,
+    "prefix": "",
+    "id_dot": "",
+    "view": [
+      "creat_order_shino"
+    ],
+    "created_at": "2025-10-29 07:31:11.671746",
+    "updated_at": "2025-10-29 07:31:11.671746"
+  },
+  {
+    "id": "pay_met_6",
+    "cat": "Перевод",
+    "sub_cat": "с Каспи на Каспи",
+    "id_wallet": "walt_3",
+    "percent": 0.0,
+    "prefix": "",
+    "id_dot": "",
+    "view": [
+      "give_money_wor"
+    ],
+    "created_at": "2025-10-29 07:31:11.671746",
+    "updated_at": "2025-10-29 07:31:11.671746"
+  },
+  {
+    "id": "pay_met_9",
+    "cat": "Наличка",
+    "sub_cat": "Наличка",
+    "id_wallet": "walt_2",
+    "percent": 0.0,
+    "prefix": "",
+    "id_dot": "",
+    "view": [
+      "give_money_wor"
+    ],
+    "created_at": "2025-10-29 07:31:11.671746",
+    "updated_at": "2025-10-29 07:31:11.671746"
+  },
+  {
+    "id": "pay_met_5",
+    "cat": "Терминал Каспи",
+    "sub_cat": "RED",
+    "id_wallet": "walt_1",
+    "percent": 7.0,
+    "prefix": "%",
+    "id_dot": "",
+    "view": [],
+    "created_at": "2025-10-29 07:31:11.671746",
+    "updated_at": "2025-10-29 07:31:11.671746"
+  },
+  {
+    "id": "pay_met_1",
+    "cat": "Терминал Каспи",
+    "sub_cat": "Каспи QR",
+    "id_wallet": "walt_1",
+    "percent": 0.95,
+    "prefix": "%",
+    "id_dot": "",
+    "view": [
+      "creat_order_shino"
+    ],
+    "created_at": "2025-10-29 07:31:11.671746",
+    "updated_at": "2025-10-29 07:31:11.671746"
+  },
+  {
+    "id": "pay_met_2",
+    "cat": "Терминал Каспи",
+    "sub_cat": "Каспи карта",
+    "id_wallet": "walt_1",
+    "percent": 1.29,
+    "prefix": "%",
+    "id_dot": "",
+    "view": [],
+    "created_at": "2025-10-29 07:31:11.671746",
+    "updated_at": "2025-10-29 07:31:11.671746"
+  },
+  {
+    "id": "pay_met_3",
+    "cat": "Терминал Каспи",
+    "sub_cat": "Другая карта",
+    "id_wallet": "walt_1",
+    "percent": 1.6,
+    "prefix": "%",
+    "id_dot": "",
+    "view": [],
+    "created_at": "2025-10-29 07:31:11.671746",
+    "updated_at": "2025-10-29 07:31:11.671746"
+  },
+  {
+    "id": "pay_met_4",
+    "cat": "Терминал Каспи",
+    "sub_cat": "Рассрочка",
+    "id_wallet": "walt_1",
+    "percent": 7.0,
+    "prefix": "%",
+    "id_dot": "",
+    "view": [],
+    "created_at": "2025-10-29 07:31:11.671746",
+    "updated_at": "2025-10-29 07:31:11.671746"
+  },
+  {
+    "id": "pay_met_7",
+    "cat": "Перечисления",
+    "sub_cat": "с Каспи на Халык",
+    "id_wallet": "walt_4",
+    "percent": 0.0,
+    "prefix": "",
+    "id_dot": "",
+    "view": [],
+    "created_at": "2025-10-29 07:31:11.671746",
+    "updated_at": "2025-10-29 07:31:11.671746"
+  },
+  {
+    "id": "pay_met_8",
+    "cat": "Перечисления",
+    "sub_cat": "с Халыка на Каспи",
+    "id_wallet": "walt_1",
+    "percent": 1.0,
+    "prefix": "%",
+    "id_dot": "",
+    "view": [],
+    "created_at": "2025-10-29 07:31:11.671746",
+    "updated_at": "2025-10-29 07:31:11.671746"
+  }
+]

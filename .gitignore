@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+
+# Бэкапы и временные файлы
+*.backup
+*.old
+*.tmp
+*_old*
+
+# Конфиденциальные данные
+z_door/ps_b1_key_new
+z_door/ps_b1_key_new.pub
+z_door/доступы_vps
+z_door/пароли
+**/пароли
+**/доступы*
+
+# Результаты сборки (опционально, если не хотите коммитить)
+# 3_result/
+
+# Логи
+*.log
+

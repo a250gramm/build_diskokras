@@ -1,0 +1,65 @@
+{
+    "html": {
+        "max-width":[95,"%"],
+        "bg-color": ["white",100],
+        "margin":   ["0 auto", "px"],
+        "padding":  ["0","px"],
+        "border":   ["1px solid", "1", "black"]
+    },
+    "page": {
+        "bg-color": ["magenta",100],
+        "margin":   ["2","px"],
+        "padding":  ["3","px"],
+        "border":   ["0px solid", "1", "page.bg-color.50"]
+    },
+    "section": {
+        "bg-color": ["cyan",100],
+        "margin":   ["0 0 2 0","px"],
+        "padding":  ["0","px"],
+        "border":   ["3px solid", "1 1 1 1","section.bg-color.100"]
+    },
+    "layout": {
+        "device": {
+            "desktop": {"width":"900px", "flex-wrap": "nowrap", "gap": "10px"},
+            "tablet":  {"width":"768px", "flex-wrap": "wrap",   "gap": "5px"},
+            "mobile":  {"width":"320px", "flex-wrap": "wrap",   "gap": "5px"}
+        },
+        "bg-color": ["yellow",90],
+        "margin":   ["0 auto", "px"],
+        "padding":  ["3","px"],
+        "border":   ["0px solid", "1", "layout.bg-color.50"]
+    },
+    "column": {
+        "margin":     ["0","px"],
+        "padding":    ["0","px"],
+        "min-width":  "0",
+        "max-width":  [100,"%"],
+        "box-sizing": "border-box",
+        "border":     ["0px solid", "1", "black"]
+    },
+    "col_in_row": {
+        "bg-color":   ["white",100],
+        "padding":    ["10","px"], 
+        "gap":        ["2","px"],
+        "border":     ["3px dotted", "1", "black.100"],
+        "box-sizing": "border-box",
+        "max-width":  [100,"%"],
+        "min-width":  "0",
+        "overflow":   "hidden"
+    },
+    "row": {
+        "bg-color": ["magenta",50],
+        "margin":   ["0","px"],
+        "padding":  ["2","px"],
+        "gap":      ["5","px"],
+        "border":   ["0px dotted", "1", "black.100"]
+    },
+    "group": {
+        "bg-color": ["white",100],
+        "margin":   ["0","px"],
+        "padding":  ["5","px"],
+        "gap":      ["5","px"],
+        "width":    "auto",
+        "border":   ["1px dotted", "1", "black.100"]
+    }
+}

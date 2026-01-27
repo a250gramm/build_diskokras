@@ -1,0 +1,31 @@
+[
+  {
+    "id": "walt_1",
+    "name": "Kaspi PAY",
+    "balance": 1852.81,
+    "img": "/pm_kaspi.png",
+    "test_data": 852.81
+  },
+  {
+    "id": "walt_2",
+    "name": "Касса 1 (на каблукова 2)",
+    "balance": 0.0,
+    "img": "",
+    "test_data": 0.0
+  },
+  {
+    "id": "walt_3",
+    "name": "Каспи номер +7 777 123 1234",
+    "balance": 0.0,
+    "img": "",
+    "test_data": 0.0
+  },
+  {
+    "id": "walt_4",
+    "name": "Halyk PAY",
+    "balance": 0.0,
+    "img": "/pm_halyk.jpg", 
+    "test_data": 0.0
+  }
+]
+

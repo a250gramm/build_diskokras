@@ -1,0 +1,40 @@
+:root {
+    /* Branded colors */
+    --branded_1: #7cbff5;
+    --branded_2: #1c99ff;
+
+    /* Basic colors */
+    --white: #ffffff;
+    --black: #000000;
+    
+    /* Primary colors */
+    --magenta: #ff00ff;
+    --cyan: #00ffff;
+    --yellow: #ffff00;
+
+    --red: #ff0000;
+    --green: #008000;
+    --lime: #00ff00;
+    --blue: #0000ff;
+    
+    /* Gray scale (from light to dark) */
+    --gray_1: #f5f5f5;
+    --gray_2: #dcdcdc;
+    --gray_3: #d3d3d3;
+    --gray_4: #c0c0c0;
+    --gray_5: #a9a9a9;
+    --gray_6: #808080;
+    --gray_7: #778899;
+    --gray_8: #708090;
+    --gray_9: #696969;
+    --gray_10: #2b2b2b;
+
+    /* Named gray colors */
+    --lightgray: #d3d3d3;
+    --lightgrey: #d3d3d3;
+    --darkgray: #a9a9a9;
+    --darkgrey: #a9a9a9;
+    --silver: #c0c0c0;
+    --gainsboro: #dcdcdc;
+}
+

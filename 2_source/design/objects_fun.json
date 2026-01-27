@@ -1,0 +1,9 @@
+{
+"суммирование всех полей с ценой":{
+    "main_btn form_form2 1.div_wr-fields field": {
+        "fun": "sum",
+        "format": "number",
+        "result": "total_price"
+    }
+}
+}

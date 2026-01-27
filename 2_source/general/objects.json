@@ -1,0 +1,189 @@
+{ 
+    "logo":{
+        "a_link1":{
+            "in":                  ["/index"],
+            "img_b":               ["img",  "logo_2_b.svg"],
+            "title":               ["text", "CRM1" ]
+        }
+    },
+    "logo_w":{
+        "a_link1":{
+            "in":                  ["/index"],
+            "img_b":               ["img",  "logo_2_w.svg"],
+            "title":               ["text", "CRM1" ]
+        }
+    },
+
+    "header_menu":{
+        "div_gr1":{
+            "logo":                ["img",  "logo_2_b.svg"],
+            "title":               ["text", "CRM" ],
+            "burger":              ["icon", "burger_svg"]
+        },
+        "nav_menu1":{
+            "shino":               ["a",  "text:Шиномонтаж",      "/shino"      ],
+            "pokras":              ["a",  "text:Покраска дисков", "/pokras"     ],
+            "hranenie":            ["a",  "text:Хранение шин",    "/hranenie"   ],
+            "geo":                 ["a",  "text:Геометрия",       "/geo"        ],
+            "deliv":               ["a",  "text:Доставка",        "/deliv"      ],
+            "poss_point":          ["a",  "text:Касса",           "/poss_point" ]
+        }
+    },
+
+    "sim":            ["text", "#"],
+    "number":         ["text", "2", "api"],
+    "date_creat_turn":["text", "5 апреля 2025", "api"],
+    "workers_name":   ["text", "Петр Степанков, Павел Марущак, Танутьяна Баранова", "api"],
+
+  
+
+    "turn_menu":{
+        "nav_menu2":{
+            "open_turn":     ["a",  "text:Открыть",       "modal",    "form"],
+            "close_turn":    ["a",  "text:Закрыть",       "modal",    "form"],
+            "add_to_turn":   ["a",  "text:Добавить",      "modal",    "form"]
+        }
+    },
+
+    "search":{
+        "form_form1":{  
+            "input": ["input", "text", "Поиск заказа"],
+            "button": ["button", "icon:grid_3x3"]
+
+        }
+    },
+
+    "main_btn":{
+        "if": {
+            "/shino": {
+                "btn_modal": ["button", "if:main_btn", "modal:modal1",
+                    {
+                    "div_modal1":{
+                        "div_gr4":{
+                            "tit":               ["text", "if:modal_main_btn" ],
+                            "close":             ["icon", "close"]
+                        },
+                        "form_form2":{  
+                            "1.div_wr-fields": {
+                                "tit":         ["text", "text:Услуги"],
+                                "1.div_field-price": {
+                                    "label":   ["text",  "text:Шиномонтаж"],
+                                    "field":   ["input", "text:Введите сумму"],
+                                    "suffix":  ["text",  "text:тг."]
+                                },
+                                "2.div_field-price": {
+                                    "label":   ["text",  "text:Прокат"],
+                                    "field":   ["input", "text:Введите сумму"],
+                                    "suffix":  ["text",  "text:тг."]
+                                },
+                                "3.div_field-price": {
+                                    "label":   ["text",  "text:Соски"],
+                                    "field":   ["input", "text:Введите сумму"],
+                                    "suffix":  ["text",  "text:тг."]
+                                },
+                                "4.div_field-price": {
+                                    "label":   ["text",  "text:Аргон"],
+                                    "field":   ["input", "text:Введите сумму"],
+                                    "suffix":  ["text",  "text:тг."]
+                                },
+                                "5.div_field-price": {
+                                    "label":   ["text",  "text:Прокат"],
+                                    "field":   ["input", "text:Введите сумму"],
+                                    "field_2": ["input", "text:Введите сумму"],
+                                    "suffix":  ["text",  "text:тг."]
+                                },
+                                "6.div_field-price": {
+                                    "label":   ["text",  "fun:total_price"]
+                                }
+                            },
+                            "2.div_wr-fields": {
+                                "tit":         ["text", "text:Способ оплаты"],
+                                "cycle_gr8 col:2,1,1":       {
+                                    "api1":        ["bd",   "front_pay_met"],
+                                    "api2":        ["bd",   "front_wall", "link:api1.id_wallet"],
+                                    "div_field-paymet col:2,2,2": {
+                                        "div_1-col:20%": {
+                                            "photo":     ["img",   "api2:img"]
+                                        },
+                                        "div_2-col:80%": {
+                                            "label":      ["text",  "api1:sub_cat"],
+                                            "percent":    ["text",  "api1:percent"],
+                                            "prefix":     ["text",  "api1:prefix"],
+                                            "id_wallet*": ["text",  "api1:id_wallet"]
+                                        }
+                                    }
+                                }
+                            },
+
+                            "button_1":      ["button", "text:Отправить"],
+                            "button_submit": ["button", "text:Утвердить"],
+                            "btn_3":         ["button", "text:Удалить"],
+                            "field_1":       ["input", "checkbox", "text:Показать поле цены", "toggle:field_price"]
+
+                            },
+                        "form_form3":{  
+                            "field_1":       ["input", "text", "text:Шиномонтаж"],
+                            "field_2":       ["input", "text", "text:Шиномонтаж"],
+                            "field_3":       ["input", "text", "text:Шиномонтаж"],
+                            "button_1":      ["button", "text:Отправить"]
+                            },
+                        "form_form4":{  
+                            "field_1":       ["input", "text", "text:Шиномонтаж"],
+                            "field_2":       ["input", "text", "text:Шиномонтаж"],
+                            "field_3":       ["input", "text", "text:Шиномонтаж"],
+                            "button_1":      ["button", "text:Отправить"]
+                            }
+                        }
+                    }
+                ]
+            },
+            "/pokras": {
+                "btn_modal": ["button", "text:Создать заказ Корень", "modal:modal1",
+                {
+                    "div_modal1":{
+                        "div_gr4":     ["double"],
+                        "form_form2":{  
+                            "field_1":  ["input", "text", "text:Шиномонтаж"],
+                            "field_2":  ["input", "text", "text:Шиномонтаж"],
+                            "field_3":  ["input", "text", "text:Шиномонтаж"],
+                            "button_1": ["button", "text:Отправить"]
+                            }
+                        }
+                    }
+                ]
+            },
+            "/hranenie":     ["button", "text:Создать заказ",    "modal",    "form"],
+            "/geo":          ["button", "text:Создать заказ",    "modal",    "form"],
+            "/deliv":        ["button", "text:Создать заказ",    "modal",    "form"],
+            "/poss_point":   ["button", "text:Принять оплату",   "modal",    "form"]
+        }
+    },
+    "main_btn_new":{
+        "div_gr3":{  
+            "button":{
+                "if": {
+                    "/shino":        ["button", "text:Создать заказ",    "modal",    "form"],
+                    "/pokras":       ["button", "text:Создать заказ",    "modal",    "form"],
+                    "/hranenie":     ["button", "text:Создать заказ",    "modal",    "form"],
+                    "/geo":          ["button", "text:Создать заказ",    "modal",    "form"],
+                    "/deliv":        ["button", "text:Создать заказ",    "modal",    "form"],
+                    "/poss_point":   ["button", "text:Принять оплату",   "modal",    "form"]
+                }
+            }
+        }
+    },
+    "list_orders": {
+        "if": {
+            "/shino":        ["list"],
+            "/pokras":       ["list"],
+            "/hranenie":     ["list"],
+            "/geo":          ["list"],
+            "/deliv":        ["list"],
+            "/poss_point":   ["list"]
+        }
+    },
+    "real_date": ["text", "21 августа 2025",    "api"],
+    "real_time": ["text", "14:53:23",           "api"]
+    
+}
+

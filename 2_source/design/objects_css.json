@@ -1,0 +1,422 @@
+{
+    "логотип новый ХЕДЕР":{
+        "logo":{
+            "display": ["flex", "none", "none"],
+            "flex-wrap": ["wrap", "wrap", "wrap"],
+            "justify-content": ["flex-end", "flex-start", "flex-start"],
+            "border*": ["2px solid", "1 1 1 1", "blue.100"]
+        },
+        "logo a_link1":{
+            "display": ["flex", "none", "none"],
+            "flex-wrap": ["wrap", "wrap", "wrap"],
+            "width": ["100","100","100", "%"],
+            "justify-content": ["flex-end", "flex-start", "flex-start"],
+            "border*": ["2px solid", "1 1 1 1", "red.100"]
+        },
+        "logo img_b": {
+            "display": ["flex", "none", "none"],
+            "height": "50px",
+            "width": "auto",
+            "max-height": "50px",
+            "max-width": ["200","150","100", "px"],
+            "object-fit": "contain",
+            "border*": ["2px solid", "1 1 1 1", "red.100"]
+        },
+        "logo title":{
+            "margin-top": ["26","24","23", "px"],
+            "font-size": ["12","10","8", "px"],
+            "display": ["block", "none", "none"]
+        }
+    
+    },
+    "логотип новый ФУТЕР":{
+        "logo_w":{
+            "display": ["flex", "none", "none"],
+            "flex-wrap": ["wrap", "wrap", "wrap"],
+            "justify-content": ["flex-end", "flex-start", "flex-start"],
+            "border*": ["2px solid", "1 1 1 1", "blue.100"]
+        },
+        "logo_w a_link1":{
+            "display": ["flex", "none", "none"],
+            "flex-wrap": ["wrap", "wrap", "wrap"],
+            "width": ["100","100","100", "%"],
+            "justify-content": ["flex-end", "flex-start", "flex-start"],
+            "border*": ["2px solid", "1 1 1 1", "red.100"]
+        },
+        "logo_w img_b": {
+            "display": ["flex", "none", "none"],
+            "height": "50px",
+            "width": "auto",
+            "max-height": "50px",
+            "max-width": ["200","150","100", "px"],
+            "object-fit": "contain"
+        },
+        "logo_w title":{
+            "margin-top": ["26","24","23", "px"],
+            "font-size": ["12","10","8", "px"],
+            "display": ["block", "none", "none"],
+            "color": "white"
+        }
+    
+    },
+    "НОВОЕ меню в хедере":{
+        "header_menu": {
+            "display": ["flex", "flex", "flex"],
+            "flex-wrap": ["nowrap", "wrap", "wrap"],
+            "width": ["auto", "100", "100", "%"],
+            "justify-content": ["flex-end", "flex-start", "flex-start"],
+            "border*": ["2px solid", "1 1 1 1", "red.100"],
+            "margin-left": ["auto", "0", "0"]
+        },
+        "header_menu div_gr1": {
+            "display": ["none", "flex", "flex"],
+            "width": ["100", "100", "100", "%"],
+            "border*": ["2px solid", "1 1 1 1", "red.100"],
+            "gap": [10, 5, 5, "px"]
+        },
+        "header_menu nav_menu1":{
+            "display": ["flex", "none", "none"],
+            "width": ["auto", "100", "100", "%"],
+            "justify-content": ["flex-end", "flex-start", "flex-start"],
+            "margin-left": ["auto", "0", "0"],
+            "margin-top": ["20","0","0", "px"],
+            "gap": [25, 5, 5, "px"]
+        },
+        "header_menu logo":{
+            "color": "white",
+            "height": "50px",
+            "width": "auto",
+            "max-height": "50px",
+            "max-width": ["200","150","100", "px"],
+            "object-fit": "contain",
+            "border*": ["4px solid", "1 1 1 1", "red.100"]
+        },
+        "header_menu title": {
+            "margin-top": ["26","24","23", "px"],
+            "font-size": ["12","10","8", "px"]
+        },
+        "header_menu burger":{
+            "margin-top": ["0","10","10", "px"],
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["row", "row", "row"],
+            "align-items": ["center", "center", "center"],
+            "justify-content": ["center", "center", "center"],
+            "width": ["40","30","30", "px"],
+            "height": ["40","30","30", "px"],
+            "margin-left": ["auto", "auto", "auto"]
+        },
+        "header_menu nav_menu1.opened": {
+            "display": ["flex", "flex", "flex"],
+            "justify-content": ["flex-end", "flex-start", "flex-start"]
+        },  
+        "header_menu nav_menu1 a": {
+            "border*": ["2px solid", "1 1 1 1", "black.100"]
+        }
+    },
+    "Поиск заказа":{
+        "search":{
+            "min-width": [100, 100, 100, "%"],
+            "width": [100, 100, 100, "%"],
+            "border*": ["2px solid", "1 1 1 1", "red.100"]
+        },
+        "search form":{
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["row", "row", "row"],
+            "width": [100, 100, 100, "%"],
+            "border-radius": [5, 5, 5, "px"],
+            "overflow": ["hidden", "hidden", "hidden"],
+            "border*": ["2px solid", "1 1 1 1", "red.100"]
+    
+        },
+        "search input":{
+            "flex": ["1", "1", "1"],
+            "border": ["0px", "0 0 0 0"],
+            "outline": ["none"],
+            "background": ["transparent"],
+            "padding": [13, 10, 10, "px"]
+        },
+        "search button":{
+            "width": [42, 50, 40, "px"],
+            "height": [40, 100, 100, "%"],
+            "border": ["0px", "0 0 0 0"],
+            "bg-color": ["blue", 100],
+            "color": ["white", 100],
+            "cursor": ["pointer"],
+            "padding": [0, 0, 0, "px"]
+        }
+    },
+    
+    "ГЛАВНАЯ КНОПКА — модальное окно":{
+        "main_btn":{
+            "box-sizing": ["border-box", "border-box", "border-box"],
+            "width": ["100","100","100", "%"],
+            "min-width": [100, 100, 100, "%"]
+        },
+        "main_btn btn_modal":{
+            "box-sizing": ["border-box", "border-box", "border-box"],
+            "width": ["100","100","100", "%"],
+            "display": ["block", "block", "block"],
+            "color": ["white",100],
+            "bg-color": ["blue",100],
+            "text-align": ["center", "center", "center"],
+            "text-decoration": ["none", "none", "none"],
+            "padding-top":    [15, 10, 10, "px"],
+            "padding-bottom": [15, 10, 10, "px"],
+            "padding-left":   [10, 10, 10, "px"],
+            "padding-right":  [10, 10, 10, "px"]
+        },
+        "main_btn div_modal1":{
+            "display": ["none", "none", "none"],
+            "position": ["fixed", "fixed", "fixed"],
+            "top": [0, 0, 0],
+            "left": [0, 0, 0],
+            "width": [100, 100, 100, "%"],
+            "height": [100, 100, 100, "%"],
+            "bg-color": ["black", 50],
+            "z-index": [1000, 1000, 1000],
+            "align-items": ["center", "center", "center"],
+            "justify-content": ["flex-start", "flex-start", "flex-start"],
+            "flex-direction": ["column", "column", "column"],
+            "overflow-y": ["auto", "auto", "auto"],
+            "box-sizing": ["border-box", "border-box", "border-box"],
+            "gap": [0, 0, 0],
+            "padding-top": [20, 20, 20, "px"],
+            "padding-bottom": [20, 20, 20, "px"]
+        }
+    },
+    "ГЛАВНАЯ КНОПКА — кнопки":{
+        "main_btn form button":{
+            "width": [100, 100, 100, "%"],
+            "padding": [12, 10, 8, "px"],
+            "bg-color": ["black", 100],
+            "color": ["white", 100],
+            "border": ["0px", "0 0 0 0"],
+            "border-radius": [5, 5, 5, "px"],
+            "cursor": ["pointer"],
+            "font-size": [16, 14, 14, "px"]
+        },
+        "main_btn form button.submit":{
+            "bg-color": ["green", 100]
+        },
+        "main_btn form button.btn_3":{
+            "bg-color": ["red", 100]
+        },
+        "main_btn form.form3 button":{
+            "bg-color": ["white", 100],
+            "border": ["1px solid", "1 1 1 1", "black.100"],
+            "color": ["black", 100]
+        }
+    },
+    
+    "Модальное окно для главной кнопки":{
+    
+        "main_btn div_modal1.active":{
+            "display": ["flex", "flex", "flex"]
+        },
+        "main_btn div_gr4":{
+            "display": ["flex", "flex", "flex"],
+            "justify-content": ["space-between", "space-between", "space-between"],
+            "align-items": ["center", "center", "center"],
+            "bg-color": ["white", 100],
+            "padding": [20, 15, 10, "px"],
+            "border-radius": [10, 10, 0, "px"],
+            "border-bottom-left-radius": [0, 0, 0],
+            "border-bottom-right-radius": [0, 0, 0],
+            "max-width": ["500px", "400px", "100%"],
+            "width": [100, 100, 100, "%"]
+        },
+        "main_btn close":{
+            "cursor": ["pointer", "pointer", "pointer"],
+            "width": [24, 20, 18, "px"],
+            "height": [24, 20, 18, "px"]
+        },
+        "main_btn form":{
+            "bg-color": ["white", 100],
+            "padding": [20, 15, 10, "px"],
+            "border-radius": [10, 10, 0, "px"],
+            "border-top-left-radius": [0, 0, 0],
+            "border-top-right-radius": [0, 0, 0],
+            "max-width": ["500px", "400px", "100%"],
+            "width": [100, 100, 100, "%"],
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["column", "column", "column"],
+            "gap": [15, 10, 10, "px"]
+        },
+        "main_btn form.form3":{
+            "bg-color": ["#FFC0CB", "#FFC0CB", "#FFC0CB"]
+        },
+    
+        "main_btn input":{
+            "width": [100, 100, 100, "%"],
+            "padding": [12, 10, 8, "px"],
+            "border*": ["1px solid", "1 1 1 1", "black.20"],
+            "border-radius*": [5, 5, 5, "px"],
+            "outline": ["none"],
+            "box-sizing": ["border-box", "border-box", "border-box"]
+        },
+        "main_btn .field_price*":{
+            "display": ["none", "none", "none"]
+        },
+        "main_btn .field_price.visible*":{
+            "display": ["block", "block", "block"]
+        }
+    },
+    
+    "Группа полей":{
+        "main_btn div_wr-fields":{
+            "border": ["2px dotted", "1 1 1 1", "black.100"]
+        },
+        "main_btn div_wr-fields tit":{
+            "border": ["2px solid", "1 1 1 1", "red.100"]
+        }
+    },
+    
+    "Поле с ценой полоплам и суффиксом":{
+        "main_btn div_field-price":{
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["row", "row", "row"],
+            "align-items": ["center", "center", "center"],
+            "gap": [10, 10, 10, "px"],
+            "border": ["1px solid", "1 1 1 1", "black.100"],
+            "box-sizing": ["border-box", "border-box", "border-box"],
+            "overflow": ["hidden", "hidden", "hidden"],
+            "position": ["relative", "relative", "relative"],
+            "margin-bottom": [10, 10, 10, "px"]
+        },
+        "main_btn div_field-price label":{
+            "flex": ["0 0 50%", "0 0 30%", "0 0 30%"],
+            "max-width": ["50%", "30%", "30%"],
+            "white-space": ["nowrap", "nowrap", "nowrap"],
+            "border": ["2px solid", "1 1 1 1", "black.100"]
+        },
+        "main_btn div_field-price input":{
+            "flex": ["1 1 auto", "1 1 auto", "1 1 auto"],
+            "padding-right": [50, 50, 50, "px"],
+            "outline": ["none", "none", "none"],
+            "border": ["2px solid", "1 1 1 1", "red.100"]
+        },
+        "main_btn div_field-price .field":{
+            "flex": ["1 1 auto", "1 1 auto", "1 1 auto"],
+            "width": [100, 100, 100, "%"],
+            "padding-right": [50, 50, 50, "px"],
+            "border": ["2px solid", "1 1 1 1", "blue.100"]
+        },
+        "main_btn div_field-price suffix":{
+            "margin-left": [-40, -40, -40, "px"],
+            "pointer-events": ["none", "none", "none"],
+            "color": ["black", 60],
+            "z-index": [1, 1, 1],
+            "position": ["relative", "relative", "relative"],
+            "border": ["2px solid", "1 1 1 1", "black.100"]
+        }
+    },
+    
+    "Поле с методом оплаты":{
+        "main_btn cycle_gr8": {
+            "gap": [10, 20, 10, "px"],
+            "border": ["2px solid", "1 1 1 1", "blue.100"],
+            "margin": "10px",
+            "padding": "10px",
+            "box-sizing": ["border-box", "border-box", "border-box"]
+        },
+        "main_btn div_field-paymet":{
+            "display": ["grid", "grid", "grid"],
+            "grid-template-columns": ["minmax(0, 20%) minmax(0, 80%)", "minmax(0, 20%) minmax(0, 80%)", "minmax(0, 20%) minmax(0, 80%)"],
+            "align-items": ["stretch", "stretch", "stretch"],
+            "min-height": [48, 130, 130, "px"],
+            "row-gap": [0, 0, 0, "px"],
+            "column-gap": [10, 10, 10, "px"],
+            "box-sizing": ["border-box", "border-box", "border-box"],
+            "min-width": [0, 0, 0],
+            "border": ["1px solid", "1 1 1 1", "black.100"],
+            "padding*": ["10", "10", "10", "px"]
+        },
+        "main_btn div_field-paymet 1-col":{
+            "display": ["flex", "flex", "flex"],
+            "align-items": ["center", "center", "center"],
+            "align-self": ["stretch", "stretch", "stretch"],
+            "border": ["1px solid", "1 1 1 1", "red.100"]
+        },
+        "main_btn div_field-paymet 2-col":{
+            "display": ["flex", "flex", "flex"],
+            "flex-wrap": ["wrap", "wrap", "wrap"],
+            "align-items": ["center", "center", "center"],
+            "align-self": ["stretch", "stretch", "stretch"],
+            "width": ["fit-content", "fit-content", "fit-content"],
+            "max-width": ["fit-content", "fit-content", "fit-content"],
+            "justify-self": ["start", "start", "start"],
+            "border": ["1px solid", "1 1 1 1", "black.100"]
+        },
+
+        "main_btn div_field-paymet img":{
+            "border": ["2px solid", "1 1 1 1", "green.100"],
+            "min-width": [20, 50, 50, "px"],
+            "min-height": [20, 50, 50, "px"],
+            "max-width": [40, 100, 100, "px"],
+            "max-height": [40, 100, 100, "px"],
+            "object-fit": ["contain", "contain", "contain"],
+            "display": ["block", "block", "block"]
+        },
+        "main_btn div_field-paymet label":{
+            "flex-basis": ["100%", "100%", "100%"],
+            "white-space": ["nowrap", "nowrap", "nowrap"],
+            "border": ["1px solid", "1 1 1 1", "red.100"]
+        },
+        "main_btn div_field-paymet percent":{
+            "display": ["inline-block", "block", "block"],
+            "white-space": ["nowrap", "normal", "normal"],
+            "width": ["fit-content", "auto", "auto"],
+            "border": ["2px solid", "1 1 1 1", "red.100"]
+        },
+        "main_btn div_field-paymet prefix":{
+            "display": ["inline-block", "block", "block"],
+            "white-space": ["nowrap", "normal", "normal"],
+            "width": ["fit-content", "auto", "auto"],
+            "border": ["1px solid", "1 1 1 1", "cyan.100"]
+        }
+    },
+    
+    
+    
+    "другая группа объектов":{
+    
+    
+        "real_date": {
+            "color": "white",
+            "text-align": ["left", "left", "center"],
+            "display": ["inline", "inline", "block"],
+            "width": ["auto", "auto", "100%"]
+        },
+        "real_time": {
+            "color": "white",
+            "text-align": ["left", "left", "center"],
+            "display": ["inline", "inline", "block"],
+            "width": ["auto", "auto", "100%"]
+        }
+    
+    },
+    "меню в смены":{
+    
+        "turn_menu":{
+            "width": ["100%", "100%", "100%"],
+            "border*": ["4px solid", "1 1 1 1", "red.100"]
+        },
+        "turn_menu nav_menu2":{
+            "flex-direction": ["row", "row", "column"],
+            "gap": [20, 10, 5, "px"]
+        },
+        "turn_menu nav_menu2 a":{
+            "width": ["100","100","100", "%"],
+            "display": ["block", "block", "block"],
+            "color": ["white",100],
+            "bg-color": ["black",100],
+            "text-align": ["center", "center", "center"],
+            "text-decoration": ["none", "none", "none"],
+            "padding-top":    [15, 10, 10, "px"],
+            "padding-bottom": [15, 10, 10, "px"],
+            "padding-left":   [10, 10, 10, "px"],
+            "padding-right":  [10, 10, 10, "px"]
+        }
+    }
+    }
+    

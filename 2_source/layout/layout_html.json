@@ -1,0 +1,92 @@
+{
+"header": {
+      "col_1": {
+        "row_1": {
+          "gr_1": [
+            "logo"
+          ]
+        }
+      },
+      "col_2": {
+        "row_1": {
+          "gr_1": [
+            "header_menu"
+          ]
+        }
+      }
+  },
+"turn": {
+      "col_1": {
+        "row_1": {
+          "gr_1": [
+            "sim", "number"
+          ]
+        },
+        "row_2": {
+          "gr_1": [
+            "date_creat_turn"
+          ]
+        }
+      },
+      "col_2": {
+        "row_1": {
+          "gr_1": [
+            "workers_name"
+          ]
+        }
+      },
+      "col_3": {
+        "row_1": {
+          "gr_1": [
+            "turn_menu"
+          ]
+        }
+      }
+    },
+"main_action": {
+        "col_1": {
+          "row_1": {
+            "gr_1": [
+              "search"
+            ]
+          }
+        },
+        "col_2": {
+          "row_1": {
+            "gr_1": [
+              "main_btn"
+            ]
+          }
+        }
+      },
+"list_orders": {
+      "col_1": {
+        "row_1": {
+          "gr_1": [
+            "list_orders"
+          ]
+        }
+      }
+  },
+"footer": {
+    "col_1": {
+      "row_1": {
+        "gr_1": [
+          "real_date"
+        ]
+      },
+      "row_2": {
+        "gr_1": [
+          "real_time"
+        ]
+      }
+    },
+    "col_2": {
+      "row_1": {
+        "gr_1": [
+          "logo_w"
+        ]
+      }
+    }
+  }
+}

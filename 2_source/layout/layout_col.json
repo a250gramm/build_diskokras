@@ -1,0 +1,31 @@
+{
+"header": {
+    "desktop": [25, 75],
+    "tablet": [100],
+    "mobile": [100]
+},
+
+"turn": {
+    "desktop": [20, 40, 40],
+    "tablet": [100],
+    "mobile": [100]
+},
+
+"main_action": {
+    "desktop": [75, 25],
+    "tablet": [50, 50],
+    "mobile": [100]
+},
+
+"list_orders": {
+    "desktop": [100],
+    "tablet": [100],
+    "mobile": [100]
+},
+
+"footer": {
+    "desktop": [50, 50],
+    "tablet": [50, 50],
+    "mobile": [100]
+}
+}

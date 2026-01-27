@@ -1,0 +1,40 @@
+{
+    "nav": {
+        "box-sizing":      ["border-box", "border-box", "border-box"],
+        "display":         ["flex", "flex", "flex"],
+        "min-width":       ["0", "0", "0"],
+        "max-width":       ["100%", "100%", "100%"],
+        "gap":             [5, 5, 5, "px"],
+        "width":           ["auto", "100%", "100%"],
+        "justify-content": ["flex-end", "flex-start", "flex-start"],
+        "flex-direction":  ["row", "column", "column"]
+    },
+    "a": {
+        "color": ["black",100],
+        "text-decoration": "none"
+    },
+    "text": {
+        "display": "inline-block",
+        "font-size": "16px",
+        "color": ["black",100]
+    },
+    "img": {
+        "display": "block",
+        "max-width": "20px",
+        "max-height": "20px",
+        "width": "auto",
+        "height": "auto"
+    },
+    "icon": {
+        "display": "inline-block",
+        "width": "40px",
+        "height": "40px",
+        "bg-color*": ["red",50],
+        "border*":   ["1px solid", "1", "red.100"]
+    },
+    "input":{
+        "border-width": [0, 0, 0],
+        "border-style": ["none", "none", "none"],
+        "outline": ["none", "none", "none"]
+    }
+}
