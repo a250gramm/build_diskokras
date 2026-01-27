@@ -560,8 +560,9 @@ class DatabaseRenderer {
                 // Для div_2-col:80% -> класс "content-2-col"
                 const match = cleanKey.match(/^div[_-](.+)$/);
                 if (match) {
-                    className = `content-${match[1]}`;
-                    // Добавляем префикс "content-" для соответствия CSS селекторам                }
+                    // Добавляем префикс 'content-' для соответствия CSS селекторам
+                    className = 'content-' + match[1];
+                }
             }
         }
         
