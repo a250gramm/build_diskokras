@@ -532,16 +532,21 @@ class CSSGenerator:
                             scan_dict(item, f"{full_path}[{i}]", current_col_info, parent_path if not col_info or col_info['type'] != 'adaptive' else full_path)
                     # Продолжаем обработку ключа даже если значение - массив
                 
-                # Если значение - словарь, обрабатываем рекурсивно
-                if isinstance(value, dict):
+                # Если значение - словарь, обрабатываем рекурсивно (если еще не обработали выше)
+                if isinstance(value, dict) and not (isinstance(value, dict) and any(isinstance(v, dict) for v in value.values() if not isinstance(v, list))):
                     new_parent_path = full_path if col_info and col_info['type'] == 'adaptive' else parent_path
                     scan_dict(value, full_path, current_col_info, new_parent_path)
                 
                 if tag_info:
                     tag_name, class_name, _ = tag_info
                     
-                    # Используем data-path для селектора
-                    last_part = full_path.split('.')[-1]
+                    # Используем data-path для селектора (используем очищенный ключ без col:)
+                    if col_info:
+                        # Используем original_key для селектора
+                        last_part = col_info['original_key'].split('.')[-1]
+                    else:
+                        last_part = full_path.split('.')[-1]
+                    
                     if class_name:
                         # Для элементов с классом используем более специфичный селектор
                         selector = f"[data-path*='{last_part}'] {tag_name}.{class_name}"
@@ -556,34 +561,37 @@ class CSSGenerator:
                             'full_path': full_path,
                             'tag_name': tag_name,
                             'class_name': class_name,
-                            'parent_path': parent_path
+                            'parent_path': parent_path,
+                            'last_part': last_part
                         }
                         col_elements.append(element_data)
                         
                         # Если это процентная колонка, сохраняем информацию о родителе
                         if col_info['type'] == 'percentage' and parent_path:
                             if parent_path not in parent_child_map:
-                                parent_child_map[parent_path] = []
-                            parent_child_map[parent_path].append(col_info['percentage'])
+                                parent_child_map[parent_path] = set()
+                            parent_child_map[parent_path].add(col_info['percentage'])
                 
                 # Обрабатываем cycle элементы отдельно
                 elif (key == 'cycle' or key.startswith('cycle_')) and col_info:
                     # Для cycle элементов используем селектор по классу
                     clean_key = col_info['original_key']
-                    last_part = full_path.split('.')[-1]
                     if clean_key.startswith('cycle_'):
                         class_name = clean_key.replace('cycle_', '')
-                        selector = f"[data-path*='{last_part}'] .{class_name}"
+                        # Используем класс для селектора (gr8, cycle_gr8 и т.д.)
+                        selector = f".{class_name}"
                     else:
-                        selector = f"[data-path*='{last_part}'] .cycle"
+                        selector = ".cycle"
+                        class_name = 'cycle'
                     
                     element_data = {
                         'col_info': col_info,
                         'selector': selector,
                         'full_path': full_path,
                         'tag_name': 'div',
-                        'class_name': class_name if clean_key.startswith('cycle_') else 'cycle',
-                        'parent_path': parent_path
+                        'class_name': class_name,
+                        'parent_path': parent_path,
+                        'last_part': class_name
                     }
                     col_elements.append(element_data)
                 
@@ -669,8 +677,13 @@ class CSSGenerator:
                     parent_element = next((e for e in col_elements if e['full_path'] == parent_path and e['col_info']['type'] == 'adaptive'), None)
                     if parent_element:
                         # Генерируем grid-template-columns на основе процентов дочерних элементов
-                        percentages = parent_child_map[parent_path]
-                        grid_template = ' '.join([f"{p}%" for p in percentages])
+                        # Используем set для уникальных значений и сортируем
+                        percentages = sorted(list(parent_child_map[parent_path]))
+                        if len(percentages) == 2:
+                            # Если два элемента, создаем простой grid-template-columns
+                            grid_template = f"{percentages[0]}% {percentages[1]}%"
+                        else:
+                            grid_template = ' '.join([f"{p}%" for p in percentages])
                         parent_selector = parent_element['selector']
                         css_parts.append(f"{parent_selector} {{")
                         css_parts.append(f"    grid-template-columns: {grid_template} !important;")
