@@ -625,24 +625,24 @@ class CSSGenerator:
                 tablet_cols = col_info['tablet']
                 mobile_cols = col_info['mobile']
                 
-                    # Desktop стили
-                    grid_template = columns_config.get(str(desktop_cols), f"repeat({desktop_cols}, 1fr)")
-                    css_parts.append(f"{selector} {{")
-                    if base_styles.get('display'):
-                        css_parts.append(f"    display: {base_styles['display']} !important;")
-                    else:
-                        css_parts.append("    display: grid !important;")
-                    css_parts.append(f"    grid-template-columns: {grid_template} !important;")
-                    if base_styles.get('gap'):
-                        gap_value = base_styles['gap']
-                        if isinstance(gap_value, list) and len(gap_value) >= 2:
-                            # Формат [10, 10, 5, "px"] - берем первое значение для desktop
-                            gap_val = gap_value[0]
-                            gap_unit = gap_value[3] if len(gap_value) > 3 else 'px'
-                            gap_str = f"{gap_val}{gap_unit}"
-                            css_parts.append(f"    gap: {gap_str} !important;")
-                    css_parts.append("    box-sizing: border-box !important;")
-                    css_parts.append("}\n")
+                # Desktop стили
+                grid_template = columns_config.get(str(desktop_cols), f"repeat({desktop_cols}, 1fr)")
+                css_parts.append(f"{selector} {{")
+                if base_styles.get('display'):
+                    css_parts.append(f"    display: {base_styles['display']} !important;")
+                else:
+                    css_parts.append("    display: grid !important;")
+                css_parts.append(f"    grid-template-columns: {grid_template} !important;")
+                if base_styles.get('gap'):
+                    gap_value = base_styles['gap']
+                    if isinstance(gap_value, list) and len(gap_value) >= 2:
+                        # Формат [10, 10, 5, "px"] - берем первое значение для desktop
+                        gap_val = gap_value[0]
+                        gap_unit = gap_value[3] if len(gap_value) > 3 else 'px'
+                        gap_str = f"{gap_val}{gap_unit}"
+                        css_parts.append(f"    gap: {gap_str} !important;")
+                css_parts.append("    box-sizing: border-box !important;")
+                css_parts.append("}\n")
                 
                 # Tablet стили (если отличается от desktop)
                 if tablet_cols != desktop_cols:

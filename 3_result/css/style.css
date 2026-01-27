@@ -2211,7 +2211,7 @@ section.section-footer {
 .gr8 {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 1010 !important;
+    gap: 10px !important;
     box-sizing: border-box !important;
 }
 
@@ -2224,7 +2224,7 @@ section.section-footer {
 [data-path*='div_field-paymet'] div.field-paymet {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 1010 !important;
+    gap: 10px !important;
     box-sizing: border-box !important;
 }
 
