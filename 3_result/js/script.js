@@ -661,11 +661,12 @@ class DatabaseRenderer {
                 // Убираем префикс div_ и используем как класс
                 className = cleanKey.replace('div_', '');
             } else if (cleanKey.startsWith('div')) {
-                // Для div_1-col:20% -> класс "1"
+                // Для div_1-col:20% -> класс "content-1-col" (чтобы соответствовать CSS селектору)
+                // Для div_2-col:80% -> класс "content-2-col"
                 const match = cleanKey.match(/^div[_-](.+)$/);
                 if (match) {
-                    className = match[1];
-                }
+                    className = `content-${match[1]}`;
+                    // Добавляем префикс "content-" для соответствия CSS селекторам                }
             }
         }
         
