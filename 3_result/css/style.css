@@ -1798,7 +1798,7 @@ section.section-footer {
 }
 
 
-[data-path='main_btn'] cycle_gr8 {
+[data-path='main_btn'] .gr8 {
     border-top: 2px solid #0000ff !important;
     border-right: 2px solid #0000ff !important;
     border-bottom: 2px solid #0000ff !important;
@@ -1811,7 +1811,7 @@ section.section-footer {
 
 
 @media (max-width: 768px) {
-    [data-path='main_btn'] cycle_gr8 {
+    [data-path='main_btn'] .gr8 {
         gap: 20px !important;
         box-sizing: border-box !important;
     }
@@ -1819,7 +1819,7 @@ section.section-footer {
 
 
 @media (max-width: 320px) {
-    [data-path='main_btn'] cycle_gr8 {
+    [data-path='main_btn'] .gr8 {
         gap: 10px !important;
         box-sizing: border-box !important;
     }

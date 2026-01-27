@@ -129,6 +129,13 @@ class ObjectsCSSProcessor:
             # Проверяем, может ли это быть тег с подчеркиванием
             nested_key = nested_parts[0]
             
+            # Проверяем, является ли это cycle элементом (cycle_gr8 -> .gr8)
+            if nested_key.startswith('cycle_'):
+                class_name = nested_key.replace('cycle_', '')
+                return f".{class_name}"
+            elif nested_key == 'cycle':
+                return ".cycle"
+            
             # Проверяем, является ли это ссылкой с классом (a_gr2 -> a.gr2)
             if nested_key.startswith('a_'):
                 class_name_from_suffix = nested_key[2:]
