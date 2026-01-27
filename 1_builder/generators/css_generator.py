@@ -256,6 +256,13 @@ class CSSGenerator:
             css_parts.append(div_column_css)
             css_parts.append("\n")
         
+        # Стили для col: синтаксиса из objects.json
+        col_syntax_css = self._generate_col_syntax_css()
+        if col_syntax_css:
+            css_parts.append("/* ===== СТИЛИ ДЛЯ COL: СИНТАКСИСА ===== */\n\n")
+            css_parts.append(col_syntax_css)
+            css_parts.append("\n")
+        
         return '\n'.join(css_parts)
     
     def _process_dict_properties_with_important(self, properties: dict, indent: str = "    ", current_section: str = None, config_for_refs: dict = None) -> str:
@@ -475,6 +482,178 @@ class CSSGenerator:
                 css_parts.append(self._process_dict_properties_with_important(selector_styles, indent="        "))
                 css_parts.append("    }")
             css_parts.append("}\n")
+        
+        return '\n'.join(css_parts)
+    
+    def _generate_col_syntax_css(self) -> str:
+        """
+        Генерирует CSS стили для элементов с col: синтаксисом из objects.json
+        Сканирует sections_config и генерирует стили для элементов с col:2,1,1 и col:20%
+        """
+        if not self.sections_config:
+            return ''
+        
+        from utils.element_utils import parse_col_syntax, parse_html_tag
+        
+        css_parts = []
+        devices = self._get_devices()
+        tablet_breakpoint = devices.get('tablet', '768px')
+        mobile_breakpoint = devices.get('mobile', '320px')
+        
+        # Собираем информацию о всех элементах с col: синтаксисом
+        col_elements = []  # Список элементов с col: синтаксисом
+        parent_child_map = {}  # {parent_path: [child_percentages]}
+        
+        def scan_dict(data: Dict, path: str = '', parent_col_info: Dict = None, parent_path: str = ''):
+            """Рекурсивно сканирует словарь и собирает элементы с col: синтаксисом"""
+            for key, value in data.items():
+                if key == 'if':
+                    continue
+                
+                # Проверяем, есть ли col: синтаксис в ключе
+                col_info = parse_col_syntax(key)
+                current_col_info = col_info if col_info else parent_col_info
+                
+                # Парсим HTML тег для получения информации об элементе
+                tag_info = parse_html_tag(key)
+                full_path = f"{path}.{key}" if path else key
+                
+                if tag_info:
+                    tag_name, class_name, _ = tag_info
+                    
+                    # Используем data-path для селектора
+                    if class_name:
+                        # Для элементов с классом используем более специфичный селектор
+                        selector = f"[data-path*='{full_path.split(\".\")[-1]}'] {tag_name}.{class_name}"
+                    else:
+                        selector = f"[data-path*='{full_path.split(\".\")[-1]}'] {tag_name}"
+                    
+                    # Если есть col: синтаксис, сохраняем информацию
+                    if col_info:
+                        element_data = {
+                            'col_info': col_info,
+                            'selector': selector,
+                            'full_path': full_path,
+                            'tag_name': tag_name,
+                            'class_name': class_name,
+                            'parent_path': parent_path
+                        }
+                        col_elements.append(element_data)
+                        
+                        # Если это процентная колонка, сохраняем информацию о родителе
+                        if col_info['type'] == 'percentage' and parent_path:
+                            if parent_path not in parent_child_map:
+                                parent_child_map[parent_path] = []
+                            parent_child_map[parent_path].append(col_info['percentage'])
+                
+                # Обрабатываем cycle элементы отдельно
+                elif (key == 'cycle' or key.startswith('cycle_')) and col_info:
+                    # Для cycle элементов используем селектор по классу
+                    clean_key = col_info['original_key']
+                    if clean_key.startswith('cycle_'):
+                        class_name = clean_key.replace('cycle_', '')
+                        selector = f"[data-path*='{full_path.split(\".\")[-1]}'] .{class_name}"
+                    else:
+                        selector = f"[data-path*='{full_path.split(\".\")[-1]}'] .cycle"
+                    
+                    element_data = {
+                        'col_info': col_info,
+                        'selector': selector,
+                        'full_path': full_path,
+                        'tag_name': 'div',
+                        'class_name': class_name if clean_key.startswith('cycle_') else 'cycle',
+                        'parent_path': parent_path
+                    }
+                    col_elements.append(element_data)
+                
+                # Рекурсивно обрабатываем вложенные словари
+                if isinstance(value, dict):
+                    new_path = f"{path}.{key}" if path else key
+                    # Если текущий элемент имеет adaptive col: синтаксис, он становится родителем
+                    new_parent_path = new_path if col_info and col_info['type'] == 'adaptive' else parent_path
+                    scan_dict(value, new_path, current_col_info, new_parent_path)
+        
+        # Сканируем все секции
+        for section_name, section_data in self.sections_config.items():
+            if isinstance(section_data, dict):
+                scan_dict(section_data, section_name)
+        
+        # Получаем базовые стили из div_column.json
+        base_styles = self.div_column_config.get('base', {})
+        columns_config = self.div_column_config.get('columns', {})
+        
+        # Сначала обрабатываем родительские элементы с процентными дочерними элементами
+        processed_parents = set()
+        
+        # Генерируем CSS для каждого элемента
+        for element in col_elements:
+            col_info = element['col_info']
+            selector = element['selector']
+            
+            if col_info['type'] == 'adaptive':
+                # Адаптивные колонки: col:2,1,1
+                desktop_cols = col_info['desktop']
+                tablet_cols = col_info['tablet']
+                mobile_cols = col_info['mobile']
+                
+                # Desktop стили
+                grid_template = columns_config.get(str(desktop_cols), f"repeat({desktop_cols}, 1fr)")
+                css_parts.append(f"{selector} {{")
+                if base_styles.get('display'):
+                    css_parts.append(f"    display: {base_styles['display']} !important;")
+                else:
+                    css_parts.append("    display: grid !important;")
+                css_parts.append(f"    grid-template-columns: {grid_template} !important;")
+                if base_styles.get('gap'):
+                    gap_value = base_styles['gap']
+                    if isinstance(gap_value, list) and len(gap_value) >= 2:
+                        gap_str = f"{gap_value[0]}{gap_value[1] if len(gap_value) > 1 else 'px'}"
+                        css_parts.append(f"    gap: {gap_str} !important;")
+                css_parts.append("    box-sizing: border-box !important;")
+                css_parts.append("}\n")
+                
+                # Tablet стили (если отличается от desktop)
+                if tablet_cols != desktop_cols:
+                    grid_template_tablet = columns_config.get(str(tablet_cols), f"repeat({tablet_cols}, 1fr)")
+                    css_parts.append(f"@media (max-width: {tablet_breakpoint}) {{")
+                    css_parts.append(f"    {selector} {{")
+                    css_parts.append(f"        grid-template-columns: {grid_template_tablet} !important;")
+                    css_parts.append("    }")
+                    css_parts.append("}\n")
+                
+                # Mobile стили (если отличается от tablet)
+                if mobile_cols != tablet_cols:
+                    grid_template_mobile = columns_config.get(str(mobile_cols), f"repeat({mobile_cols}, 1fr)")
+                    css_parts.append(f"@media (max-width: {mobile_breakpoint}) {{")
+                    css_parts.append(f"    {selector} {{")
+                    css_parts.append(f"        grid-template-columns: {grid_template_mobile} !important;")
+                    css_parts.append("    }")
+                    css_parts.append("}\n")
+            
+            elif col_info['type'] == 'percentage':
+                # Процентная ширина: col:20%
+                # Это используется для дочерних элементов внутри grid контейнера
+                percent = col_info['percentage']
+                css_parts.append(f"{selector} {{")
+                css_parts.append(f"    width: {percent}% !important;")
+                css_parts.append(f"    max-width: {percent}% !important;")
+                css_parts.append("    box-sizing: border-box !important;")
+                css_parts.append("}\n")
+                
+                # Если у родителя есть дочерние элементы с процентами, обновляем grid-template-columns
+                parent_path = element.get('parent_path', '')
+                if parent_path and parent_path in parent_child_map and parent_path not in processed_parents:
+                    processed_parents.add(parent_path)
+                    # Находим родительский элемент
+                    parent_element = next((e for e in col_elements if e['full_path'] == parent_path and e['col_info']['type'] == 'adaptive'), None)
+                    if parent_element:
+                        # Генерируем grid-template-columns на основе процентов дочерних элементов
+                        percentages = parent_child_map[parent_path]
+                        grid_template = ' '.join([f"{p}%" for p in percentages])
+                        parent_selector = parent_element['selector']
+                        css_parts.append(f"{parent_selector} {{")
+                        css_parts.append(f"    grid-template-columns: {grid_template} !important;")
+                        css_parts.append("}\n")
         
         return '\n'.join(css_parts)
     

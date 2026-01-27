@@ -175,11 +175,30 @@ class ElementProcessor:
             if key == 'if':
                 continue
             
-            # Обрабатываем ключ "cycle" или "cycle_col-N"
-            if (key == 'cycle' or key.startswith('cycle_col-')) and isinstance(value, dict):
+            # Обрабатываем ключ "cycle" или "cycle_col-N" или "cycle_gr8 col:2,1,1"
+            from utils.element_utils import parse_col_syntax, extract_col_info_from_key
+            
+            is_cycle = key == 'cycle' or key.startswith('cycle_col-') or key.startswith('cycle_')
+            if is_cycle and isinstance(value, dict):
+                # Извлекаем col: информацию из ключа
+                clean_key, col_info = extract_col_info_from_key(key)
+                
+                # Определяем cycle_key для cycle_processor
+                if clean_key.startswith('cycle_col-'):
+                    cycle_key = clean_key
+                elif clean_key.startswith('cycle_'):
+                    # Для cycle_gr8 col:2,1,1 создаем cycle_key на основе col_info
+                    if col_info and col_info['type'] == 'adaptive':
+                        desktop_cols = col_info['desktop']
+                        cycle_key = f"cycle_col-{desktop_cols}"
+                    else:
+                        cycle_key = clean_key
+                else:
+                    cycle_key = clean_key
+                
                 # Собираем bd_sources из самого cycle (api1, api2 могут быть внутри cycle)
                 cycle_bd_sources = self.database_processor.collect_bd_sources(value, bd_sources)
-                cycle_html = self.cycle_processor.process_cycle(value, cycle_bd_sources, self.template_processor, self.database_processor, cycle_key=key)
+                cycle_html = self.cycle_processor.process_cycle(value, cycle_bd_sources, self.template_processor, self.database_processor, cycle_key=cycle_key)
                 html_parts.append(cycle_html)
                 continue
             
@@ -195,8 +214,34 @@ class ElementProcessor:
             tag_info = parse_html_tag(key)
             
             if tag_info:
-                tag_name, class_name = tag_info
-                attrs = f' class="{class_name}"' if class_name else ''
+                tag_name, class_name, col_info = tag_info
+                
+                # Формируем атрибуты класса
+                classes = []
+                if class_name:
+                    classes.append(class_name)
+                
+                # Обрабатываем col: синтаксис
+                if col_info:
+                    if col_info['type'] == 'adaptive':
+                        # Добавляем класс _col-N для адаптивных колонок
+                        desktop_cols = col_info['desktop']
+                        classes.append(f"_col-{desktop_cols}")
+                    elif col_info['type'] == 'percentage':
+                        # Для процентных колонок добавляем класс с процентом
+                        percent = int(col_info['percentage'])
+                        classes.append(f"_col-{percent}pct")
+                
+                attrs = f' class="{" ".join(classes)}"' if classes else ''
+                
+                # Добавляем data-col атрибут для CSS генерации
+                if col_info:
+                    if col_info['type'] == 'adaptive':
+                        attrs += f' data-col-desktop="{col_info["desktop"]}"'
+                        attrs += f' data-col-tablet="{col_info["tablet"]}"'
+                        attrs += f' data-col-mobile="{col_info["mobile"]}"'
+                    elif col_info['type'] == 'percentage':
+                        attrs += f' data-col-percent="{col_info["percentage"]}"'
                 
                 # Для модальных окон добавляем также id
                 if class_name and class_name.startswith('modal'):
@@ -211,7 +256,7 @@ class ElementProcessor:
                     if is_template:
                         # Это шаблон - генерируем только контейнер с data-template
                         template_attrs = self.template_processor.generate_template_attrs(value)
-                        html_parts.append(f"<{tag_name}{template_attrs}></{tag_name}>")
+                        html_parts.append(f"<{tag_name}{attrs}{template_attrs}></{tag_name}>")
                     else:
                         # Обычная обработка
                         inner_html = self._process_complex_element(value, sub_path, bd_sources)

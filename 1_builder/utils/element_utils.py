@@ -74,44 +74,48 @@ def normalize_numeric_prefix(key: str) -> str:
     return key
 
 
-def parse_html_tag(key: str) -> Optional[Tuple[str, str]]:
+def parse_html_tag(key: str) -> Optional[Tuple[str, str, Optional[Dict[str, any]]]]:
     """
-    Парсит HTML тег из ключа
+    Парсит HTML тег из ключа, включая синтаксис col:
     
     Args:
-        key: Ключ элемента (например, "div_gr1", "nav_menu1", "div wrapper")
+        key: Ключ элемента (например, "div_gr1", "nav_menu1", "div wrapper", "div_field-paymet col:2,2,2")
         
     Returns:
-        Кортеж (tag_name, class_name) или None если это не HTML тег
+        Кортеж (tag_name, class_name, col_info) или None если это не HTML тег
+        col_info может быть None если синтаксис col: не найден
     """
     html_tags = ['div', 'span', 'section', 'article', 'aside', 'header', 'footer', 'main', 'nav', 'form']
     tag_name = None
     class_name = None
     
+    # Извлекаем информацию о col: синтаксисе
+    clean_key, col_info = extract_col_info_from_key(key)
+    
     # Убираем числовой префикс
-    key = normalize_numeric_prefix(key)
+    clean_key = normalize_numeric_prefix(clean_key)
     
     # Проверяем формат "tag classname" (с пробелом)
-    if ' ' in key:
-        parts = key.split(' ', 1)
+    if ' ' in clean_key:
+        parts = clean_key.split(' ', 1)
         if parts[0] in html_tags:
-            return (parts[0], parts[1])
+            return (parts[0], parts[1], col_info)
     
     # Проверяем формат с суффиксом (div_1, nav_menu1, div-1)
     for tag in html_tags:
-        if key.startswith(tag):
-            if key == tag:
-                return (tag, None)
-            if key[len(tag):][0] in ['_', '-']:
+        if clean_key.startswith(tag):
+            if clean_key == tag:
+                return (tag, None, col_info)
+            if clean_key[len(tag):][0] in ['_', '-']:
                 tag_name = tag
-                suffix = key[len(tag):]
+                suffix = clean_key[len(tag):]
                 if suffix.startswith('_') or suffix.startswith('-'):
                     class_name = suffix[1:]  # Убираем префикс _ или -
-                return (tag_name, class_name)
+                return (tag_name, class_name, col_info)
     
     # Точное совпадение
-    if key in html_tags:
-        return (key, None)
+    if clean_key in html_tags:
+        return (clean_key, None, col_info)
     
     return None
 
@@ -176,4 +180,104 @@ def is_menu_dict(value: Dict) -> bool:
         for v in value.values() 
         if not isinstance(v, dict)
     )
+
+
+def parse_col_syntax(key: str) -> Optional[Dict[str, any]]:
+    """
+    Парсит синтаксис col: из ключа элемента
+    
+    Args:
+        key: Ключ элемента (например, "div_field-paymet col:2,2,2" или "div_1-col:20%")
+        
+    Returns:
+        Словарь с информацией о колонках:
+        - type: "adaptive" (col:2,1,1) или "percentage" (col:20%)
+        - desktop: количество колонок для desktop или процент
+        - tablet: количество колонок для tablet (только для adaptive)
+        - mobile: количество колонок для mobile (только для adaptive)
+        - original_key: ключ без col: синтаксиса
+        Или None если синтаксис col: не найден
+    """
+    # Ищем паттерн " col:X,Y,Z" или " col:X%" в конце ключа
+    col_pattern = r'\s+col:([^\s]+)'
+    match = re.search(col_pattern, key)
+    
+    if not match:
+        return None
+    
+    col_value = match.group(1)
+    original_key = re.sub(col_pattern, '', key)
+    
+    # Проверяем формат col:20% (процентная ширина)
+    if '%' in col_value:
+        percentage = col_value.replace('%', '')
+        try:
+            percent_value = float(percentage)
+            return {
+                'type': 'percentage',
+                'percentage': percent_value,
+                'original_key': original_key
+            }
+        except ValueError:
+            return None
+    
+    # Проверяем формат col:2,1,1 (адаптивные колонки)
+    if ',' in col_value:
+        parts = col_value.split(',')
+        if len(parts) == 3:
+            try:
+                desktop = int(parts[0].strip())
+                tablet = int(parts[1].strip())
+                mobile = int(parts[2].strip())
+                return {
+                    'type': 'adaptive',
+                    'desktop': desktop,
+                    'tablet': tablet,
+                    'mobile': mobile,
+                    'original_key': original_key
+                }
+            except ValueError:
+                return None
+        elif len(parts) == 1:
+            # col:2 (одинаковое количество колонок для всех устройств)
+            try:
+                cols = int(parts[0].strip())
+                return {
+                    'type': 'adaptive',
+                    'desktop': cols,
+                    'tablet': cols,
+                    'mobile': cols,
+                    'original_key': original_key
+                }
+            except ValueError:
+                return None
+    
+    # Просто число без запятых - одинаковое количество колонок
+    try:
+        cols = int(col_value)
+        return {
+            'type': 'adaptive',
+            'desktop': cols,
+            'tablet': cols,
+            'mobile': cols,
+            'original_key': original_key
+        }
+    except ValueError:
+        return None
+
+
+def extract_col_info_from_key(key: str) -> Tuple[str, Optional[Dict[str, any]]]:
+    """
+    Извлекает информацию о col: синтаксисе из ключа и возвращает очищенный ключ
+    
+    Args:
+        key: Ключ элемента (например, "div_field-paymet col:2,2,2")
+        
+    Returns:
+        Кортеж (очищенный_ключ, col_info) где col_info может быть None
+    """
+    col_info = parse_col_syntax(key)
+    if col_info:
+        return (col_info['original_key'], col_info)
+    return (key, None)
 

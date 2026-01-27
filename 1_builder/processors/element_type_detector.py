@@ -105,5 +105,9 @@ class ElementTypeDetector:
             Кортеж (tag_name, class_name) или None
         """
         from utils.element_utils import parse_html_tag
-        return parse_html_tag(key)
+        result = parse_html_tag(key)
+        if result:
+            # Возвращаем только первые два значения (tag_name, class_name)
+            return (result[0], result[1])
+        return None
 
