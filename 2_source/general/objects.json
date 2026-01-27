@@ -3,14 +3,14 @@
         "a_link1":{
             "in":                  ["/index"],
             "img_b":               ["img",  "logo_2_b.svg"],
-            "title":               ["text", "CRM1—НВОАЯ ВЕРВСИЯ123123" ]
+            "title":               ["text", "CRM" ]
         }
     },
     "logo_w":{
         "a_link1":{
             "in":                  ["/index"],
             "img_b":               ["img",  "logo_2_w.svg"],
-            "title":               ["text", "CRM1" ]
+            "title":               ["text", "CRM" ]
         }
     },
 
