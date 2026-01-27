@@ -198,7 +198,7 @@ class ElementProcessor:
                 
                 # Собираем bd_sources из самого cycle (api1, api2 могут быть внутри cycle)
                 cycle_bd_sources = self.database_processor.collect_bd_sources(value, bd_sources)
-                cycle_html = self.cycle_processor.process_cycle(value, cycle_bd_sources, self.template_processor, self.database_processor, cycle_key=cycle_key)
+                cycle_html = self.cycle_processor.process_cycle(value, cycle_bd_sources, self.template_processor, self.database_processor, cycle_key=cycle_key, original_cycle_key=key)
                 html_parts.append(cycle_html)
                 continue
             

@@ -198,15 +198,17 @@ def parse_col_syntax(key: str) -> Optional[Dict[str, any]]:
         - original_key: ключ без col: синтаксиса
         Или None если синтаксис col: не найден
     """
-    # Ищем паттерн " col:X,Y,Z" или " col:X%" в конце ключа
-    col_pattern = r'\s+col:([^\s]+)'
+    # Ищем паттерн " col:X,Y,Z" или " col:X%" в ключе
+    # Паттерн должен захватывать col: с числами, запятыми и процентами
+    col_pattern = r'\s+col:([0-9,%]+)'
     match = re.search(col_pattern, key)
     
     if not match:
         return None
     
     col_value = match.group(1)
-    original_key = re.sub(col_pattern, '', key)
+    # Удаляем паттерн из ключа, включая пробел перед col:
+    original_key = re.sub(col_pattern, '', key).strip()
     
     # Проверяем формат col:20% (процентная ширина)
     if '%' in col_value:
