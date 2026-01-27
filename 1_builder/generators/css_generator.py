@@ -504,10 +504,17 @@ class CSSGenerator:
         col_elements = []  # Список элементов с col: синтаксисом
         parent_child_map = {}  # {parent_path: [child_percentages]}
         
-        def scan_dict(data: Dict, path: str = '', parent_col_info: Dict = None, parent_path: str = ''):
+        def scan_dict(data: Any, path: str = '', parent_col_info: Dict = None, parent_path: str = ''):
             """Рекурсивно сканирует словарь и собирает элементы с col: синтаксисом"""
+            if not isinstance(data, dict):
+                return
+            
             for key, value in data.items():
                 if key == 'if':
+                    # Обрабатываем if условия рекурсивно
+                    if isinstance(value, dict):
+                        for if_key, if_value in value.items():
+                            scan_dict(if_value, f"{path}.if.{if_key}" if path else f"if.{if_key}", parent_col_info, parent_path)
                     continue
                 
                 # Проверяем, есть ли col: синтаксис в ключе
@@ -517,6 +524,18 @@ class CSSGenerator:
                 # Парсим HTML тег для получения информации об элементе
                 tag_info = parse_html_tag(key)
                 full_path = f"{path}.{key}" if path else key
+                
+                # Обрабатываем массивы (например, ["button", "if:main_btn", "modal:modal1", {...}])
+                if isinstance(value, list):
+                    for i, item in enumerate(value):
+                        if isinstance(item, dict):
+                            scan_dict(item, f"{full_path}[{i}]", current_col_info, parent_path if not col_info or col_info['type'] != 'adaptive' else full_path)
+                    # Продолжаем обработку ключа даже если значение - массив
+                
+                # Если значение - словарь, обрабатываем рекурсивно
+                if isinstance(value, dict):
+                    new_parent_path = full_path if col_info and col_info['type'] == 'adaptive' else parent_path
+                    scan_dict(value, full_path, current_col_info, new_parent_path)
                 
                 if tag_info:
                     tag_name, class_name, _ = tag_info
