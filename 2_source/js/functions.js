@@ -481,7 +481,15 @@ class DatabaseRenderer {
         }
         
         const colValue = match[1];
-        let cleanKey = key.replace(colPattern, '').trim();
+        // Для "-col:X%" заменяем только ":X%", оставляя "-col" в cleanKey
+        // Для " col:X%" заменяем полностью
+        let cleanKey;
+        if (colPattern === colPatternDash) {
+            // Для "div_2-col:80%" -> "div_2-col" (убираем только ":80%", оставляя "-col")
+            cleanKey = key.replace(/-col:([0-9,%]+)/, '-col').trim();
+        } else {
+            cleanKey = key.replace(colPattern, '').trim();
+        }
         
         // Проверяем формат col:20% (процентная ширина)
         if (colValue.includes('%')) {
