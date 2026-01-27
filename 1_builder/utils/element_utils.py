@@ -198,17 +198,35 @@ def parse_col_syntax(key: str) -> Optional[Dict[str, any]]:
         - original_key: ключ без col: синтаксиса
         Или None если синтаксис col: не найден
     """
-    # Ищем паттерн " col:X,Y,Z" или " col:X%" в ключе
+    # Ищем паттерн " col:X,Y,Z", " col:X%" или "-col:X%" в ключе
     # Паттерн должен захватывать col: с числами, запятыми и процентами
-    col_pattern = r'\s+col:([0-9,%]+)'
-    match = re.search(col_pattern, key)
+    # Поддерживаем два формата: " col:" (с пробелом) и "-col:" (с дефисом)
+    col_pattern_space = r'\s+col:([0-9,%]+)'
+    col_pattern_dash = r'-col:([0-9,%]+)'
+    
+    match = None
+    col_pattern = None
+    
+    # Сначала проверяем формат с пробелом
+    match = re.search(col_pattern_space, key)
+    if match:
+        col_pattern = col_pattern_space
+    else:
+        # Проверяем формат с дефисом
+        match = re.search(col_pattern_dash, key)
+        if match:
+            col_pattern = col_pattern_dash
     
     if not match:
         return None
     
     col_value = match.group(1)
-    # Удаляем паттерн из ключа, включая пробел перед col:
-    original_key = re.sub(col_pattern, '', key).strip()
+    # Удаляем паттерн из ключа
+    if col_pattern == col_pattern_space:
+        original_key = re.sub(col_pattern, '', key).strip()
+    else:
+        # Для формата с дефисом удаляем "-col:..." и оставляем остальное
+        original_key = re.sub(col_pattern, '', key).strip()
     
     # Проверяем формат col:20% (процентная ширина)
     if '%' in col_value:
