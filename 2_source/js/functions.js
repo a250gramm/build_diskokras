@@ -458,25 +458,139 @@ class DatabaseRenderer {
     }
 
     /**
+     * Парсит синтаксис col: из ключа элемента
+     * Возвращает {cleanKey, colInfo} где colInfo может быть null
+     */
+    parseColSyntax(key) {
+        // Ищем паттерн " col:X,Y,Z" или " col:X%" или "-col:X%"
+        const colPatternSpace = /\s+col:([0-9,%]+)/;
+        const colPatternDash = /-col:([0-9,%]+)/;
+        
+        let match = key.match(colPatternSpace);
+        let colPattern = colPatternSpace;
+        
+        if (!match) {
+            match = key.match(colPatternDash);
+            if (match) {
+                colPattern = colPatternDash;
+            }
+        }
+        
+        if (!match) {
+            return { cleanKey: key, colInfo: null };
+        }
+        
+        const colValue = match[1];
+        let cleanKey = key.replace(colPattern, '').trim();
+        
+        // Проверяем формат col:20% (процентная ширина)
+        if (colValue.includes('%')) {
+            const percentage = parseFloat(colValue.replace('%', ''));
+            return {
+                cleanKey: cleanKey,
+                colInfo: {
+                    type: 'percentage',
+                    percentage: percentage
+                }
+            };
+        }
+        
+        // Проверяем формат col:2,1,1 (адаптивные колонки)
+        if (colValue.includes(',')) {
+            const parts = colValue.split(',');
+            if (parts.length === 3) {
+                return {
+                    cleanKey: cleanKey,
+                    colInfo: {
+                        type: 'adaptive',
+                        desktop: parseInt(parts[0].trim()),
+                        tablet: parseInt(parts[1].trim()),
+                        mobile: parseInt(parts[2].trim())
+                    }
+                };
+            } else if (parts.length === 1) {
+                const cols = parseInt(parts[0].trim());
+                return {
+                    cleanKey: cleanKey,
+                    colInfo: {
+                        type: 'adaptive',
+                        desktop: cols,
+                        tablet: cols,
+                        mobile: cols
+                    }
+                };
+            }
+        }
+        
+        // Просто число без запятых
+        const cols = parseInt(colValue);
+        return {
+            cleanKey: cleanKey,
+            colInfo: {
+                type: 'adaptive',
+                desktop: cols,
+                tablet: cols,
+                mobile: cols
+            }
+        };
+    }
+
+    /**
      * Создает элемент из шаблона
      */
     createElementFromTemplate(template, record, bdSources, elementKey = null) {
         // Определяем тег и класс из шаблона
         const tagName = 'div';
-        // Определяем класс из ключа элемента (div_field-paymet -> field-paymet)
+        
+        // Определяем класс из ключа элемента, обрабатывая синтаксис col:
         let className = 'field-paymet'; // По умолчанию
-        if (elementKey && elementKey.startsWith('div_')) {
-            // Убираем префикс div_ и используем как класс
-            className = elementKey.replace('div_', '');
+        let colInfo = null;
+        
+        if (elementKey) {
+            // Парсим синтаксис col:
+            const parsed = this.parseColSyntax(elementKey);
+            const cleanKey = parsed.cleanKey;
+            colInfo = parsed.colInfo;
+            
+            if (cleanKey.startsWith('div_')) {
+                // Убираем префикс div_ и используем как класс
+                className = cleanKey.replace('div_', '');
+            } else if (cleanKey.startsWith('div')) {
+                // Для div_1-col:20% -> класс "1"
+                const match = cleanKey.match(/^div[_-](.+)$/);
+                if (match) {
+                    className = match[1];
+                }
+            }
         }
         
         const element = document.createElement(tagName);
-        element.className = className;
+        const classes = [className];
+        
+        // Добавляем классы для col: синтаксиса
+        if (colInfo) {
+            if (colInfo.type === 'adaptive') {
+                classes.push(`_col-${colInfo.desktop}`);
+            } else if (colInfo.type === 'percentage') {
+                classes.push(`_col-${Math.round(colInfo.percentage)}pct`);
+            }
+        }
+        
+        element.className = classes.join(' ');
         
         // Обрабатываем каждый элемент шаблона
         for (const [key, value] of Object.entries(template)) {
             // Пропускаем элементы, ключ которых содержит звездочку (игнорируем их)
             if (key.includes('*')) {
+                continue;
+            }
+            
+            // Обрабатываем вложенные элементы (например, div_1-col:20%, div_2-col:80%)
+            if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
+                // Это вложенный элемент - рекурсивно создаем его
+                const nestedParsed = this.parseColSyntax(key);
+                const nestedElement = this.createElementFromTemplate(value, record, bdSources, nestedParsed.cleanKey);
+                element.appendChild(nestedElement);
                 continue;
             }
             
