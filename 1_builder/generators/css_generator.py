@@ -522,11 +522,12 @@ class CSSGenerator:
                     tag_name, class_name, _ = tag_info
                     
                     # Используем data-path для селектора
+                    last_part = full_path.split('.')[-1]
                     if class_name:
                         # Для элементов с классом используем более специфичный селектор
-                        selector = f"[data-path*='{full_path.split(\".\")[-1]}'] {tag_name}.{class_name}"
+                        selector = f"[data-path*='{last_part}'] {tag_name}.{class_name}"
                     else:
-                        selector = f"[data-path*='{full_path.split(\".\")[-1]}'] {tag_name}"
+                        selector = f"[data-path*='{last_part}'] {tag_name}"
                     
                     # Если есть col: синтаксис, сохраняем информацию
                     if col_info:
@@ -550,11 +551,12 @@ class CSSGenerator:
                 elif (key == 'cycle' or key.startswith('cycle_')) and col_info:
                     # Для cycle элементов используем селектор по классу
                     clean_key = col_info['original_key']
+                    last_part = full_path.split('.')[-1]
                     if clean_key.startswith('cycle_'):
                         class_name = clean_key.replace('cycle_', '')
-                        selector = f"[data-path*='{full_path.split(\".\")[-1]}'] .{class_name}"
+                        selector = f"[data-path*='{last_part}'] .{class_name}"
                     else:
-                        selector = f"[data-path*='{full_path.split(\".\")[-1]}'] .cycle"
+                        selector = f"[data-path*='{last_part}'] .cycle"
                     
                     element_data = {
                         'col_info': col_info,
