@@ -666,9 +666,16 @@ class DatabaseRenderer {
             colInfo = parsed.colInfo;
             
             if (cleanKey.startsWith('div_')) {
-                // Убираем префикс div_ и используем как класс
-                className = cleanKey.replace('div_', '');
-            } else if (cleanKey.startsWith('div')) {
+            if (cleanKey.startsWith('div_')) {
+                const suffix = cleanKey.replace('div_', '');
+                // Если суффикс начинается с цифры (например, "2-col"), добавляем префикс "content-"
+                if (suffix && /^\d/.test(suffix)) {
+                    className = 'content-' + suffix;
+                } else {
+                    // Для других случаев (например, "field-paymet") используем как есть
+                    className = suffix;
+                }
+                console.log('createElementFromTemplate: cleanKey=', cleanKey, 'className=', className);
                 // Для div_1-col:20% -> класс "content-1-col" (чтобы соответствовать CSS селектору)
                 // Для div_2-col:80% -> класс "content-2-col"
                 const match = cleanKey.match(/^div[_-](.+)$/);
