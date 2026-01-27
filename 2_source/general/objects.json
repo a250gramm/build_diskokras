@@ -3,7 +3,7 @@
         "a_link1":{
             "in":                  ["/index"],
             "img_b":               ["img",  "logo_2_b.svg"],
-            "title":               ["text", "CRM123" ]
+            "title":               ["text", "CRM" ]
         }
     },
     "logo_w":{
