@@ -253,18 +253,17 @@ def main():
     # Определяем пути
     current_file = Path(__file__).resolve()
     build_dir = current_file.parent.parent
-    source_dir = build_dir.parent / 'sourse'
-    output_dir = build_dir.parent.parent / ':var:www:html' / 'diskokras'
+    project_root = build_dir.parent
+    source_dir = project_root / '2_source'
+    output_dir = project_root / '3_result'
     
     # Загружаем layout_html.json
     html_config_path = source_dir / 'layout' / 'layout_html.json'
     with open(html_config_path, 'r', encoding='utf-8') as f:
         html_config = json.load(f)
     
-    # Загружаем CSS - пробуем разные пути (правильный путь первый)
+    # Загружаем CSS из результата сборки
     css_paths = [
-        Path('/Users/ivanussov/Desktop/Проекты/ps-b1/products/1_ТЗ/builder/diskokras/:var:www:html/diskokras/css/style.css'),
-        build_dir.parent.parent / ':var:www:html' / 'diskokras' / 'css' / 'style.css',
         output_dir / 'css' / 'style.css',
     ]
     

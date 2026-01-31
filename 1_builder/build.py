@@ -22,17 +22,18 @@ from generators.page_generator import PageGenerator
 from generators.css_generator import CSSGenerator
 
 
+SOURCE_DIR_NAME = '2_source'
+OUTPUT_DIR_NAME = '3_result'
+
+
 def main():
     """Главная функция сборки"""
     
     # Определяем пути
     script_dir = Path(__file__).parent.resolve()
-    project_root = script_dir.parent  # :home:ubuntu/diskokras
-    source_dir = project_root / 'sourse'
-    
-    # Путь к результату
-    diskokras_dir = project_root.parent.parent  # builder/diskokras
-    output_dir = diskokras_dir / ':var:www:html' / 'diskokras'
+    project_root = script_dir.parent  # корень проекта (build_diskokras)
+    source_dir = project_root / SOURCE_DIR_NAME
+    output_dir = project_root / OUTPUT_DIR_NAME
     
     print("=" * 60)
     print("🚀 СБОРКА DISKOKRAS (NEW_build)")
@@ -42,11 +43,14 @@ def main():
     print()
     
     try:
-        # Удаляем старую директорию результата для чистой сборки
+        # Удаляем старую директорию результата для чистой сборки (если не удалось — перезаписываем файлы)
         if output_dir.exists():
             print("🗑️  Удаление старого результата...")
-            shutil.rmtree(output_dir)
-            print("   ✅ Старый результат удален")
+            try:
+                shutil.rmtree(output_dir)
+                print("   ✅ Старый результат удален")
+            except OSError as e:
+                print(f"   ⚠️  Не удалось удалить (перезаписываем): {e}")
             print()
         
         # Создаем директории для результата

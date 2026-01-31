@@ -49,7 +49,7 @@ def get_default_css(source_dir: Optional[Path] = None, general_config: Optional[
     if source_dir is None:
         # От build/layout/default.py до sourse/css/default.json
         current_file = Path(__file__).resolve()
-        source_dir = current_file.parent.parent.parent / 'sourse'
+        source_dir = current_file.parent.parent.parent.parent / '2_source'
     
     # Ищем default.json, игнорируя файлы со звездочкой
     css_dir = source_dir / 'css'
@@ -239,7 +239,7 @@ def get_section_styles_css(source_dir: Optional[Path] = None, general_config: Op
     """
     if source_dir is None:
         current_file = Path(__file__).resolve()
-        source_dir = current_file.parent.parent.parent / 'sourse'
+        source_dir = current_file.parent.parent.parent.parent / '2_source'
     
     # Ищем default.json, игнорируя файлы со звездочкой
     css_dir = source_dir / 'css'
@@ -303,7 +303,7 @@ def get_component_css(source_dir: Optional[Path] = None) -> str:
     """
     if source_dir is None:
         current_file = Path(__file__).resolve()
-        source_dir = current_file.parent.parent.parent / 'sourse'
+        source_dir = current_file.parent.parent.parent.parent / '2_source'
     
     # Ищем default.json, игнорируя файлы со звездочкой
     css_dir = source_dir / 'css'
@@ -339,7 +339,7 @@ def get_alignment_css(source_dir: Optional[Path] = None) -> str:
     """
     if source_dir is None:
         current_file = Path(__file__).resolve()
-        source_dir = current_file.parent.parent.parent / 'sourse'
+        source_dir = current_file.parent.parent.parent.parent / '2_source'
     
     # Ищем default.json, игнорируя файлы со звездочкой
     css_dir = source_dir / 'css'
@@ -375,7 +375,7 @@ def get_modal_css(source_dir: Optional[Path] = None) -> str:
     """
     if source_dir is None:
         current_file = Path(__file__).resolve()
-        source_dir = current_file.parent.parent.parent / 'sourse'
+        source_dir = current_file.parent.parent.parent.parent / '2_source'
     
     # Ищем default.json, игнорируя файлы со звездочкой
     css_dir = source_dir / 'css'

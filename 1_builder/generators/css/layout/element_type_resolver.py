@@ -116,21 +116,54 @@ class ElementTypeResolver:
                     div_data = parent_data[tag_with_class_key]
                 elif tag_with_class_key_underscore in parent_data:
                     div_data = parent_data[tag_with_class_key_underscore]
+                else:
+                    # Ключ в objects.json может быть с суффиксом " col:2,2,2" (например "div_field-paymet col:2,2,2")
+                    for key in parent_data:
+                        if key.startswith(tag_with_class_key_underscore) or key.startswith(tag_with_class_key.replace(' ', '_')):
+                            div_data = parent_data[key]
+                            break
             
-            if div_data and isinstance(div_data, dict) and child_key in div_data:
-                child_data = div_data[child_key]
-                if isinstance(child_data, list) and len(child_data) > 0:
-                    return child_data[0]
+            if div_data and isinstance(div_data, dict):
+                # Точное совпадение дочернего ключа
+                if child_key in div_data:
+                    child_data = div_data[child_key]
+                    if isinstance(child_data, list) and len(child_data) > 0:
+                        return child_data[0]
+                # Ключ в objects.json может быть "div_2-col:80%" при child_key "2-col"
+                for key in div_data:
+                    if key == child_key:
+                        child_data = div_data[key]
+                        if isinstance(child_data, list) and len(child_data) > 0:
+                            return child_data[0]
+                    if key.startswith(f"div_{child_key}") or key.startswith(f"div-{child_key}"):
+                        child_data = div_data[key]
+                        if isinstance(child_data, list) and len(child_data) > 0:
+                            return child_data[0]
+                        if isinstance(child_data, dict):
+                            return 'text'
             
             # Пробуем найти div_field-paymet рекурсивно
             div_field_data = self.find_child_recursive(parent_data, f"div_{class_name}")
             if not div_field_data:
                 div_field_data = self.find_child_recursive(parent_data, f"div-{class_name}")
+            if not div_field_data and isinstance(parent_data, dict):
+                for key in parent_data:
+                    if key.startswith(f"div_{class_name}") or key.startswith(f"div-{class_name}"):
+                        div_field_data = parent_data[key]
+                        break
             
-            if div_field_data and isinstance(div_field_data, dict) and child_key in div_field_data:
-                child_data = div_field_data[child_key]
-                if isinstance(child_data, list) and len(child_data) > 0:
-                    return child_data[0]
+            if div_field_data and isinstance(div_field_data, dict):
+                if child_key in div_field_data:
+                    child_data = div_field_data[child_key]
+                    if isinstance(child_data, list) and len(child_data) > 0:
+                        return child_data[0]
+                for key in div_field_data:
+                    if key.startswith(f"div_{child_key}") or key.startswith(f"div-{child_key}"):
+                        child_data = div_field_data[key]
+                        if isinstance(child_data, list) and len(child_data) > 0:
+                            return child_data[0]
+                        if isinstance(child_data, dict):
+                            return 'text'
         
         # Ищем child_key рекурсивно во всем parent_data
         child_data = self.find_child_recursive(parent_data, child_key)

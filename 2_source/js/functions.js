@@ -570,12 +570,15 @@ class DatabaseRenderer {
                     className = suffix;
                 }
                 console.log('createElementFromTemplate: cleanKey=', cleanKey, 'className=', className);
-                // Для div_1-col:20% -> класс "content-1-col" (чтобы соответствовать CSS селектору)
-                // Для div_2-col:80% -> класс "content-2-col"
+                // Префикс content- только для колоночных ключей (1-col, 2-col) — селекторы .content-1-col, .content-2-col
+                // Для div_field-paymet класс остаётся "field-paymet" — селектор div.field-paymet в objects_css
                 const match = cleanKey.match(/^div[_-](.+)$/);
                 if (match) {
-                    // Добавляем префикс 'content-' для соответствия CSS селекторам
-                    className = 'content-' + match[1];
+                    if (/^\d/.test(match[1])) {
+                        className = 'content-' + match[1];
+                    } else {
+                        className = match[1];
+                    }
                 }
             }
         }

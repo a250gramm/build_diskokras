@@ -22,18 +22,13 @@ class PathUtils:
         # Путь к текущему скрипту
         current_file = Path(__file__).absolute()
         
-        # build/ находится в родительской директории utils/
+        # build (1_builder) находится в родительской директории utils/
         build_dir = current_file.parent.parent
+        project_root = build_dir.parent
         
-        # diskokras/ находится в родительской директории build/
-        diskokras_dir = build_dir.parent
-        
-        # Исходники
-        source_dir = diskokras_dir / 'sourse'
-        
-        # Результат: :var:www:html/diskokras
-        diskokras_base = diskokras_dir.parent.parent
-        output_dir = diskokras_base / ':var:www:html' / 'diskokras'
+        # Исходники и результат
+        source_dir = project_root / '2_source'
+        output_dir = project_root / '3_result'
         
         return source_dir, build_dir, output_dir
     

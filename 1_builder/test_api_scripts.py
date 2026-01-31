@@ -22,7 +22,7 @@ def test_api_elements():
     # Определяем пути
     script_dir = Path(__file__).parent.resolve()
     project_root = script_dir.parent
-    source_dir = project_root / 'sourse'
+    source_dir = project_root / '2_source'
     
     print("=" * 60)
     print("🔍 ПРОВЕРКА API ЭЛЕМЕНТОВ")

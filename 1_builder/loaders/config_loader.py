@@ -95,16 +95,16 @@ class ConfigLoader:
         tag_file = self.source_dir / 'default' / 'tag.json'
         configs['tag'] = load_json_safe(tag_file, {})
         
-        # 10. default_report - отладочные стили (объединяем general и tag)
-        report_general = self.source_dir / 'default_report' / 'general.json'
-        report_tag = self.source_dir / 'default_report' / 'tag.json'
+        # 10. default_report - отладочные стили (папки/файлы с * в имени не участвуют)
+        report_dir = self.source_dir / 'default_report'
+        report_general = report_dir / 'general.json'
+        report_tag = report_dir / 'tag.json'
         report_general_data = load_json_safe(report_general, {})
         report_tag_data = load_json_safe(report_tag, {})
-        # Объединяем в один словарь (general и tag на верхнем уровне)
         configs['report'] = {**report_general_data, **report_tag_data}
         
         # 10.1. default_report/objects_css.json - отладочные стили для объектов
-        report_objects_css_file = self.source_dir / 'default_report' / 'objects_css.json'
+        report_objects_css_file = report_dir / 'objects_css.json'
         configs['report_objects_css'] = load_json_safe(report_objects_css_file, {})
         
         # 11. config.json - настройки сборки
