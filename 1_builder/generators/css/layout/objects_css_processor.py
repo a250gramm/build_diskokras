@@ -147,6 +147,10 @@ class ObjectsCSSProcessor:
                     suffix = nested_key[len(tag):]
                     if suffix.startswith('_') or suffix.startswith('-'):
                         class_name_from_suffix = suffix[1:]
+                        # Поддержка :has() для состояний (например div_field-paymet:has(input:checked))
+                        if ':has(' in class_name_from_suffix:
+                            base_class, pseudo = class_name_from_suffix.split(':has(', 1)
+                            return f"{tag}.{base_class}:has({pseudo}"
                         return f"{tag}.{class_name_from_suffix}"
             
             # Если это не тег с классом, определяем тип из objects.json

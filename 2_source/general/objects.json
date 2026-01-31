@@ -102,6 +102,7 @@
                                     "api1":        ["bd",   "front_pay_met"],
                                     "api2":        ["bd",   "front_wall", "link:api1.id_wallet"],
                                     "div_field-paymet col:2,2,2": {
+                                        "field": ["input", "radio", "api1:id", "name:pay_method"],
                                         "div_1-col:20%": {
                                             "photo":     ["img",   "api2:img"]
                                         },
@@ -114,26 +115,9 @@
                                     }
                                 }
                             },
-
-                            "button_1":      ["button", "text:Отправить"],
-                            "button_submit": ["button", "text:Утвердить"],
-                            "btn_3":         ["button", "text:Удалить"],
-                            "field_1":       ["input", "checkbox", "text:Показать поле цены", "toggle:field_price"]
-
-                            },
-                        "form_form3":{  
-                            "field_1":       ["input", "text", "text:Шиномонтаж"],
-                            "field_2":       ["input", "text", "text:Шиномонтаж"],
-                            "field_3":       ["input", "text", "text:Шиномонтаж"],
-                            "button_1":      ["button", "text:Отправить"]
-                            },
-                        "form_form4":{  
-                            "field_1":       ["input", "text", "text:Шиномонтаж"],
-                            "field_2":       ["input", "text", "text:Шиномонтаж"],
-                            "field_3":       ["input", "text", "text:Шиномонтаж"],
-                            "button_1":      ["button", "text:Отправить"]
-                            }
+                            "button_1": ["button", "text:Отправить"]
                         }
+                    }
                     }
                 ]
             },

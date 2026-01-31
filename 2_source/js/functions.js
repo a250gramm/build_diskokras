@@ -547,7 +547,7 @@ class DatabaseRenderer {
      * Создает элемент из шаблона
      */
     createElementFromTemplate(template, record, bdSources, elementKey = null) {
-        // Определяем тег и класс из шаблона
+        // Определяем тег и класс из шаблона (всегда div — стили в objects_css ориентированы на div.field-paymet)
         const tagName = 'div';
         
         // Определяем класс из ключа элемента, обрабатывая синтаксис col:
@@ -659,6 +659,18 @@ class DatabaseRenderer {
                 element.appendChild(imgEl);
                 }
                 // Если fieldValue пустое - не создаем элемент img, чтобы не было пустого места
+            } else if (elementType === 'input' && (value[1] === 'radio' || value[1] === 'checkbox')) {
+                const inputType = value[1];
+                const valueContent = value[2] || '';
+                const nameContent = value[3] || '';
+                const inputValue = this.resolveValue(valueContent, record, bdSources);
+                const inputName = nameContent.includes(':') ? nameContent.split(':', 2)[1] : nameContent;
+                const inputEl = document.createElement('input');
+                inputEl.type = inputType;
+                inputEl.name = inputName;
+                inputEl.value = String(inputValue || '');
+                inputEl.className = 'field';
+                element.insertBefore(inputEl, element.firstChild);
             }
         }
         
