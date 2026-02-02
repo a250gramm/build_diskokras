@@ -111,6 +111,14 @@ class ConfigLoader:
         config_file = self.source_dir / 'config.json'
         configs['config'] = load_json_safe(config_file, {})
         
+        # 11.5. send_form/*.json - конфиг форм для сохранения данных (имя файла → конфиг)
+        send_form_dir = self.source_dir / 'send_form'
+        configs['send_form'] = {}
+        if send_form_dir.exists():
+            for json_file in send_form_dir.glob('*.json'):
+                if json_file.is_file():
+                    configs['send_form'][json_file.stem] = load_json_safe(json_file, {})
+        
         # 12. library/color.css - библиотека цветов (приоритет над color.json)
         color_css_file = self.source_dir / 'library' / 'color.css'
         colors_from_css = load_css_variables_safe(color_css_file, {})

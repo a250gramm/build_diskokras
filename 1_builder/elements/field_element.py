@@ -37,6 +37,9 @@ class FieldElement(BaseElement):
                 if self.key:
                     css_class = f"field {self.key}"
                 
+                # name для формы (совпадает с ключами в JSON-шаблоне)
+                name_attr = self._get_name_attr()
+                
                 # Проверяем есть ли функция в контексте
                 function_attr = ''
                 if self.context and 'function' in self.context:
@@ -47,10 +50,10 @@ class FieldElement(BaseElement):
                 
                 # Для checkbox/radio создаём label
                 if input_type in ['checkbox', 'radio']:
-                    return f'<label><input type="{input_type}" class="{css_class}">{placeholder}</label>'
+                    return f'<label><input type="{input_type}" class="{css_class}"{name_attr}>{placeholder}</label>'
                 # Для обычных полей используем placeholder
                 else:
-                    return f'<input type="{input_type}" placeholder="{placeholder}" class="{css_class}"{function_attr}>'
+                    return f'<input type="{input_type}" placeholder="{placeholder}" class="{css_class}"{name_attr}{function_attr}>'
             else:
                 # Формат без двоеточия - просто type (например "checkbox")
                 input_type = param2
@@ -85,12 +88,15 @@ class FieldElement(BaseElement):
             if self.key:
                 css_class = f"field {self.key}"
             
+            # name для формы (совпадает с ключами в JSON-шаблоне)
+            name_attr = self._get_name_attr()
+            
             # Для checkbox и radio создаём label
             if input_type in ['checkbox', 'radio']:
-                return f'<label><input type="{input_type}" class="{css_class}"{data_attrs}>{content}</label>'
+                return f'<label><input type="{input_type}" class="{css_class}"{name_attr}{data_attrs}>{content}</label>'
             # Для обычных полей используем placeholder
             else:
-                return f'<input type="{input_type}" placeholder="{content}" class="{css_class}"{data_attrs}>'
+                return f'<input type="{input_type}" placeholder="{content}" class="{css_class}"{name_attr}{data_attrs}>'
         
         # Старый формат: ["field", "Поиск заказа", "form"] - для обратной совместимости
         else:
@@ -101,4 +107,13 @@ class FieldElement(BaseElement):
                 form_id = self.value[2]
                 data_form = f' data-form="{form_id}"'
             
-            return f'<input type="text" placeholder="{placeholder}" class="field"{data_form}>'
+            name_attr = self._get_name_attr()
+            return f'<input type="text" placeholder="{placeholder}" class="field"{name_attr}{data_form}>'
+
+    def _get_name_attr(self) -> str:
+        """Возвращает атрибут name для поля формы (путь с точками → подчёркивания)."""
+        path = self.context.get('element_path') if self.context else None
+        if not path:
+            path = self.key or 'field'
+        name = path.replace('.', '_')
+        return f' name="{name}"' if name else ''

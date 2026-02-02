@@ -20,6 +20,7 @@ from core.config_manager import ConfigManager
 from generators.section_generator import SectionGenerator
 from generators.page_generator import PageGenerator
 from generators.css_generator import CSSGenerator
+from generators.form_json_generator import FormJsonGenerator
 
 
 SOURCE_DIR_NAME = '2_source'
@@ -176,7 +177,19 @@ def main():
         css_gen.save(css_content, css_file)
         print("   ✅ CSS создан")
         print()
-        
+
+        # ЭТАП 6: JSON-шаблоны форм (для сохранения данных после отправки)
+        print("📋 Генерация JSON-шаблонов форм...")
+        form_gen = FormJsonGenerator(configs)
+        form_files = form_gen.generate(output_dir)
+        if form_files:
+            print(f"   ✅ Создано файлов форм: {len(form_files)}")
+            for form_class, fp in form_files.items():
+                print(f"      — {fp.name}")
+        else:
+            print("   (форм с полями не найдено)")
+        print()
+
         # Итоги
         print("=" * 60)
         print("✅ СБОРКА ЗАВЕРШЕНА УСПЕШНО!")

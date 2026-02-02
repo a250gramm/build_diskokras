@@ -107,10 +107,13 @@ class ElementProcessor:
         # 4. Определяем тип элемента
         element_type = self.type_detector.detect_type(key, element_data)
         
+        # Контекст с путём элемента (для name у полей формы)
+        context_with_path = {**self.context, 'element_path': path}
+
         # 5. Обрабатываем в зависимости от типа
         if element_type == 'menu':
             # Это меню - обрабатываем напрямую
-            element = ElementFactory.create(key, element_data, self.context)
+            element = ElementFactory.create(key, element_data, context_with_path)
             if element:
                 return element.render()
         
@@ -125,7 +128,7 @@ class ElementProcessor:
                         # Обрабатываем модалку
                         modal_html = self._process_complex_element(nested_value[3], f"{path}.{nested_key}.modal")
                         # Создаем кнопку
-                        button_element = ElementFactory.create(nested_key, nested_value, self.context)
+                        button_element = ElementFactory.create(nested_key, nested_value, context_with_path)
                         if button_element:
                             return button_element.render() + modal_html
         
@@ -140,7 +143,7 @@ class ElementProcessor:
                 modal_html = self._process_complex_element(element_data[3], f"{path}.modal")
         
         # 7. Создаем элемент через фабрику
-        element = ElementFactory.create(key, element_data, self.context)
+        element = ElementFactory.create(key, element_data, context_with_path)
         
         if element:
             html = element.render()
@@ -294,6 +297,7 @@ class ElementProcessor:
                         function_info = self._get_function_info(sub_path)
                         
                         element_context = self.context.copy()
+                        element_context['element_path'] = sub_path
                         if function_info:
                             element_context['function'] = function_info
                         
