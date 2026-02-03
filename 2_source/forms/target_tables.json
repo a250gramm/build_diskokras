@@ -1,0 +1,17 @@
+{
+  "_comment": "Схема таблиц назначения: куда уходят данные при отправке формы. Таблица = «страница» с ячейками (колонками). Одна строка = одна запись (один отправленный заказ).",
+  "order_shino": {
+    "title": "Заказ шиномонтажа",
+    "description": "Одна строка = один заказ. Колонки = ячейки, в которые попадают данные из формы form_form2.",
+    "columns": [
+      { "id": "shinomontazh", "title": "Шиномонтаж", "type": "number", "unit": "тг." },
+      { "id": "prokat", "title": "Прокат", "type": "number", "unit": "тг." },
+      { "id": "soski", "title": "Соски", "type": "number", "unit": "тг." },
+      { "id": "argon", "title": "Аргон", "type": "number", "unit": "тг." },
+      { "id": "prokat_2_1", "title": "Прокат (1)", "type": "number", "unit": "тг." },
+      { "id": "prokat_2_2", "title": "Прокат (2)", "type": "number", "unit": "тг." },
+      { "id": "total", "title": "Итого", "type": "number", "unit": "тг." },
+      { "id": "id_pay_met", "title": "Способ оплаты", "type": "string", "source": "front_pay_met.id" }
+    ]
+  }
+}
