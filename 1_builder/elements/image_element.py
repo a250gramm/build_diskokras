@@ -5,6 +5,7 @@
 """
 
 from .base_element import BaseElement
+from utils.path_utils import PathUtils
 
 
 class ImageElement(BaseElement):
@@ -29,6 +30,8 @@ class ImageElement(BaseElement):
         # Если есть ссылка
         if len(self.value) > 2:
             url = self.value[2]
+            if url.startswith('/') and '//' not in url:
+                url = PathUtils.page_path_to_name(url)
             return f'<a href="{url}">{img_tag}</a>'
         
         return img_tag

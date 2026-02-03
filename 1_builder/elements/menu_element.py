@@ -6,6 +6,7 @@
 
 from typing import Dict
 from .base_element import BaseElement
+from utils.path_utils import PathUtils
 
 
 class MenuElement(BaseElement):
@@ -62,9 +63,9 @@ class MenuElement(BaseElement):
                     # Это модальное окно
                     links.append(f'<a href="modal" class="btn" data-modal="{modal_id}">{text}</a>')
                 else:
-                    # В меню конвертируем URL: /index -> index.html
-                    if url.startswith('/'):
-                        url = url.lstrip('/') + '.html'
+                    # Внутренний путь страницы → имя файла для file:// и статики
+                    if url.startswith('/') and '//' not in url:
+                        url = PathUtils.page_path_to_name(url)
                     links.append(f'<a href="{url}" class="btn">{text}</a>')
         
         if not links:

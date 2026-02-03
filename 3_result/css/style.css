@@ -2257,6 +2257,56 @@ section.section-footer {
 
 .gr8 {
     display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+}
+
+[data-path*='div_field-price'] div.field-price {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+}
+
+.gr8 {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 768px) {
+    .gr8 {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+[data-path*='div_field-paymet'] div.field-paymet {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+}
+
+[data-path*='div_1'] div.1 {
+    width: 20.0% !important;
+    max-width: 20.0% !important;
+    box-sizing: border-box !important;
+}
+
+[data-path*='div_field-paymet'] div.field-paymet {
+    grid-template-columns: 20.0% 80.0% !important;
+}
+
+[data-path*='div_2'] div.2 {
+    width: 80.0% !important;
+    max-width: 80.0% !important;
+    box-sizing: border-box !important;
+}
+
+.gr8 {
+    display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 10px !important;
     box-sizing: border-box !important;

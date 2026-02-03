@@ -52,6 +52,42 @@ class DatabaseProcessor:
             print(f"⚠️ Ошибка загрузки {json_path}: {e}")
             return None
     
+    def _parse_bd_options(self, value: List) -> tuple:
+        """
+        Парсит опции из массива bd: link:, filter: и т.д.
+        
+        Args:
+            value: ["bd", "table_name", "filter:field=val", "link:api1.field"] ...
+            
+        Returns:
+            (link_attr: str, filter_spec: str|None, filter_predicate: callable|None)
+        """
+        link_attr = ''
+        filter_spec = None
+        filter_predicate = None
+        
+        for i in range(2, len(value)):
+            opt = value[i]
+            if not isinstance(opt, str):
+                continue
+            if opt.startswith('link:'):
+                link_attr = f' data-bd-link="{opt}"'
+            elif opt.startswith('filter:'):
+                filter_spec = opt  # "filter:id_dep_from=shino"
+                # Парсим "field=value" для фильтрации списка записей
+                eq = opt.find('=', len('filter:'))
+                if eq > 0:
+                    field = opt[len('filter:'):eq].strip()
+                    filter_value = opt[eq + 1:].strip()
+                    if field and filter_value is not None:
+                        def _predicate(record, f=field, v=filter_value):
+                            if not isinstance(record, dict):
+                                return False
+                            return str(record.get(f)) == str(v)
+                        filter_predicate = _predicate
+        
+        return link_attr, filter_spec, filter_predicate
+    
     def generate_bd_element(self, key: str, value: List, base_path: str = '') -> str:
         """
         Генерирует HTML для элемента БД
@@ -68,9 +104,7 @@ class DatabaseProcessor:
             return ''
         
         table_name = value[1]
-        link_attr = ''
-        if len(value) >= 3 and isinstance(value[2], str) and value[2].startswith('link:'):
-            link_attr = f' data-bd-link="{value[2]}"'
+        link_attr, filter_spec, filter_predicate = self._parse_bd_options(value)
         
         # Используем ключ как имя источника (api1, api2, ...)
         api_name = key
@@ -80,16 +114,21 @@ class DatabaseProcessor:
         if self.source_dir:
             json_data = self.load_bd_json(table_name)
             if json_data:
-                print(f"   ✅ Загружены данные для {table_name}: {len(json_data)} записей")
+                if filter_predicate and isinstance(json_data, list):
+                    json_data = [r for r in json_data if filter_predicate(r)]
+                    print(f"   ✅ Загружены данные для {table_name}: {len(json_data)} записей (с фильтром {filter_spec})")
+                else:
+                    print(f"   ✅ Загружены данные для {table_name}: {len(json_data)} записей")
             else:
                 print(f"   ⚠️ Не удалось загрузить данные для {table_name}")
         
+        filter_attr = f' data-bd-filter="{filter_spec}"' if filter_spec else ''
         # Генерируем span с data-атрибутами (скрытый элемент для JavaScript)
-        bd_html = f'<span data-bd-api="{api_name}" data-bd-source="{table_name}" data-bd-url="../bd/{table_name}.json"{link_attr} style="display:none;"></span>'
+        bd_html = f'<span data-bd-api="{api_name}" data-bd-source="{table_name}" data-bd-url="../bd/{table_name}.json"{link_attr}{filter_attr} style="display:none;"></span>'
         
         html_parts = [bd_html]
         
-        # Если данные загружены, встраиваем их в script тег
+        # Если данные загружены, встраиваем их в script тег (уже отфильтрованные при наличии filter:)
         if json_data is not None:
             json_str = json.dumps(json_data, ensure_ascii=False)
             script_html = f'<script type="application/json" data-bd-api="{api_name}" data-bd-source="{table_name}">{json_str}</script>'
@@ -115,14 +154,19 @@ class DatabaseProcessor:
         
         for key, value in data.items():
             if isinstance(value, list) and len(value) >= 2 and value[0] == 'bd':
-                # Это источник базы данных
                 table_name = value[1]
-                link_attr = ''
-                if len(value) >= 3 and isinstance(value[2], str) and value[2].startswith('link:'):
-                    link_attr = value[2]  # "link:api1.id_wallet"
+                link_raw = ''
+                filter_raw = ''
+                for i in range(2, len(value)):
+                    opt = value[i]
+                    if isinstance(opt, str) and opt.startswith('link:'):
+                        link_raw = opt
+                    elif isinstance(opt, str) and opt.startswith('filter:'):
+                        filter_raw = opt
                 bd_sources[key] = {
                     'table': table_name,
-                    'link': link_attr
+                    'link': link_raw,
+                    'filter': filter_raw
                 }
         
         return bd_sources

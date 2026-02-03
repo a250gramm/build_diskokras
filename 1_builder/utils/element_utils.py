@@ -7,6 +7,8 @@
 import re
 from typing import Dict, Optional, Tuple
 
+from utils.path_utils import PathUtils
+
 
 def parse_element_path(path: str) -> Dict[str, str]:
     """
@@ -158,7 +160,11 @@ def extract_link_info(key: str, value: Dict) -> Tuple[Optional[str], Optional[st
             link_href = '/'  # По умолчанию
     else:
         link_href = '/'  # По умолчанию
-    
+
+    # Внутренний путь страницы → имя файла для работы с file:// и статикой
+    if link_href.startswith('/') and '//' not in link_href:
+        link_href = PathUtils.page_path_to_name(link_href)
+
     return (link_href, link_class)
 
 

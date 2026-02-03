@@ -6,6 +6,7 @@
 
 from typing import Dict, List
 from .element_processor import ElementProcessor
+from utils.path_utils import PathUtils
 
 
 class LayoutProcessor:
@@ -174,6 +175,8 @@ class LayoutProcessor:
             group_attrs = self.html_attrs.get(group_path, {})
             tag = group_attrs.get('tag', 'div')
             href = group_attrs.get('href', '')
+            if href.startswith('/') and '//' not in href:
+                href = PathUtils.page_path_to_name(href)
             
             # Класс группы: {СЕКЦИЯ}-{КОЛОНКА}-{СТРОКА}-{ГРУППА}
             group_class = f"{self.section_name}-{col_num}-{row_num}-{group_num}"

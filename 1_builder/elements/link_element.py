@@ -5,6 +5,7 @@
 """
 
 from .base_element import BaseElement
+from utils.path_utils import PathUtils
 
 
 class LinkElement(BaseElement):
@@ -33,6 +34,10 @@ class LinkElement(BaseElement):
         if len(self.value) > 3 and url == 'modal':
             modal_id = self.value[3]
             return f'<a href="modal" class="btn" data-modal="{modal_id}">{content_html}</a>'
+        
+        # Внутренний путь страницы (/shino, /index) → имя файла для работы с file:// и статикой
+        if url.startswith('/') and '//' not in url:
+            url = PathUtils.page_path_to_name(url)
         
         # Обычная ссылка
         return f'<a href="{url}" class="btn">{content_html}</a>'

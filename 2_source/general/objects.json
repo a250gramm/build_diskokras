@@ -66,6 +66,69 @@
                         "form_form2":{  
                             "1.div_wr-fields": {
                                 "tit":         ["text", "text:Услуги"],
+                                "cycle_gr8 col:1,1,1":       {
+                                    "api1":        ["bd",   "front_servi", "filter:id_dep_from=shino"],
+                                    "div_field-price col:1,1,1": {     
+                                        "label":   ["text",  "api1:sub_cat"],
+                                        "field":   ["input", "text:Введите сумму"],
+                                        "suffix":  ["text",  "text:тг."]
+                                    }
+                                }
+                            },
+                            "2.div_wr-fields": {
+                                "tit":         ["text", "text:Способ оплаты"],
+                                "cycle_gr8 col:2,1,1":       {
+                                    "api1":        ["bd",   "front_pay_met"],
+                                    "api2":        ["bd",   "front_wall", "link:api1.id_wallet"],
+                                    "div_field-paymet col:2,2,2": {
+                                        "field": ["input", "radio", "api1:id", "name:pay_method"],
+                                        "div_1-col:20%": {
+                                            "photo":     ["img",   "api2:img"]
+                                        },
+                                        "div_2-col:80%": {
+                                            "label":      ["text",  "api1:sub_cat"],
+                                            "percent":    ["text",  "api1:percent"],
+                                            "prefix":     ["text",  "api1:prefix"],
+                                            "id_wallet*": ["text",  "api1:id_wallet"]
+                                        }
+                                    }
+                                }
+                            },
+                            "button_1": ["button", "text:Отправить"]
+                        }
+                    }
+                    }
+                ]
+            },
+            "/pokras": {
+                "btn_modal": ["button", "text:Создать заказ Корень", "modal:modal1",
+                {
+                    "div_modal1":{
+                        "div_gr4":{
+                            "tit":               ["text", "if:modal_main_btn" ],
+                            "close":             ["icon", "close"]
+                        },
+                        "form_form2":{  
+                            "field_1":  ["input", "text", "text:Шиномонтаж"],
+                            "field_2":  ["input", "text", "text:Шиномонтаж"],
+                            "field_3":  ["input", "text", "text:Шиномонтаж"],
+                            "button_1": ["button", "text:Отправить"]
+                            }
+                        }
+                    }
+                ]
+            },
+            "/hranenie":     {
+                "btn_modal": ["button", "text:Создать заказ Корень", "modal:modal1",
+                {
+                    "div_modal1":{
+                        "div_gr4":{
+                            "tit":               ["text", "if:modal_main_btn" ],
+                            "close":             ["icon", "close"]
+                        },
+                        "form_form2":{  
+                            "1.div_wr-fields": {
+                                "tit":         ["text", "text:Услуги"],
                                 "1.div_field-price": {
                                     "label":   ["text",  "text:Шиномонтаж"],
                                     "field":   ["input", "text:Введите сумму"],
@@ -98,19 +161,19 @@
                             },
                             "2.div_wr-fields": {
                                 "tit":         ["text", "text:Способ оплаты"],
-                                "cycle_gr8 col:2,1,1":       {
-                                    "api1":        ["bd",   "front_pay_met"],
-                                    "api2":        ["bd",   "front_wall", "link:api1.id_wallet"],
+                                "cycle_gr8 col:2,1,1": {
+                                    "api1": ["bd", "front_pay_met"],
+                                    "api2": ["bd", "front_wall", "link:api1.id_wallet"],
                                     "div_field-paymet col:2,2,2": {
                                         "field": ["input", "radio", "api1:id", "name:pay_method"],
                                         "div_1-col:20%": {
-                                            "photo":     ["img",   "api2:img"]
+                                            "photo":     ["img", "api2:img"]
                                         },
                                         "div_2-col:80%": {
-                                            "label":      ["text",  "api1:sub_cat"],
-                                            "percent":    ["text",  "api1:percent"],
-                                            "prefix":     ["text",  "api1:prefix"],
-                                            "id_wallet*": ["text",  "api1:id_wallet"]
+                                            "label":      ["text", "api1:sub_cat"],
+                                            "percent":    ["text", "api1:percent"],
+                                            "prefix":     ["text", "api1:prefix"],
+                                            "id_wallet*": ["text", "api1:id_wallet"]
                                         }
                                     }
                                 }
@@ -121,22 +184,6 @@
                     }
                 ]
             },
-            "/pokras": {
-                "btn_modal": ["button", "text:Создать заказ Корень", "modal:modal1",
-                {
-                    "div_modal1":{
-                        "div_gr4":     ["double"],
-                        "form_form2":{  
-                            "field_1":  ["input", "text", "text:Шиномонтаж"],
-                            "field_2":  ["input", "text", "text:Шиномонтаж"],
-                            "field_3":  ["input", "text", "text:Шиномонтаж"],
-                            "button_1": ["button", "text:Отправить"]
-                            }
-                        }
-                    }
-                ]
-            },
-            "/hranenie":     ["button", "text:Создать заказ",    "modal",    "form"],
             "/geo":          ["button", "text:Создать заказ",    "modal",    "form"],
             "/deliv":        ["button", "text:Создать заказ",    "modal",    "form"],
             "/poss_point":   ["button", "text:Принять оплату",   "modal",    "form"]
