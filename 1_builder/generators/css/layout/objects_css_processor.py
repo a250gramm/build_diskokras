@@ -162,8 +162,14 @@ class ObjectsCSSProcessor:
                     return 'nav.menu'
                 else:
                     return child_type
-            else:
-                return nested_key
+            # Ключи из инклюдов (div_fp04-field, div_field-paymet) не в sections — даём валидный селектор
+            if nested_key.startswith('.'):
+                return nested_key  # уже класс, напр. ".field"
+            if nested_key in ('input', 'img', 'button', 'form', 'a', 'label'):
+                return nested_key  # HTML-тег
+            if nested_key and (nested_key[0].isdigit() or '-col' in nested_key):
+                return f".{nested_key}"  # колонки: div_1-col → .1-col
+            return f".content-{nested_key}"  # текст/прочее: suffix, percent, prefix → .content-*
         
         elif len(nested_parts) == 2:
             # Формат "div_2 burger" -> div.2 icon
@@ -181,6 +187,9 @@ class ObjectsCSSProcessor:
                     break
             
             if tag_name and class_name:
+                # Уже селектор класса (например ".gr8._cycle-contents") — не добавляем content-
+                if child_key.startswith('.'):
+                    return f"{tag_name}.{class_name} {child_key}"
                 child_type = self.type_resolver.resolve_child_type(data_path_key, child_key, tag_name, class_name)
                 if child_type:
                     if child_type == 'text':
@@ -213,6 +222,16 @@ class ObjectsCSSProcessor:
         # Множественные вложенные части: "nav a" -> "nav a"
         return ' '.join(nested_parts)
     
+    def _selector_for_div_class_key(self, element_key: str) -> Optional[str]:
+        """Для ключа вида div_xxx или div-xxx возвращает селектор div.xxx (инклюды без data-path)."""
+        if element_key.startswith('div_') or element_key.startswith('div-'):
+            suffix = element_key[4:]
+            if suffix.startswith('_') or suffix.startswith('-'):
+                suffix = suffix[1:]
+            if suffix:
+                return f"div.{suffix}"
+        return None
+    
     def generate_css(self) -> str:
         """
         Генерирует CSS из objects_css
@@ -237,7 +256,11 @@ class ObjectsCSSProcessor:
             
             if composite_result:
                 data_path_key, nested_selectors, nested_parts, additional_classes = composite_result
-                selector = f"[data-path='{data_path_key}'] {nested_selectors}"
+                base = self._selector_for_div_class_key(data_path_key)
+                if base:
+                    selector = f"{base} {nested_selectors}" if nested_selectors.strip() else base
+                else:
+                    selector = f"[data-path='{data_path_key}'] {nested_selectors}"
                 
                 # Обрабатываем стили
                 if isinstance(element_styles, dict):
@@ -254,11 +277,15 @@ class ObjectsCSSProcessor:
                         css_parts.append("}\n\n")
                 continue
             
-            # Простой селектор - определяем тип элемента
-            element_type, has_api, is_complex_structure = self.type_resolver.resolve_element_type(element_key)
-            selector = self.type_resolver.build_selector_for_type(
-                element_key, element_type, has_api, is_complex_structure
-            )
+            # Простой селектор: для div_xxx/div-xxx из инклюдов — по классу, иначе по data-path
+            div_class_selector = self._selector_for_div_class_key(element_key)
+            if div_class_selector:
+                selector = div_class_selector
+            else:
+                element_type, has_api, is_complex_structure = self.type_resolver.resolve_element_type(element_key)
+                selector = self.type_resolver.build_selector_for_type(
+                    element_key, element_type, has_api, is_complex_structure
+                )
             
             # Генерируем стили
             if isinstance(element_styles, dict):

@@ -9,6 +9,55 @@ from typing import Dict, Any
 from .file_loader import load_json_safe, load_css_variables_safe
 
 
+def _resolve_includes(source_dir: Path, data: Dict, objects_css: Dict, objects_fun: Dict) -> None:
+    """Рекурсивно раскрывает инклюды: ключ с значением ["include", "имя_файла"]
+    читает 2_source/include/имя_файла.json, подставляет api и html, мержит css в objects_css и fun в objects_fun."""
+    if not isinstance(data, dict):
+        return
+    include_dir = source_dir / 'include'
+    keys_to_resolve = []
+    for key, value in data.items():
+        if isinstance(value, list) and len(value) >= 2 and value[0] == 'include':
+            filename = value[1]
+            if isinstance(filename, str):
+                keys_to_resolve.append((key, filename))
+    for key, filename in keys_to_resolve:
+        inc_path = include_dir / f'{filename}.json'
+        inc = load_json_safe(inc_path, {})
+        if inc:
+            api = inc.get('api', {})
+            html = inc.get('html', {})
+            if key.startswith('/'):
+                data[key] = html
+                _resolve_includes(source_dir, html, objects_css, objects_fun)
+            else:
+                for k, v in html.items():
+                    if isinstance(v, dict) and api:
+                        v = {**api, **v}
+                    data[k] = v
+                del data[key]
+            if inc.get('css'):
+                objects_css[filename] = inc['css']
+            if inc.get('fun'):
+                for group_name, group_value in inc['fun'].items():
+                    if not isinstance(group_value, dict):
+                        continue
+                    if 'fun' in group_value and 'result' in group_value:
+                        path_key = 'main_btn form_form2 1.div_wr-fields field'
+                        objects_fun.setdefault(group_name, {})[path_key] = group_value
+                    else:
+                        objects_fun.setdefault(group_name, {}).update(group_value)
+        else:
+            del data[key]
+    for value in data.values():
+        if isinstance(value, dict):
+            _resolve_includes(source_dir, value, objects_css, objects_fun)
+        elif isinstance(value, list):
+            for item in value:
+                if isinstance(item, dict):
+                    _resolve_includes(source_dir, item, objects_css, objects_fun)
+
+
 class ConfigLoader:
     """Загружает все конфигурационные файлы из директории source"""
     
@@ -46,6 +95,15 @@ class ConfigLoader:
         objects_file = self.source_dir / 'general' / 'objects.json'
         configs['sections'] = load_json_safe(objects_file, {})
         
+        # 2.1. objects_css и objects_fun загружаем раньше, чтобы мержить в них данные из include
+        objects_css_file = self.source_dir / 'design' / 'objects_css.json'
+        configs['objects_css'] = load_json_safe(objects_css_file, {})
+        objects_fun_file = self.source_dir / 'design' / 'objects_fun.json'
+        configs['objects_fun'] = load_json_safe(objects_fun_file, {})
+        
+        # 2.2. раскрытие include в sections: подстановка api, html, мерж css и fun
+        _resolve_includes(self.source_dir, configs['sections'], configs['objects_css'], configs['objects_fun'])
+        
         # 3. layout_html.json - структура разметки
         html_file = self.source_dir / 'layout' / 'layout_html.json'
         configs['html'] = load_json_safe(html_file, {})
@@ -59,13 +117,7 @@ class ConfigLoader:
         css_data = load_json_safe(css_file, {})
         configs['css'].update(css_data)
         
-        # 5.5. design/objects_css.json - стили для конкретных объектов
-        objects_css_file = self.source_dir / 'design' / 'objects_css.json'
-        configs['objects_css'] = load_json_safe(objects_css_file, {})
-        
-        # 5.6. design/objects_fun.json - функции для объектов (sum, avg, etc)
-        objects_fun_file = self.source_dir / 'design' / 'objects_fun.json'
-        configs['objects_fun'] = load_json_safe(objects_fun_file, {})
+        # 5.5. objects_css и objects_fun уже загружены в п. 2.1 и дополнены из include
         
         # 6. design/html.json - HTML атрибуты для групп/элементов (tag, href и т.д.)
         html_attrs_file = self.source_dir / 'design' / 'html.json'

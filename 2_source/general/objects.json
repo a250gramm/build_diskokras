@@ -55,51 +55,7 @@
 
     "main_btn":{
         "if": {
-            "/shino": {
-                "btn_modal": ["button", "if:main_btn", "modal:modal1",
-                    {
-                    "div_modal1":{
-                        "div_gr4":{
-                            "tit":               ["text", "if:modal_main_btn" ],
-                            "close":             ["icon", "close"]
-                        },
-                        "form_form2":{  
-                            "1.div_wr-fields": {
-                                "tit":         ["text", "text:Услуги"],
-                                "cycle_gr8 col:1,1,1":       {
-                                    "api1":        ["bd",   "front_servi", "filter:id_dep_from=shino"],
-                                    "div_field-price col:1,1,1": {     
-                                        "label":   ["text",  "api1:sub_cat"],
-                                        "field":   ["input", "text:Введите сумму"],
-                                        "suffix":  ["text",  "text:тг."]
-                                    }
-                                }
-                            },
-                            "2.div_wr-fields": {
-                                "tit":         ["text", "text:Способ оплаты"],
-                                "cycle_gr8 col:2,1,1":       {
-                                    "api1":        ["bd",   "front_pay_met"],
-                                    "api2":        ["bd",   "front_wall", "link:api1.id_wallet"],
-                                    "div_field-paymet col:2,2,2": {
-                                        "field": ["input", "radio", "api1:id", "name:pay_method"],
-                                        "div_1-col:20%": {
-                                            "photo":     ["img",   "api2:img"]
-                                        },
-                                        "div_2-col:80%": {
-                                            "label":      ["text",  "api1:sub_cat"],
-                                            "percent":    ["text",  "api1:percent"],
-                                            "prefix":     ["text",  "api1:prefix"],
-                                            "id_wallet*": ["text",  "api1:id_wallet"]
-                                        }
-                                    }
-                                }
-                            },
-                            "button_1": ["button", "text:Отправить"]
-                        }
-                    }
-                    }
-                ]
-            },
+            "/shino": ["include", "shino/form"],
             "/pokras": {
                 "btn_modal": ["button", "text:Создать заказ Корень", "modal:modal1",
                 {
@@ -184,7 +140,29 @@
                     }
                 ]
             },
-            "/geo":          ["button", "text:Создать заказ",    "modal",    "form"],
+            "/geo": {
+                "btn_modal": ["button", "if:main_btn", "modal:modal1",
+                    {
+                    "div_modal1":{
+                        "div_gr4":{
+                            "tit":               ["text", "if:modal_main_btn" ],
+                            "close":             ["icon", "close"]
+                        },
+                        "form_form2":{  
+                            "1.div_wr-fields": {
+                                "tit":         ["text",    "text:Услуги"],
+                                "servi_shino": ["include", "servi_shino_geo"]
+                            },
+                            "2.div_wr-fields": {
+                                "tit":         ["text",    "text:Способ оплаты"],
+                                "pay_met":     ["include", "pay_met_geo"]
+                            },
+                            "button_1": ["button", "text:Отправить"]
+                        }
+                    }
+                    }
+                ]
+            },
             "/deliv":        ["button", "text:Создать заказ",    "modal",    "form"],
             "/poss_point":   ["button", "text:Принять оплату",   "modal",    "form"]
         }

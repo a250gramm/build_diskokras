@@ -1,0 +1,59 @@
+
+{
+"api":{
+    "api1":        ["bd",   "front_servi", "filter:id_dep_from=shino"]
+
+},
+"fun":{
+    "Сумма всех полей с ценой": {
+        "fun": "sum", "format": "number", "result": "total_price"
+    }
+},
+"html":{
+    "cycle_fp04 col:1,1,1": {
+        "div_fp04-field": {
+            "label":   ["text",  "api1:sub_cat"],
+            "field":   ["input", "text:Введите сумму"],
+            "suffix":  ["text",  "text:тг."]
+        }
+    },
+    "div_all-sum": {
+        "label":   ["text",  "fun:total_price"]
+    }
+},
+
+"css":{
+    "div_fp04-field":{
+        "display": ["flex", "flex", "flex"],
+        "flex-direction": ["row", "row", "row"],
+        "align-items": ["center", "center", "center"],
+        "gap": [10, 10, 10, "px"],
+        "border": ["1px solid", "1 1 1 1", "black.100"],
+        "box-sizing": ["border-box", "border-box", "border-box"],
+        "overflow": ["hidden", "hidden", "hidden"],
+        "position": ["relative", "relative", "relative"],
+        "margin-bottom": [10, 10, 10, "px"]
+    },
+    "div_fp04-field label":{
+        "flex": ["0 0 50%", "0 0 30%", "0 0 30%"],
+        "max-width": ["50%", "30%", "30%"],
+        "white-space": ["nowrap", "nowrap", "nowrap"],
+        "border": ["2px solid", "1 1 1 1", "black.100"]
+    },
+    "div_fp04-field .field":{
+        "flex": ["1 1 auto", "1 1 auto", "1 1 auto"],
+        "width": [100, 100, 100, "%"],
+        "padding-right": [50, 50, 50, "px"],
+        "outline": ["none", "none", "none"],
+        "border": ["2px solid", "1 1 1 1", "blue.100"]
+    },
+    "div_fp04-field suffix":{
+        "margin-left": [-40, -40, -40, "px"],
+        "pointer-events": ["none", "none", "none"],
+        "color": ["black", 60],
+        "z-index": [1, 1, 1],
+        "position": ["relative", "relative", "relative"],
+        "border": ["2px solid", "1 1 1 1", "black.100"]
+    }
+}
+}

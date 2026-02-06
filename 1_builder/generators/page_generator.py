@@ -116,21 +116,30 @@ class PageGenerator:
         
         body_content = '\n    '.join(sections_html_parts)
         
-        # Загружаем JSON данные и добавляем script теги в конец body
-        scripts_html = self._generate_bd_scripts()
+        # Источники bd, уже вставленные из секций (с data-bd-api и фильтрами) — не дублировать
+        skip_sources = set()
+        for tag in script_tags:
+            m = re.search(r'data-bd-source="([^"]+)"', tag)
+            if m:
+                skip_sources.add(m.group(1))
+        
+        scripts_html = self._generate_bd_scripts(skip_sources=skip_sources)
         if script_tags:
-            scripts_html = '\n    '.join(script_tags) + '\n' + scripts_html if scripts_html else '\n    '.join(script_tags)
+            scripts_html = '\n    '.join(script_tags) + ('\n' + scripts_html if scripts_html else '')
         elif scripts_html:
             scripts_html = scripts_html
         
+        from datetime import datetime
+        build_marker = f'<!-- build: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")} -->'
         return f'''<body data-page="{page_name}">
+    {build_marker}
     {body_content}
 {('    ' + scripts_html + '\n') if scripts_html else ''}
     <script src="../js/script.js"></script>
 </body>'''
     
-    def _generate_bd_scripts(self) -> str:
-        """Генерирует script теги с данными из JSON файлов"""
+    def _generate_bd_scripts(self, skip_sources: set = None) -> str:
+        """Генерирует script теги с данными из JSON файлов. Не добавляет скрипты для источников из skip_sources (уже вставлены из секций с data-bd-api и фильтрами)."""
         if not self.source_dir:
             return ''
         
@@ -138,13 +147,15 @@ class PageGenerator:
         if not bd_dir.exists():
             return ''
         
+        skip_sources = skip_sources or set()
         scripts = []
-        # Загружаем все JSON файлы из bd/
         for json_file in bd_dir.glob('*.json'):
+            table_name = json_file.stem
+            if table_name in skip_sources:
+                continue
             try:
                 with open(json_file, 'r', encoding='utf-8') as f:
                     data = json.load(f)
-                    table_name = json_file.stem
                     script_tag = f'<script type="application/json" data-bd-source="{table_name}">{json.dumps(data, ensure_ascii=False)}</script>'
                     scripts.append(script_tag)
             except Exception as e:

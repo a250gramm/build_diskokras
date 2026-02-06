@@ -53,9 +53,12 @@ class CycleProcessor:
         
         # Добавляем класс колонок на основе cycle_key
         # cycle_col-2 -> класс _col-2, cycle_col-3 -> класс _col-3 и т.д.
+        contents_attr = ''
         if cycle_key.startswith('cycle_col-'):
             col_num = cycle_key.replace('cycle_col-', '')
             classes.append(f'_col-{col_num}')
+            if col_num == '1':
+                contents_attr = ' style="display:contents"'
         
         class_attr = f' class="{" ".join(classes)}"' if classes else ''
         
@@ -76,13 +79,13 @@ class CycleProcessor:
                 else:
                     # Если нет class, добавляем перед data-template
                     template_attrs = f'{class_attr}{template_attrs}'
-            html_parts.append(f'<div{template_attrs}></div>')
+            html_parts.append(f'<div{template_attrs}{contents_attr}></div>')
         else:
             # Если template_attrs пустой, все равно создаем контейнер с data-template
             # (для случая когда cycle содержит div_field-paymet с api: префиксами)
             template_json = json.dumps(cycle_template, ensure_ascii=False)
             # Используем одинарные кавычки для атрибута, чтобы не экранировать двойные кавычки в JSON
-            html_parts.append(f"<div{class_attr} data-template='{template_json}'></div>")
+            html_parts.append(f"<div{class_attr} data-template='{template_json}'{contents_attr}></div>")
         
         return ''.join(html_parts)
     

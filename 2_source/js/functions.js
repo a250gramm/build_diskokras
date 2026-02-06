@@ -547,7 +547,7 @@ class DatabaseRenderer {
      * Создает элемент из шаблона
      */
     createElementFromTemplate(template, record, bdSources, elementKey = null) {
-        // Определяем тег и класс из шаблона (всегда div — стили в objects_css ориентированы на div.field-paymet)
+        // Определяем тег и класс из шаблона
         const tagName = 'div';
         
         // Определяем класс из ключа элемента, обрабатывая синтаксис col:
@@ -561,24 +561,13 @@ class DatabaseRenderer {
             colInfo = parsed.colInfo;
             
             if (cleanKey.startsWith('div_')) {
-                const suffix = cleanKey.replace('div_', '');
-                // Если суффикс начинается с цифры (например, "2-col"), добавляем префикс "content-"
+                const suffix = cleanKey.replace(/^div[_-]/, '');
+                // Если суффикс начинается с цифры (например, "1-col", "2-col"), добавляем префикс "content-"
+                // — иначе CSS селектор .1-col невалиден. Для fp04-field, field-paymet — класс без префикса.
                 if (suffix && /^\d/.test(suffix)) {
                     className = 'content-' + suffix;
                 } else {
-                    // Для других случаев (например, "field-paymet") используем как есть
                     className = suffix;
-                }
-                console.log('createElementFromTemplate: cleanKey=', cleanKey, 'className=', className);
-                // Префикс content- только для колоночных ключей (1-col, 2-col) — селекторы .content-1-col, .content-2-col
-                // Для div_field-paymet класс остаётся "field-paymet" — селектор div.field-paymet в objects_css
-                const match = cleanKey.match(/^div[_-](.+)$/);
-                if (match) {
-                    if (/^\d/.test(match[1])) {
-                        className = 'content-' + match[1];
-                    } else {
-                        className = match[1];
-                    }
                 }
             }
         }
@@ -634,6 +623,14 @@ class DatabaseRenderer {
                 element.appendChild(textEl);
                 }
                 // Если fieldValue пустое - не создаем элемент text, чтобы не было пустого места
+            } else if (elementType === 'input') {
+                const inputEl = document.createElement('input');
+                inputEl.type = 'text';
+                inputEl.className = `${key} input`;
+                if (fieldValue) {
+                    inputEl.placeholder = String(fieldValue).trim();
+                }
+                element.appendChild(inputEl);
             } else if (elementType === 'img') {
                 // Создаем img элемент только если есть значение
                 // Проверяем что fieldValue существует и не пустое
@@ -659,18 +656,6 @@ class DatabaseRenderer {
                 element.appendChild(imgEl);
                 }
                 // Если fieldValue пустое - не создаем элемент img, чтобы не было пустого места
-            } else if (elementType === 'input' && (value[1] === 'radio' || value[1] === 'checkbox')) {
-                const inputType = value[1];
-                const valueContent = value[2] || '';
-                const nameContent = value[3] || '';
-                const inputValue = this.resolveValue(valueContent, record, bdSources);
-                const inputName = nameContent.includes(':') ? nameContent.split(':', 2)[1] : nameContent;
-                const inputEl = document.createElement('input');
-                inputEl.type = inputType;
-                inputEl.name = inputName;
-                inputEl.value = String(inputValue || '');
-                inputEl.className = 'field';
-                element.insertBefore(inputEl, element.firstChild);
             }
         }
         
