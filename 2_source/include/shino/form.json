@@ -9,7 +9,7 @@
                 },
                 "form_form2":{
                     "1.div_wr-fields": {
-                        "tit":         ["text",    "text:Услуги"],
+                        "tit":         ["text",    "text:Услуги111"],
                         "servi_shino": ["include", "shino/servi"]
                     },
                     "2.div_wr-fields": {
