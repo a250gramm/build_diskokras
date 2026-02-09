@@ -151,11 +151,11 @@
                         "form_form2":{  
                             "1.div_wr-fields": {
                                 "tit":         ["text",    "text:Услуги"],
-                                "servi_shino": ["include", "servi_shino_geo"]
+                                "servi_shino": ["include", "shino/servi"]
                             },
                             "2.div_wr-fields": {
                                 "tit":         ["text",    "text:Способ оплаты"],
-                                "pay_met":     ["include", "pay_met_geo"]
+                                "pay_met":     ["include", "shino/pay_met"]
                             },
                             "button_1": ["button", "text:Отправить"]
                         }

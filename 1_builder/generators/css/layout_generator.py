@@ -18,13 +18,15 @@ class LayoutGenerator:
     
     def __init__(self, css_config, general_config, report_config, default_config,
                  objects_css, report_objects_css, structure_analyzer, process_dict_fn, process_props_fn, 
-                 process_props_important_fn, is_report_enabled_fn, sections_config=None):
+                 process_props_important_fn, is_report_enabled_fn, sections_config=None,
+                 objects_css_by_page=None):
         self.css_config = css_config
         self.general_config = general_config
         self.report_config = report_config
         self.default_config = default_config
         self.objects_css = objects_css
         self.report_objects_css = report_objects_css
+        self.objects_css_by_page = objects_css_by_page or {}
         self.structure_analyzer = structure_analyzer
         self._process_dict_properties_with_important = process_dict_fn
         self._process_properties = process_props_fn
@@ -546,6 +548,23 @@ class LayoutGenerator:
                 mobile_breakpoint
             )
             css_parts.append(objects_processor.generate_css())
+        
+        # Стили инклудов по страницам — независимо, с body[data-page] для перекрытия design
+        for page, page_objects_css in self.objects_css_by_page.items():
+            if page_objects_css:
+                page_processor = ObjectsCSSProcessor(
+                    page_objects_css,
+                    self.sections_config,
+                    self.general_config,
+                    self._process_property,
+                    self._add_css_property,
+                    self._normalize_array_value,
+                    self._process_dict_properties_with_important,
+                    tablet_breakpoint,
+                    mobile_breakpoint
+                )
+                css_parts.append(f"\n/* ===== СТИЛИ ИНКЛУДОВ: страница {page} ===== */\n\n")
+                css_parts.append(page_processor.generate_css(page_prefix=page))
         
         # Генерируем стили для report_objects_css (отладочные стили элементов)
         if self._is_report_enabled() and self.report_objects_css:

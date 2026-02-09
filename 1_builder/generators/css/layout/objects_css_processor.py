@@ -223,18 +223,25 @@ class ObjectsCSSProcessor:
         return ' '.join(nested_parts)
     
     def _selector_for_div_class_key(self, element_key: str) -> Optional[str]:
-        """Для ключа вида div_xxx или div-xxx возвращает селектор div.xxx (инклюды без data-path)."""
+        """Для ключа вида div_xxx, div-xxx или cycle_xxx возвращает селектор (инклюды без data-path)."""
         if element_key.startswith('div_') or element_key.startswith('div-'):
             suffix = element_key[4:]
             if suffix.startswith('_') or suffix.startswith('-'):
                 suffix = suffix[1:]
             if suffix:
                 return f"div.{suffix}"
+        if element_key.startswith('cycle_'):
+            suffix = element_key[6:]
+            if suffix:
+                return f".{suffix}"
         return None
     
-    def generate_css(self) -> str:
+    def generate_css(self, page_prefix: str = None) -> str:
         """
         Генерирует CSS из objects_css
+        
+        Args:
+            page_prefix: Если задан (например "shino"), селекторы оборачиваются в body[data-page="shino"]
         
         Returns:
             CSS строка
@@ -243,6 +250,11 @@ class ObjectsCSSProcessor:
         
         if not self.objects_css:
             return ''
+        
+        def wrap_selector(sel: str) -> str:
+            if page_prefix:
+                return f"body[data-page='{page_prefix}'] {sel}"
+            return sel
         
         flat_objects_css = self.flatten_objects_css()
         
@@ -261,6 +273,7 @@ class ObjectsCSSProcessor:
                     selector = f"{base} {nested_selectors}" if nested_selectors.strip() else base
                 else:
                     selector = f"[data-path='{data_path_key}'] {nested_selectors}"
+                selector = wrap_selector(selector)
                 
                 # Обрабатываем стили
                 if isinstance(element_styles, dict):
@@ -286,6 +299,7 @@ class ObjectsCSSProcessor:
                 selector = self.type_resolver.build_selector_for_type(
                     element_key, element_type, has_api, is_complex_structure
                 )
+            selector = wrap_selector(selector)
             
             # Генерируем стили
             if isinstance(element_styles, dict):

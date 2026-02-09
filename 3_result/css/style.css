@@ -2388,11 +2388,11 @@ div.fp04-field .content-suffix {
 }
 
 
-[data-path='cycle_gr8'] text {
-    border-top: 2px solid #0000ff !important;
-    border-right: 2px solid #0000ff !important;
-    border-bottom: 2px solid #0000ff !important;
-    border-left: 2px solid #0000ff !important;
+.gr8 {
+    border-top: 5px solid #008000 !important;
+    border-right: 5px solid #008000 !important;
+    border-bottom: 5px solid #008000 !important;
+    border-left: 5px solid #008000 !important;
     margin: 10px !important;
     padding: 10px !important;
     gap: 10px !important;
@@ -2401,7 +2401,7 @@ div.fp04-field .content-suffix {
 
 
 @media (max-width: 768px) {
-    [data-path='cycle_gr8'] text {
+    .gr8 {
         gap: 20px !important;
         box-sizing: border-box !important;
     }
@@ -2409,7 +2409,7 @@ div.fp04-field .content-suffix {
 
 
 @media (max-width: 320px) {
-    [data-path='cycle_gr8'] text {
+    .gr8 {
         gap: 10px !important;
         box-sizing: border-box !important;
     }
@@ -2968,6 +2968,736 @@ div.wr-fields .content-tit {
 
 @media (max-width: 320px) {
     [data-path='form'] button {
+        width: 100% !important;
+        padding: 8px !important;
+        border-radius: 5px !important;
+        font-size: 14px !important;
+    }
+}
+
+
+
+/* ===== СТИЛИ ИНКЛУДОВ: страница shino ===== */
+
+
+body[data-page='shino'] div.fp04-field {
+    border-top: 1px solid #000000 !important;
+    border-right: 1px solid #000000 !important;
+    border-bottom: 1px solid #000000 !important;
+    border-left: 1px solid #000000 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    position: relative !important;
+    margin-bottom: 10px !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.fp04-field {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 10px !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        position: relative !important;
+        margin-bottom: 10px !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.fp04-field {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 10px !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        position: relative !important;
+        margin-bottom: 10px !important;
+    }
+}
+
+
+body[data-page='shino'] div.fp04-field label {
+    border-top: 2px solid #000000 !important;
+    border-right: 2px solid #000000 !important;
+    border-bottom: 2px solid #000000 !important;
+    border-left: 2px solid #000000 !important;
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+    white-space: nowrap !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.fp04-field label {
+        flex: 0 0 30% !important;
+        max-width: 30% !important;
+        white-space: nowrap !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.fp04-field label {
+        flex: 0 0 30% !important;
+        max-width: 30% !important;
+        white-space: nowrap !important;
+    }
+}
+
+
+body[data-page='shino'] div.fp04-field .field {
+    border-top: 2px solid #0000ff !important;
+    border-right: 2px solid #0000ff !important;
+    border-bottom: 2px solid #0000ff !important;
+    border-left: 2px solid #0000ff !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    padding-right: 50px !important;
+    outline: none !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.fp04-field .field {
+        flex: 1 1 auto !important;
+        width: 100% !important;
+        padding-right: 50px !important;
+        outline: none !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.fp04-field .field {
+        flex: 1 1 auto !important;
+        width: 100% !important;
+        padding-right: 50px !important;
+        outline: none !important;
+    }
+}
+
+
+body[data-page='shino'] div.fp04-field .content-suffix {
+    color: rgba(0, 0, 0, 0.6) !important;
+    border-top: 2px solid #000000 !important;
+    border-right: 2px solid #000000 !important;
+    border-bottom: 2px solid #000000 !important;
+    border-left: 2px solid #000000 !important;
+    margin-left: -40px !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    position: relative !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.fp04-field .content-suffix {
+        margin-left: -40px !important;
+        pointer-events: none !important;
+        z-index: 1 !important;
+        position: relative !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.fp04-field .content-suffix {
+        margin-left: -40px !important;
+        pointer-events: none !important;
+        z-index: 1 !important;
+        position: relative !important;
+    }
+}
+
+
+body[data-page='shino'] .gr8 {
+    border-top: 5px solid #008000 !important;
+    border-right: 5px solid #008000 !important;
+    border-bottom: 5px solid #008000 !important;
+    border-left: 5px solid #008000 !important;
+    margin: 10px !important;
+    padding: 10px !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] .gr8 {
+        gap: 20px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] .gr8 {
+        gap: 10px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+body[data-page='shino'] div.field-paymet {
+    border-top: 1px solid #000000 !important;
+    border-right: 1px solid #000000 !important;
+    border-bottom: 1px solid #000000 !important;
+    border-left: 1px solid #000000 !important;
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 20%) minmax(0, 80%) !important;
+    align-items: stretch !important;
+    min-height: 48px !important;
+    row-gap: 0px !important;
+    column-gap: 10px !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    padding*: 10px !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.field-paymet {
+        position: relative !important;
+        display: grid !important;
+        grid-template-columns: minmax(0, 20%) minmax(0, 80%) !important;
+        align-items: stretch !important;
+        min-height: 130px !important;
+        row-gap: 0px !important;
+        column-gap: 10px !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
+        padding*: 10px !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.field-paymet {
+        position: relative !important;
+        display: grid !important;
+        grid-template-columns: minmax(0, 20%) minmax(0, 80%) !important;
+        align-items: stretch !important;
+        min-height: 130px !important;
+        row-gap: 0px !important;
+        column-gap: 10px !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
+        padding*: 10px !important;
+    }
+}
+
+
+body[data-page='shino'] div.field-paymet .1-col {
+    border-top: 1px solid #ff0000 !important;
+    border-right: 1px solid #ff0000 !important;
+    border-bottom: 1px solid #ff0000 !important;
+    border-left: 1px solid #ff0000 !important;
+    display: flex !important;
+    align-items: center !important;
+    align-self: stretch !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.field-paymet .1-col {
+        display: flex !important;
+        align-items: center !important;
+        align-self: stretch !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.field-paymet .1-col {
+        display: flex !important;
+        align-items: center !important;
+        align-self: stretch !important;
+    }
+}
+
+
+body[data-page='shino'] div.field-paymet .2-col {
+    border-top: 1px solid #000000 !important;
+    border-right: 1px solid #000000 !important;
+    border-bottom: 1px solid #000000 !important;
+    border-left: 1px solid #000000 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    align-self: stretch !important;
+    width: fit-content !important;
+    max-width: fit-content !important;
+    justify-self: start !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.field-paymet .2-col {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        align-self: stretch !important;
+        width: fit-content !important;
+        max-width: fit-content !important;
+        justify-self: start !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.field-paymet .2-col {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        align-self: stretch !important;
+        width: fit-content !important;
+        max-width: fit-content !important;
+        justify-self: start !important;
+    }
+}
+
+
+body[data-page='shino'] div.field-paymet:has(input:checked) {
+    border-top: 5px solid #0000ff !important;
+    border-right: 5px solid #0000ff !important;
+    border-bottom: 5px solid #0000ff !important;
+    border-left: 5px solid #0000ff !important;
+}
+
+
+body[data-page='shino'] div.field-paymet input {
+    inset: 0 !important;
+    margin: 0 !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 0 !important;
+    cursor: pointer !important;
+    z-index: 1 !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.field-paymet input {
+        position: absolute !important;
+        width: 100% !important;
+        height: 100% !important;
+        opacity: 0 !important;
+        cursor: pointer !important;
+        z-index: 1 !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.field-paymet input {
+        position: absolute !important;
+        width: 100% !important;
+        height: 100% !important;
+        opacity: 0 !important;
+        cursor: pointer !important;
+        z-index: 1 !important;
+    }
+}
+
+
+body[data-page='shino'] div.field-paymet img {
+    border-top: 2px solid #008000 !important;
+    border-right: 2px solid #008000 !important;
+    border-bottom: 2px solid #008000 !important;
+    border-left: 2px solid #008000 !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.field-paymet img {
+        min-width: 50px !important;
+        min-height: 50px !important;
+        max-width: 100px !important;
+        max-height: 100px !important;
+        object-fit: contain !important;
+        display: block !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.field-paymet img {
+        min-width: 50px !important;
+        min-height: 50px !important;
+        max-width: 100px !important;
+        max-height: 100px !important;
+        object-fit: contain !important;
+        display: block !important;
+    }
+}
+
+
+body[data-page='shino'] div.field-paymet label {
+    border-top: 1px solid #ff0000 !important;
+    border-right: 1px solid #ff0000 !important;
+    border-bottom: 1px solid #ff0000 !important;
+    border-left: 1px solid #ff0000 !important;
+    flex-basis: 100% !important;
+    white-space: nowrap !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.field-paymet label {
+        flex-basis: 100% !important;
+        white-space: nowrap !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.field-paymet label {
+        flex-basis: 100% !important;
+        white-space: nowrap !important;
+    }
+}
+
+
+body[data-page='shino'] div.field-paymet .content-percent {
+    border-top: 2px solid #ff0000 !important;
+    border-right: 2px solid #ff0000 !important;
+    border-bottom: 2px solid #ff0000 !important;
+    border-left: 2px solid #ff0000 !important;
+    display: inline-block !important;
+    white-space: nowrap !important;
+    width: fit-content !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.field-paymet .content-percent {
+        display: block !important;
+        white-space: normal !important;
+        width: auto !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.field-paymet .content-percent {
+        display: block !important;
+        white-space: normal !important;
+        width: auto !important;
+    }
+}
+
+
+body[data-page='shino'] div.field-paymet .content-prefix {
+    border-top: 1px solid #00ffff !important;
+    border-right: 1px solid #00ffff !important;
+    border-bottom: 1px solid #00ffff !important;
+    border-left: 1px solid #00ffff !important;
+    display: inline-block !important;
+    white-space: nowrap !important;
+    width: fit-content !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.field-paymet .content-prefix {
+        display: block !important;
+        white-space: normal !important;
+        width: auto !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.field-paymet .content-prefix {
+        display: block !important;
+        white-space: normal !important;
+        width: auto !important;
+    }
+}
+
+
+body[data-page='shino'] div.modal1 {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    display: none !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1000 !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+    gap: 0 !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.modal1 {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 1000 !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        flex-direction: column !important;
+        overflow-y: auto !important;
+        box-sizing: border-box !important;
+        gap: 0 !important;
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.modal1 {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 1000 !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        flex-direction: column !important;
+        overflow-y: auto !important;
+        box-sizing: border-box !important;
+        gap: 0 !important;
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+    }
+}
+
+
+body[data-page='shino'] div.modal1.active {
+    display: flex !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.modal1.active {
+        display: flex !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.modal1.active {
+        display: flex !important;
+    }
+}
+
+
+body[data-page='shino'] div.gr4 {
+    background-color: rgba(255, 255, 255, 1.0) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 20px !important;
+    border-radius: 10px !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    max-width: 500px !important;
+    width: 100% !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.gr4 {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 15px !important;
+        border-radius: 10px !important;
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        max-width: 400px !important;
+        width: 100% !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.gr4 {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 10px !important;
+        border-radius: 0px !important;
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
+
+
+body[data-page='shino'] [data-path='close'] text {
+    cursor: pointer !important;
+    width: 24px !important;
+    height: 24px !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] [data-path='close'] text {
+        cursor: pointer !important;
+        width: 20px !important;
+        height: 20px !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] [data-path='close'] text {
+        cursor: pointer !important;
+        width: 18px !important;
+        height: 18px !important;
+    }
+}
+
+
+body[data-page='shino'] [data-path='form'] text {
+    background-color: rgba(255, 255, 255, 1.0) !important;
+    padding: 20px !important;
+    border-radius: 10px !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    max-width: 500px !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] [data-path='form'] text {
+        padding: 15px !important;
+        border-radius: 10px !important;
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        max-width: 400px !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] [data-path='form'] text {
+        padding: 10px !important;
+        border-radius: 0px !important;
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+}
+
+
+body[data-page='shino'] [data-path='input'] text {
+    outline: ['none'] !important;
+    width: 100% !important;
+    padding: 12px !important;
+    border*: 1px solid !important;
+    border-radius*: 5px !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] [data-path='input'] text {
+        width: 100% !important;
+        padding: 10px !important;
+        border*: 1 1 1 1 !important;
+        border-radius*: 5px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] [data-path='input'] text {
+        width: 100% !important;
+        padding: 8px !important;
+        border*: #cccccc !important;
+        border-radius*: 5px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+body[data-page='shino'] div.wr-fields {
+    border-top: 2px dotted #000000 !important;
+    border-right: 2px dotted #000000 !important;
+    border-bottom: 2px dotted #000000 !important;
+    border-left: 2px dotted #000000 !important;
+}
+
+
+body[data-page='shino'] div.wr-fields .content-tit {
+    border-top: 2px solid #ff0000 !important;
+    border-right: 2px solid #ff0000 !important;
+    border-bottom: 2px solid #ff0000 !important;
+    border-left: 2px solid #ff0000 !important;
+}
+
+
+body[data-page='shino'] [data-path='form'] button {
+    background-color: rgba(0, 0, 0, 1.0) !important;
+    color: rgba(255, 255, 255, 1.0) !important;
+    border: 0px 0 0 0 0 !important;
+    cursor: ['pointer'] !important;
+    width: 100% !important;
+    padding: 12px !important;
+    border-radius: 5px !important;
+    font-size: 16px !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] [data-path='form'] button {
+        width: 100% !important;
+        padding: 10px !important;
+        border-radius: 5px !important;
+        font-size: 14px !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] [data-path='form'] button {
         width: 100% !important;
         padding: 8px !important;
         border-radius: 5px !important;

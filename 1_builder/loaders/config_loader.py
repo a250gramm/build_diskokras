@@ -9,9 +9,11 @@ from typing import Dict, Any
 from .file_loader import load_json_safe, load_css_variables_safe
 
 
-def _resolve_includes(source_dir: Path, data: Dict, objects_css: Dict, objects_fun: Dict) -> None:
+def _resolve_includes(source_dir: Path, data: Dict, objects_css: Dict, objects_fun: Dict,
+                      objects_css_by_page: Dict = None, current_page: str = None) -> None:
     """Рекурсивно раскрывает инклюды: ключ с значением ["include", "имя_файла"]
-    читает 2_source/include/имя_файла.json, подставляет api и html, мержит css в objects_css и fun в objects_fun."""
+    читает 2_source/include/имя_файла.json, подставляет api и html, мержит css в objects_css и fun в objects_fun.
+    objects_css_by_page: {page: {filename: css}} — стили инклудов по страницам (независимо, без перезаписи)."""
     if not isinstance(data, dict):
         return
     include_dir = source_dir / 'include'
@@ -27,9 +29,12 @@ def _resolve_includes(source_dir: Path, data: Dict, objects_css: Dict, objects_f
         if inc:
             api = inc.get('api', {})
             html = inc.get('html', {})
+            page_for_include = current_page
             if key.startswith('/'):
+                page_for_include = key.lstrip('/')
                 data[key] = html
-                _resolve_includes(source_dir, html, objects_css, objects_fun)
+                _resolve_includes(source_dir, html, objects_css, objects_fun,
+                                 objects_css_by_page, page_for_include)
             else:
                 for k, v in html.items():
                     if isinstance(v, dict) and api:
@@ -38,6 +43,10 @@ def _resolve_includes(source_dir: Path, data: Dict, objects_css: Dict, objects_f
                 del data[key]
             if inc.get('css'):
                 objects_css[filename] = inc['css']
+                if objects_css_by_page is not None and page_for_include:
+                    if page_for_include not in objects_css_by_page:
+                        objects_css_by_page[page_for_include] = {}
+                    objects_css_by_page[page_for_include][filename] = inc['css']
             if inc.get('fun'):
                 for group_name, group_value in inc['fun'].items():
                     if not isinstance(group_value, dict):
@@ -51,11 +60,13 @@ def _resolve_includes(source_dir: Path, data: Dict, objects_css: Dict, objects_f
             del data[key]
     for value in data.values():
         if isinstance(value, dict):
-            _resolve_includes(source_dir, value, objects_css, objects_fun)
+            _resolve_includes(source_dir, value, objects_css, objects_fun,
+                             objects_css_by_page, current_page)
         elif isinstance(value, list):
             for item in value:
                 if isinstance(item, dict):
-                    _resolve_includes(source_dir, item, objects_css, objects_fun)
+                    _resolve_includes(source_dir, item, objects_css, objects_fun,
+                                     objects_css_by_page, current_page)
 
 
 class ConfigLoader:
@@ -100,9 +111,11 @@ class ConfigLoader:
         configs['objects_css'] = load_json_safe(objects_css_file, {})
         objects_fun_file = self.source_dir / 'design' / 'objects_fun.json'
         configs['objects_fun'] = load_json_safe(objects_fun_file, {})
+        configs['objects_css_by_page'] = {}
         
         # 2.2. раскрытие include в sections: подстановка api, html, мерж css и fun
-        _resolve_includes(self.source_dir, configs['sections'], configs['objects_css'], configs['objects_fun'])
+        _resolve_includes(self.source_dir, configs['sections'], configs['objects_css'], configs['objects_fun'],
+                         configs['objects_css_by_page'])
         
         # 3. layout_html.json - структура разметки
         html_file = self.source_dir / 'layout' / 'layout_html.json'

@@ -32,6 +32,7 @@ class CSSGenerator:
         self.general_config = configs.get('general', {})
         self.tag_config = configs.get('tag', {})
         self.objects_css = configs.get('objects_css', {})
+        self.objects_css_by_page = configs.get('objects_css_by_page', {})
         self.report_objects_css = configs.get('report_objects_css', {})
         self.if_config = configs.get('if', {})
         self.filter_config = configs.get('filter', {})
@@ -70,7 +71,8 @@ class CSSGenerator:
             self._process_properties,
             self._process_properties_with_important,
             self._is_report_enabled,
-            self.sections_config  # objects.json для определения типов элементов
+            self.sections_config,  # objects.json для определения типов элементов
+            self.objects_css_by_page
         )
         
         self.report_generator = ReportGenerator(
