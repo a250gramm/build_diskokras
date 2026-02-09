@@ -1,0 +1,11 @@
+{
+  "front_servi": [
+    {"id": "shino_001", "sub_cat": "Прокат", "price": "123" },
+    {"id": "shino_002", "sub_cat": "Аргон", "price": "123" }
+  ],
+  "front_pay_met": {
+    "id": "pay_met_9",
+    "sub_cat": "Наличка"
+  },
+  "total_price": "246"
+}

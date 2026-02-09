@@ -100,6 +100,61 @@ def _extract_forms_from_section(section_data: Dict, section_key: str) -> Dict[st
     return result
 
 
+def _collect_forms_with_button_json(data: Dict, path: str, current_form_class: str,
+                                    result: set) -> None:
+    """
+    Рекурсивно ищет внутри data кнопки с типом button_json.
+    Если находит — добавляет current_form_class в result.
+    """
+    for key, value in data.items():
+        if key == 'if':
+            if isinstance(value, dict):
+                for branch in value.values():
+                    if isinstance(branch, dict):
+                        _collect_forms_with_button_json(branch, path, current_form_class, result)
+                    elif isinstance(branch, list) and len(branch) >= 4 and isinstance(branch[3], dict):
+                        _collect_forms_with_button_json(branch[3], path, current_form_class, result)
+            continue
+
+        if isinstance(value, list) and len(value) >= 1 and value[0] == 'button_json':
+            if current_form_class:
+                result.add(current_form_class)
+            continue
+
+        if isinstance(value, list) and len(value) >= 4 and isinstance(value[3], dict):
+            _collect_forms_with_button_json(value[3], path, current_form_class, result)
+            continue
+
+        if isinstance(value, dict):
+            tag_info = parse_html_tag(key) if isinstance(key, str) else None
+            form_class = None
+            if tag_info:
+                tag_name, class_name, _ = tag_info
+                if tag_name == 'form' and class_name:
+                    form_class = class_name
+            _collect_forms_with_button_json(
+                value, path, form_class if form_class else current_form_class, result
+            )
+
+
+def forms_with_button_json(sections: Dict[str, Any]) -> set:
+    """
+    Возвращает множество имён классов форм (form1, form2, ...), внутри которых есть кнопка button_json.
+
+    Args:
+        sections: configs['sections'] — объекты из objects.json
+
+    Returns:
+        Множество строк, например {"form2"}.
+    """
+    result = set()
+    for section_key, section_data in sections.items():
+        if not isinstance(section_data, dict):
+            continue
+        _collect_forms_with_button_json(section_data, section_key, '', result)
+    return result
+
+
 def extract_forms_structure(sections: Dict[str, Any]) -> Dict[str, Dict[str, str]]:
     """
     Извлекает структуру всех форм из objects (sections).

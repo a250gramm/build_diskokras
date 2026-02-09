@@ -128,6 +128,10 @@ class PageGenerator:
             scripts_html = '\n    '.join(script_tags) + ('\n' + scripts_html if scripts_html else '')
         elif scripts_html:
             scripts_html = scripts_html
+
+        button_json_scripts = self._generate_button_json_config_scripts(body_content)
+        if button_json_scripts:
+            scripts_html = scripts_html + '\n    ' + button_json_scripts if scripts_html else button_json_scripts
         
         from datetime import datetime
         build_marker = f'<!-- build: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")} -->'
@@ -161,6 +165,31 @@ class PageGenerator:
             except Exception as e:
                 print(f"   ⚠️ Ошибка загрузки {json_file}: {e}")
         
+        return '\n    '.join(scripts) if scripts else ''
+
+    def _generate_button_json_config_scripts(self, page_html: str) -> str:
+        """Находит data-button-json=\"X\" на странице, подставляет конфиг из button_json/X.json — fallback при недоступном fetch."""
+        if not self.source_dir or not page_html:
+            return ''
+        import re
+        found = set(re.findall(r'data-button-json="([^"]+)"', page_html))
+        if not found:
+            return ''
+        button_json_dir = self.source_dir / 'button_json'
+        if not button_json_dir.exists():
+            return ''
+        scripts = []
+        for name in found:
+            path = button_json_dir / f'{name}.json'
+            if not path.is_file():
+                continue
+            try:
+                with open(path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                tag = f'<script type="application/json" data-button-json-config="{name}">{json.dumps(data, ensure_ascii=False)}</script>'
+                scripts.append(tag)
+            except Exception as e:
+                print(f"   ⚠️ button_json {name}: {e}")
         return '\n    '.join(scripts) if scripts else ''
     
     def save_all(self, pages_html: Dict[str, str], output_dir: Path):

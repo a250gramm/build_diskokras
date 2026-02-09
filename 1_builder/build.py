@@ -63,7 +63,21 @@ def main():
         (output_dir / 'img').mkdir(exist_ok=True)
         (output_dir / 'php').mkdir(exist_ok=True)
         (output_dir / 'bd').mkdir(exist_ok=True)
-        
+        (output_dir / 'button_json').mkdir(exist_ok=True)
+
+        # Копируем конфиги button_json (shino.json, result.json и т.д.)
+        source_button_json_dir = source_dir / 'button_json'
+        output_button_json_dir = output_dir / 'button_json'
+        if source_button_json_dir.exists():
+            print("📦 Копирование конфигов button_json...")
+            for json_file in source_button_json_dir.glob('*.json'):
+                if json_file.is_file():
+                    shutil.copy2(json_file, output_button_json_dir / json_file.name)
+            count = len(list(output_button_json_dir.glob('*.json')))
+            if count:
+                print(f"   ✅ Скопировано файлов: {count}")
+            print()
+
         # Копируем изображения
         source_img_dir = source_dir / 'img'
         output_img_dir = output_dir / 'img'
@@ -187,7 +201,7 @@ def main():
             for form_class, fp in form_files.items():
                 print(f"      — {fp.name}")
         else:
-            print("   (форм с полями не найдено)")
+            print("   (форм с button_json не найдено)")
         print()
 
         # Итоги

@@ -20,8 +20,8 @@
 "layout": {
     "device": {
         "desktop": {"width":"1200px", "flex-wrap": "nowrap", "gap": "0px"},
-        "tablet":  {"width":"768px", "flex-wrap": "wrap",   "gap": "0px"},
-        "mobile":  {"width":"576px", "flex-wrap": "wrap",   "gap": "0px"}
+        "tablet":  {"width":"800px", "flex-wrap": "wrap",   "gap": "0px"},
+        "mobile":  {"width":"600px", "flex-wrap": "wrap",   "gap": "0px"}
     },
     "margin":   ["0 auto", "px"],
     "padding":  ["10","px"],

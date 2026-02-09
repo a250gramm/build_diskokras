@@ -16,7 +16,7 @@
                         "tit":         ["text",    "text:Способ оплаты"],
                         "pay_met":     ["include", "shino/pay_met"]
                     },
-                    "button_1": ["button", "text:Отправить"]
+                    "button_1": ["button_json", "shino", "text:Отправить"]
                 }
             }
             }
@@ -45,7 +45,7 @@
             "padding-bottom": [20, 0, 0, "px"],
             "padding-left": [10, 10, 10, "px"],
             "padding-right": [10, 10, 10, "px"],
-            "border-radius": [10, 0, 0, "px"],
+            "border-radius": [0, 0, 0, "px"],
             "border": ["0px solid", "1 1 1 1", "red.100"]
 
         },
@@ -94,13 +94,15 @@
         },
         "form button": {
             "width": [100, 100, 100, "%"],
-            "padding": [12, 10, 8, "px"],
+            "padding": [12, 12, 12, "px"],
             "bg-color": ["black", 100],
             "color": ["white", 100],
             "border": ["0px", "0 0 0 0"],
             "border-radius": [5, 5, 5, "px"],
             "cursor": ["pointer"],
-            "font-size": [16, 14, 14, "px"]
+            "font-size": [16, 16, 16, "px"],
+            "min-height": [0, 0, 48, "px"]
         }
     }
 }
+ 

@@ -1,0 +1,32 @@
+{
+  "collect": [
+    {
+      "name_key": "front_servi111",
+      "source": "front_servi",
+      "rowsSelector": ".fp04-field",
+      "data": {
+        "id": "bd",
+        "sub_cat": "bd",
+        "price": "input_number"
+      }
+    },
+    {
+      "name_key": "pay_met",
+      "source": "front_pay_met",
+      "radioName": "pay_method",
+      "data": {
+        "id": "bd",
+        "sub_cat": "bd",
+        "percent": "bd",
+        "prefix": "bd",
+        "id_wallet": "bd"
+      }
+    },
+    {
+      "name_key": "form",
+      "data": {
+        "total_price": "number"
+      }
+    }
+  ]
+}

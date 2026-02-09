@@ -46,7 +46,7 @@ class ElementFactory:
                 return IconElement(key, value, context)
             elif element_type == 'field' or element_type == 'input':
                 return FieldElement(key, value, context)
-            elif element_type == 'button':
+            elif element_type == 'button' or element_type == 'button_json':
                 return ButtonElement(key, value, context)
             elif element_type == 'list':
                 return ListElement(key, value, context)

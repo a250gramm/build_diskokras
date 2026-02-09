@@ -1,56 +1,47 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Генератор JSON-шаблонов форм для 3_result.
-После отправки формы данные пользователя можно сохранять в эти файлы.
+Генератор JSON для форм в 3_result.
+Создаёт только form_*_db_paths.json для форм с кнопкой button_json.
 """
 
-import json
 from pathlib import Path
 from typing import Dict, Any
 
-from utils.form_structure_extractor import extract_forms_structure
+from utils.form_structure_extractor import forms_with_button_json
 
 
 class FormJsonGenerator:
-    """Генерирует JSON-шаблоны структур форм в 3_result."""
+    """Генерирует JSON для форм в 3_result (только db_paths для форм с button_json)."""
 
     def __init__(self, configs: Dict[str, Any]):
         """
         Args:
-            configs: Загруженные конфиги (должны быть 'sections' и опционально 'send_form').
+            configs: Загруженные конфиги (должны быть 'sections').
         """
         self.configs = configs
         self.sections = configs.get('sections', {})
-        self.send_form = configs.get('send_form', {})
 
     def generate(self, output_dir: Path) -> Dict[str, Path]:
         """
-        Извлекает структуру форм из objects и записывает JSON-файлы в output_dir.
+        Для форм с кнопкой button_json создаёт пустой JSON (описание путей в БД) в output_dir.
 
         Args:
             output_dir: Директория результата (3_result).
 
         Returns:
-            Словарь { form_class: путь_к_файлу }.
+            Словарь { form_class_db_paths: путь_к_файлу }.
         """
         output_dir = Path(output_dir)
-        output_dir.mkdir(parents=True, exist_ok=True)
-
-        forms = extract_forms_structure(self.sections)
+        send_form_dir = output_dir / 'send_form_json'
+        send_form_dir.mkdir(parents=True, exist_ok=True)
         written = {}
 
-        for form_class, fields in forms.items():
-            if not fields:
-                continue
-            # Имя файла: из send_form[form_id].output или по умолчанию form_{form_class}_data.json
-            filename = f"form_{form_class}_data.json"
-            for form_id, form_config in self.send_form.items():
-                if isinstance(form_config, dict) and form_config.get('form_class') == form_class:
-                    filename = form_config.get('output', filename)
-                    break
-            file_path = output_dir / filename
-            file_path.write_text(json.dumps(fields, ensure_ascii=False, indent=2), encoding='utf-8')
-            written[form_class] = file_path
+        # Для форм с кнопкой button_json создаём пустой JSON — описание будущих путей в БД
+        for form_class in forms_with_button_json(self.sections):
+            db_paths_filename = f"form_{form_class}_db_paths.json"
+            db_paths_path = send_form_dir / db_paths_filename
+            db_paths_path.write_text("{}", encoding='utf-8')
+            written[f"{form_class}_db_paths"] = db_paths_path
 
         return written
