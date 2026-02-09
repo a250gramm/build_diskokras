@@ -128,10 +128,22 @@ class FunctionsManager {
         // Находим все элементы с функциями
         this.findFunctionElements();
         
-        // Устанавливаем слушателей на все input
-        this.attachInputListeners();
+        // Слушатели только при первой инициализации (делегирование через document)
+        if (!this._listenersAttached) {
+            this.attachInputListeners();
+            this._listenersAttached = true;
+        }
         
         // Первый расчет
+        this.calculateAll();
+    }
+
+    /**
+     * Обновить список input для сумм после динамического рендера (шаблоны, инклуды).
+     * Вызывается из DatabaseRenderer после renderAll().
+     */
+    refreshAfterRender() {
+        this.findFunctionElements();
         this.calculateAll();
     }
 
@@ -139,7 +151,7 @@ class FunctionsManager {
      * Находит элементы с data-function-sum атрибутами
      */
     findFunctionElements() {
-        // Ищем все input с data-function-sum
+        this.functions = {};
         const inputs = document.querySelectorAll('input[data-function-sum]');
         
         inputs.forEach(input => {
@@ -158,16 +170,47 @@ class FunctionsManager {
     }
 
     /**
-     * Устанавливает слушателей на все input поля
+     * Устанавливает слушателей на все input поля (один раз на document — делегирование)
      */
     attachInputListeners() {
-        const inputs = document.querySelectorAll('input[type="text"], input[type="number"]');
-        
-        inputs.forEach(input => {
-            input.addEventListener('input', () => {
+        if (this._delegationBound) return;
+        this._delegationBound = true;
+        document.addEventListener('input', (e) => {
+            const el = e.target;
+            if (el && el.matches('input[data-function-sum]')) {
+                const start = el.selectionStart, end = el.selectionEnd;
+                const raw = String(el.value || '').replace(/\s/g, '').replace(',', '.');
+                const digitsAndDot = raw.replace(/[^\d.]/g, '').split('.');
+                const intPart = (digitsAndDot[0] || '').slice(0, 15);
+                const decPart = digitsAndDot.length > 1 ? (digitsAndDot[1] || '').slice(0, 2) : '';
+                const rawNumStr = decPart ? intPart + '.' + decPart : intPart;
+                const formatted = this.formatInputValue(rawNumStr);
+                const digitsBeforeCursor = String(el.value || '').slice(0, start).replace(/\D/g, '').length;
+                let newPos = 0, digitCount = 0;
+                for (let i = 0; i < formatted.length; i++) {
+                    if (digitCount >= digitsBeforeCursor) break;
+                    if (/\d/.test(formatted[i])) digitCount++;
+                    newPos = i + 1;
+                }
+                el.value = formatted;
+                el.setSelectionRange(newPos, newPos);
                 this.calculateAll();
-            });
+                return;
+            }
+            if (el && (el.matches('input[type="text"]') || el.matches('input[type="number"]'))) {
+                this.calculateAll();
+            }
         });
+        document.addEventListener('blur', (e) => {
+            const el = e.target;
+            if (el && el.matches('input[data-function-sum]')) {
+                const raw = String(el.value || '').replace(/\s/g, '');
+                const num = parseFloat(raw);
+                if (!isNaN(num)) {
+                    el.value = this.formatNumber(num);
+                }
+            }
+        }, true);
     }
 
     /**
@@ -199,13 +242,17 @@ class FunctionsManager {
 
     /**
      * Суммирование значений
+     * Для полей внутри .fp04-field учитываем только если строка выбрана (.selected)
      */
     calculateSum(config) {
         const inputs = config.inputs || [];
         let sum = 0;
         
         inputs.forEach(input => {
-            const value = parseFloat(input.value) || 0;
+            const row = input.closest('.fp04-field');
+            if (row && !row.classList.contains('selected')) return;
+            const raw = String(input.value || '').replace(/\s/g, '');
+            const value = parseFloat(raw) || 0;
             sum += value;
         });
         
@@ -243,7 +290,7 @@ class FunctionsManager {
             // Форматируем число
             const formatted = this.formatNumber(value);
             
-            // Обновляем содержимое
+            // Обновляем содержимое (formatted уже строка с пробелами)
             if (el.tagName === 'INPUT') {
                 el.value = formatted;
             } else {
@@ -253,11 +300,25 @@ class FunctionsManager {
     }
 
     /**
-     * Форматирует число
+     * Форматирует число с пробелами как разделитель тысяч (1 000, 10 000, 100 000)
      */
     formatNumber(value) {
-        // Округляем до 2 знаков после запятой
-        return Math.round(value * 100) / 100;
+        const num = Math.round(value * 100) / 100;
+        const parts = String(num).split('.');
+        const intPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        return parts.length > 1 ? intPart + '.' + parts[1] : intPart;
+    }
+
+    /**
+     * Форматирует строку ввода (цифры и точка) с пробелами в момент набора
+     */
+    formatInputValue(str) {
+        if (!str) return '';
+        const parts = String(str).replace(/\s/g, '').split('.');
+        const intPart = (parts[0] || '').replace(/\D/g, '');
+        const decPart = parts.length > 1 ? (parts[1] || '').replace(/\D/g, '').slice(0, 2) : '';
+        const formattedInt = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        return decPart ? formattedInt + '.' + decPart : formattedInt;
     }
 }
 
@@ -386,6 +447,9 @@ class DatabaseRenderer {
                 container.remove();
             }
         }
+        
+        // Подхватываем input[data-function-sum] из динамически созданных полей (инклуды) и пересчитываем суммы
+        functionsManager.refreshAfterRender();
     }
 
     /**
@@ -552,10 +616,24 @@ class DatabaseRenderer {
         
         console.log('renderTemplate: Используем шаблон', elementTemplate, 'ключ:', elementKey);
         
+        // Если в том же wr-fields или в форме есть data-function-result — добавляем data-function-sum к полям (fun:total_price из инклудов)
+        let sumVar = null;
+        const wrFields = container.closest('.wr-fields');
+        if (wrFields) {
+            const resultEl = wrFields.querySelector('[data-function-result]');
+            if (resultEl) sumVar = resultEl.getAttribute('data-function-result');
+        }
+        if (!sumVar) {
+            const form = container.closest('form');
+            if (form) {
+                const resultEl = form.querySelector('[data-function-result]');
+                if (resultEl) sumVar = resultEl.getAttribute('data-function-result');
+            }
+        }
+        
         // Для каждой записи из основного источника
         for (const record of mainData) {
-            // Создаем элемент по шаблону, передаем ключ для определения класса
-            const element = this.createElementFromTemplate(elementTemplate, record, bdSources, elementKey);
+            const element = this.createElementFromTemplate(elementTemplate, record, bdSources, elementKey, sumVar);
             container.appendChild(element);
         }
         
@@ -651,7 +729,7 @@ class DatabaseRenderer {
     /**
      * Создает элемент из шаблона
      */
-    createElementFromTemplate(template, record, bdSources, elementKey = null) {
+    createElementFromTemplate(template, record, bdSources, elementKey = null, sumVar = null) {
         // Определяем тег и класс из шаблона
         const tagName = 'div';
         
@@ -702,7 +780,7 @@ class DatabaseRenderer {
             if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
                 // Это вложенный элемент - рекурсивно создаем его
                 const nestedParsed = this.parseColSyntax(key);
-                const nestedElement = this.createElementFromTemplate(value, record, bdSources, nestedParsed.cleanKey);
+                const nestedElement = this.createElementFromTemplate(value, record, bdSources, nestedParsed.cleanKey, sumVar);
                 element.appendChild(nestedElement);
                 continue;
             }
@@ -729,11 +807,40 @@ class DatabaseRenderer {
                 }
                 // Если fieldValue пустое - не создаем элемент text, чтобы не было пустого места
             } else if (elementType === 'input') {
+                const inputSubtype = (value.length > 1) ? value[1] : 'text';
                 const inputEl = document.createElement('input');
-                inputEl.type = 'text';
-                inputEl.className = `${key} input`;
-                if (fieldValue) {
-                    inputEl.placeholder = String(fieldValue).trim();
+                if (inputSubtype === 'radio' || inputSubtype === 'checkbox') {
+                    inputEl.type = inputSubtype;
+                    inputEl.className = `${key} input`;
+                    const radioValue = (value.length >= 3) ? this.resolveValue(value[2], record, bdSources) : fieldValue;
+                    inputEl.value = (radioValue != null && radioValue !== '') ? String(radioValue) : '';
+                    if (value.length > 3 && typeof value[3] === 'string' && value[3].startsWith('name:')) {
+                        inputEl.name = value[3].replace(/^name:/, '');
+                    }
+                } else {
+                    // Формат "type:placeholder" (например "number:Введите сумму") — тип для мобильной клавиатуры
+                    let inputType = 'text';
+                    let placeholderText = fieldValue ? String(fieldValue).trim() : '';
+                    if (typeof inputSubtype === 'string' && inputSubtype.includes(':')) {
+                        const colonIdx = inputSubtype.indexOf(':');
+                        inputType = inputSubtype.slice(0, colonIdx).trim();
+                        placeholderText = inputSubtype.slice(colonIdx + 1).trim();
+                    }
+                    // type="number" несовместим с форматированием пробелами (1 234) — браузер сбрасывает значение.
+                    // Используем type="text" + inputmode="decimal": клавиатура цифровая, значение можно форматировать.
+                    if (inputType === 'number') {
+                        inputEl.type = 'text';
+                        inputEl.setAttribute('inputmode', 'decimal');
+                    } else {
+                        inputEl.type = inputType;
+                    }
+                    inputEl.className = `${key} input`;
+                    if (placeholderText) {
+                        inputEl.placeholder = placeholderText;
+                    }
+                    if (sumVar && key === 'field') {
+                        inputEl.setAttribute('data-function-sum', sumVar);
+                    }
                 }
                 element.appendChild(inputEl);
             } else if (elementType === 'img') {
@@ -762,6 +869,35 @@ class DatabaseRenderer {
                 }
                 // Если fieldValue пустое - не создаем элемент img, чтобы не было пустого места
             }
+        }
+        
+        // Строки услуг (fp04-field): по клику по строке переключаем «выбран» и показываем/скрываем поле ввода и суффикс
+        if (className === 'fp04-field') {
+            element.addEventListener('click', function(e) {
+                if (e.target.closest('input')) return;
+                element.classList.toggle('selected');
+                const fieldEl = element.querySelector('input.field') || element.querySelector('.field');
+                const suffixEl = element.querySelector('.content-suffix') || element.querySelector('suffix');
+                const setShow = function(el, show) {
+                    if (!el) return;
+                    el.style.setProperty('display', show ? 'block' : 'none', 'important');
+                };
+                const setShowInline = function(el, show) {
+                    if (!el) return;
+                    el.style.setProperty('display', show ? 'inline' : 'none', 'important');
+                };
+                if (element.classList.contains('selected')) {
+                    setShow(fieldEl, true);
+                    setShowInline(suffixEl, true);
+                    if (fieldEl) {
+                        fieldEl.focus();
+                    }
+                } else {
+                    setShow(fieldEl, false);
+                    setShowInline(suffixEl, false);
+                }
+                if (typeof functionsManager !== 'undefined') functionsManager.calculateAll();
+            });
         }
         
         return element;

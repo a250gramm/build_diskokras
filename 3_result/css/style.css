@@ -1323,6 +1323,10 @@ section.section-footer {
 
 [data-path='main_btn'] div.modal1 {
     background-color: rgba(0, 0, 0, 0.5) !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
     display: none !important;
     position: fixed !important;
     top: 0 !important;
@@ -1338,6 +1342,9 @@ section.section-footer {
     gap: 0 !important;
     padding-top: 20px !important;
     padding-bottom: 20px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    border-radius: 10px !important;
 }
 
 
@@ -1356,8 +1363,11 @@ section.section-footer {
         overflow-y: auto !important;
         box-sizing: border-box !important;
         gap: 0 !important;
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border-radius: 0px !important;
     }
 }
 
@@ -1377,8 +1387,11 @@ section.section-footer {
         overflow-y: auto !important;
         box-sizing: border-box !important;
         gap: 0 !important;
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border-radius: 0px !important;
     }
 }
 
@@ -1474,7 +1487,7 @@ section.section-footer {
         justify-content: space-between !important;
         align-items: center !important;
         padding: 15px !important;
-        border-radius: 10px !important;
+        border-radius: 0px !important;
         border-bottom-left-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
         max-width: 400px !important;
@@ -1488,7 +1501,7 @@ section.section-footer {
         display: flex !important;
         justify-content: space-between !important;
         align-items: center !important;
-        padding: 10px !important;
+        padding: 0px !important;
         border-radius: 0px !important;
         border-bottom-left-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
@@ -1554,7 +1567,7 @@ section.section-footer {
 
 @media (max-width: 320px) {
     [data-path='main_btn'] form {
-        padding: 10px !important;
+        padding: 20px !important;
         border-radius: 0px !important;
         border-top-left-radius: 0 !important;
         border-top-right-radius: 0 !important;
@@ -1619,18 +1632,42 @@ section.section-footer {
 
 
 [data-path='main_btn'] div.wr-fields {
-    border-top: 2px dotted #000000 !important;
-    border-right: 2px dotted #000000 !important;
-    border-bottom: 2px dotted #000000 !important;
-    border-left: 2px dotted #000000 !important;
+    border-top: 0px dotted #000000 !important;
+    border-right: 0px dotted #000000 !important;
+    border-bottom: 0px dotted #000000 !important;
+    border-left: 0px dotted #000000 !important;
 }
 
 
 [data-path='main_btn'] div.wr-fields .content-tit {
-    border-top: 2px solid #ff0000 !important;
-    border-right: 2px solid #ff0000 !important;
-    border-bottom: 2px solid #ff0000 !important;
-    border-left: 2px solid #ff0000 !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
+    display: block !important;
+    font-size: 18px !important;
+    padding-bottom: 10px !important;
+    font-weight: 700 !important;
+}
+
+
+@media (max-width: 768px) {
+    [data-path='main_btn'] div.wr-fields .content-tit {
+        display: block !important;
+        font-size: 17px !important;
+        padding-bottom: 10px !important;
+        font-weight: 700 !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    [data-path='main_btn'] div.wr-fields .content-tit {
+        display: block !important;
+        font-size: 16px !important;
+        padding-bottom: 10px !important;
+        font-weight: 700 !important;
+    }
 }
 
 
@@ -1799,12 +1836,12 @@ section.section-footer {
 
 
 [data-path='main_btn'] .gr8 {
-    border-top: 2px solid #0000ff !important;
-    border-right: 2px solid #0000ff !important;
-    border-bottom: 2px solid #0000ff !important;
-    border-left: 2px solid #0000ff !important;
-    margin: 10px !important;
-    padding: 10px !important;
+    border-top: 0px solid #008000 !important;
+    border-right: 0px solid #008000 !important;
+    border-bottom: 0px solid #008000 !important;
+    border-left: 0px solid #008000 !important;
+    margin: 0px !important;
+    padding: 0px !important;
     gap: 10px !important;
     box-sizing: border-box !important;
 }
@@ -1812,7 +1849,7 @@ section.section-footer {
 
 @media (max-width: 768px) {
     [data-path='main_btn'] .gr8 {
-        gap: 20px !important;
+        gap: 10px !important;
         box-sizing: border-box !important;
     }
 }
@@ -1820,7 +1857,7 @@ section.section-footer {
 
 @media (max-width: 320px) {
     [data-path='main_btn'] .gr8 {
-        gap: 10px !important;
+        gap: 6px !important;
         box-sizing: border-box !important;
     }
 }
@@ -1837,10 +1874,11 @@ section.section-footer {
     align-items: stretch !important;
     min-height: 48px !important;
     row-gap: 0px !important;
-    column-gap: 10px !important;
+    column-gap: 6px !important;
     box-sizing: border-box !important;
     min-width: 0 !important;
     padding*: 10px !important;
+    border-radius: 5px !important;
 }
 
 
@@ -1850,12 +1888,13 @@ section.section-footer {
         display: grid !important;
         grid-template-columns: minmax(0, 20%) minmax(0, 80%) !important;
         align-items: stretch !important;
-        min-height: 130px !important;
+        min-height: 72px !important;
         row-gap: 0px !important;
-        column-gap: 10px !important;
+        column-gap: 6px !important;
         box-sizing: border-box !important;
         min-width: 0 !important;
-        padding*: 10px !important;
+        padding*: 8px !important;
+        border-radius: 5px !important;
     }
 }
 
@@ -1866,32 +1905,35 @@ section.section-footer {
         display: grid !important;
         grid-template-columns: minmax(0, 20%) minmax(0, 80%) !important;
         align-items: stretch !important;
-        min-height: 130px !important;
+        min-height: 56px !important;
         row-gap: 0px !important;
-        column-gap: 10px !important;
+        column-gap: 5px !important;
         box-sizing: border-box !important;
         min-width: 0 !important;
-        padding*: 10px !important;
+        padding*: 6px !important;
+        border-radius: 5px !important;
     }
 }
 
 
 [data-path='main_btn'] div.field-paymet .content-1-col {
-    border-top: 1px solid #ff0000 !important;
-    border-right: 1px solid #ff0000 !important;
-    border-bottom: 1px solid #ff0000 !important;
-    border-left: 1px solid #ff0000 !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
     display: flex !important;
-    align-items: center !important;
+    align-items: stretch !important;
     align-self: stretch !important;
+    min-height: 48px !important;
 }
 
 
 @media (max-width: 768px) {
     [data-path='main_btn'] div.field-paymet .content-1-col {
         display: flex !important;
-        align-items: center !important;
+        align-items: stretch !important;
         align-self: stretch !important;
+        min-height: 72px !important;
     }
 }
 
@@ -1899,17 +1941,18 @@ section.section-footer {
 @media (max-width: 320px) {
     [data-path='main_btn'] div.field-paymet .content-1-col {
         display: flex !important;
-        align-items: center !important;
+        align-items: stretch !important;
         align-self: stretch !important;
+        min-height: 56px !important;
     }
 }
 
 
 [data-path='main_btn'] div.field-paymet .content-2-col {
-    border-top: 1px solid #000000 !important;
-    border-right: 1px solid #000000 !important;
-    border-bottom: 1px solid #000000 !important;
-    border-left: 1px solid #000000 !important;
+    border-top: 0px solid #000000 !important;
+    border-right: 0px solid #000000 !important;
+    border-bottom: 0px solid #000000 !important;
+    border-left: 0px solid #000000 !important;
     display: flex !important;
     flex-wrap: wrap !important;
     align-items: center !important;
@@ -1917,6 +1960,7 @@ section.section-footer {
     width: fit-content !important;
     max-width: fit-content !important;
     justify-self: start !important;
+    row-gap: 2px !important;
 }
 
 
@@ -1929,6 +1973,7 @@ section.section-footer {
         width: fit-content !important;
         max-width: fit-content !important;
         justify-self: start !important;
+        row-gap: 2px !important;
     }
 }
 
@@ -1942,15 +1987,16 @@ section.section-footer {
         width: fit-content !important;
         max-width: fit-content !important;
         justify-self: start !important;
+        row-gap: 2px !important;
     }
 }
 
 
 [data-path='main_btn'] div.field-paymet:has(input:checked) {
-    border-top: 5px solid #0000ff !important;
-    border-right: 5px solid #0000ff !important;
-    border-bottom: 5px solid #0000ff !important;
-    border-left: 5px solid #0000ff !important;
+    border-top: 2px solid #0000ff !important;
+    border-right: 2px solid #0000ff !important;
+    border-bottom: 2px solid #0000ff !important;
+    border-left: 2px solid #0000ff !important;
 }
 
 
@@ -1991,27 +2037,35 @@ section.section-footer {
 
 
 [data-path='main_btn'] div.field-paymet img {
-    border-top: 2px solid #008000 !important;
-    border-right: 2px solid #008000 !important;
-    border-bottom: 2px solid #008000 !important;
-    border-left: 2px solid #008000 !important;
+    border-top: 0px solid #008000 !important;
+    border-right: 0px solid #008000 !important;
+    border-bottom: 0px solid #008000 !important;
+    border-left: 0px solid #008000 !important;
     min-width: 20px !important;
-    min-height: 20px !important;
+    min-height: 22px !important;
     max-width: 40px !important;
-    max-height: 40px !important;
-    object-fit: contain !important;
+    max-height: none !important;
+    object-fit: cover !important;
     display: block !important;
+    height: 100% !important;
+    width: 100% !important;
+    object-position: center !important;
+    border-radius: 3px !important;
 }
 
 
 @media (max-width: 768px) {
     [data-path='main_btn'] div.field-paymet img {
         min-width: 50px !important;
-        min-height: 50px !important;
+        min-height: 22px !important;
         max-width: 100px !important;
-        max-height: 100px !important;
-        object-fit: contain !important;
+        max-height: none !important;
+        object-fit: cover !important;
         display: block !important;
+        height: 100% !important;
+        width: 100% !important;
+        object-position: center !important;
+        border-radius: 5px !important;
     }
 }
 
@@ -2019,22 +2073,28 @@ section.section-footer {
 @media (max-width: 320px) {
     [data-path='main_btn'] div.field-paymet img {
         min-width: 50px !important;
-        min-height: 50px !important;
+        min-height: 22px !important;
         max-width: 100px !important;
-        max-height: 100px !important;
-        object-fit: contain !important;
+        max-height: none !important;
+        object-fit: cover !important;
         display: block !important;
+        height: 100% !important;
+        width: 100% !important;
+        object-position: center !important;
+        border-radius: 5px !important;
     }
 }
 
 
 [data-path='main_btn'] div.field-paymet label {
-    border-top: 1px solid #ff0000 !important;
-    border-right: 1px solid #ff0000 !important;
-    border-bottom: 1px solid #ff0000 !important;
-    border-left: 1px solid #ff0000 !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
     flex-basis: 100% !important;
     white-space: nowrap !important;
+    font-size: 14px !important;
+    margin-bottom: 0px !important;
 }
 
 
@@ -2042,6 +2102,8 @@ section.section-footer {
     [data-path='main_btn'] div.field-paymet label {
         flex-basis: 100% !important;
         white-space: nowrap !important;
+        font-size: 13px !important;
+        margin-bottom: 0px !important;
     }
 }
 
@@ -2050,18 +2112,22 @@ section.section-footer {
     [data-path='main_btn'] div.field-paymet label {
         flex-basis: 100% !important;
         white-space: nowrap !important;
+        font-size: 12px !important;
+        margin-bottom: 0px !important;
     }
 }
 
 
 [data-path='main_btn'] div.field-paymet .content-percent {
-    border-top: 2px solid #ff0000 !important;
-    border-right: 2px solid #ff0000 !important;
-    border-bottom: 2px solid #ff0000 !important;
-    border-left: 2px solid #ff0000 !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
     display: inline-block !important;
     white-space: nowrap !important;
     width: fit-content !important;
+    font-size: 14px !important;
+    margin-top: -12px !important;
 }
 
 
@@ -2070,6 +2136,8 @@ section.section-footer {
         display: block !important;
         white-space: normal !important;
         width: auto !important;
+        font-size: 13px !important;
+        margin-top: -12px !important;
     }
 }
 
@@ -2079,18 +2147,22 @@ section.section-footer {
         display: block !important;
         white-space: normal !important;
         width: auto !important;
+        font-size: 12px !important;
+        margin-top: -12px !important;
     }
 }
 
 
 [data-path='main_btn'] div.field-paymet .content-prefix {
-    border-top: 1px solid #00ffff !important;
-    border-right: 1px solid #00ffff !important;
-    border-bottom: 1px solid #00ffff !important;
-    border-left: 1px solid #00ffff !important;
+    border-top: 0px solid #00ffff !important;
+    border-right: 0px solid #00ffff !important;
+    border-bottom: 0px solid #00ffff !important;
+    border-left: 0px solid #00ffff !important;
     display: inline-block !important;
     white-space: nowrap !important;
     width: fit-content !important;
+    font-size: 14px !important;
+    margin-top: -12px !important;
 }
 
 
@@ -2099,6 +2171,8 @@ section.section-footer {
         display: block !important;
         white-space: normal !important;
         width: auto !important;
+        font-size: 13px !important;
+        margin-top: -12px !important;
     }
 }
 
@@ -2108,6 +2182,8 @@ section.section-footer {
         display: block !important;
         white-space: normal !important;
         width: auto !important;
+        font-size: 12px !important;
+        margin-top: -12px !important;
     }
 }
 
@@ -2251,18 +2327,25 @@ section.section-footer {
 
 
 div.fp04-field {
-    border-top: 1px solid #000000 !important;
-    border-right: 1px solid #000000 !important;
-    border-bottom: 1px solid #000000 !important;
-    border-left: 1px solid #000000 !important;
+    border-top: 1px solid #666666 !important;
+    border-right: 1px solid #666666 !important;
+    border-bottom: 1px solid #666666 !important;
+    border-left: 1px solid #666666 !important;
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    gap: 10px !important;
+    width: 100% !important;
+    gap: 5px !important;
+    min-height: 48px !important;
+    background: white !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
     position: relative !important;
-    margin-bottom: 10px !important;
+    margin-bottom*: 10px !important;
+    cursor: pointer !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    border-radius: 5px !important;
 }
 
 
@@ -2271,11 +2354,18 @@ div.fp04-field {
         display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
-        gap: 10px !important;
+        width: 100% !important;
+        gap: 5px !important;
+        min-height: 48px !important;
+        background: white !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
         position: relative !important;
-        margin-bottom: 10px !important;
+        margin-bottom*: 10px !important;
+        cursor: pointer !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border-radius: 5px !important;
     }
 }
 
@@ -2285,23 +2375,63 @@ div.fp04-field {
         display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
-        gap: 10px !important;
+        width: 100% !important;
+        gap: 5px !important;
+        min-height: 48px !important;
+        background: white !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
         position: relative !important;
-        margin-bottom: 10px !important;
+        margin-bottom*: 10px !important;
+        cursor: pointer !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border-radius: 5px !important;
+    }
+}
+
+
+div.fp04-field.selected {
+    border-top: 1px solid #0000ff !important;
+    border-right: 1px solid #0000ff !important;
+    border-bottom: 1px solid #0000ff !important;
+    border-left: 1px solid #0000ff !important;
+    box-shadow: 0 0 0 1px !important;
+    background: white !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+
+@media (max-width: 768px) {
+    div.fp04-field.selected {
+        box-shadow: 1 1 1 1 !important;
+        background: white !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    div.fp04-field.selected {
+        box-shadow: #0000ff !important;
+        background: white !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
     }
 }
 
 
 div.fp04-field label {
-    border-top: 2px solid #000000 !important;
-    border-right: 2px solid #000000 !important;
-    border-bottom: 2px solid #000000 !important;
-    border-left: 2px solid #000000 !important;
+    border-top: 0px solid #000000 !important;
+    border-right: 0px solid #000000 !important;
+    border-bottom: 0px solid #000000 !important;
+    border-left: 0px solid #000000 !important;
     flex: 0 0 50% !important;
     max-width: 50% !important;
     white-space: nowrap !important;
+    cursor: pointer !important;
 }
 
 
@@ -2310,6 +2440,7 @@ div.fp04-field label {
         flex: 0 0 30% !important;
         max-width: 30% !important;
         white-space: nowrap !important;
+        cursor: pointer !important;
     }
 }
 
@@ -2319,48 +2450,75 @@ div.fp04-field label {
         flex: 0 0 30% !important;
         max-width: 30% !important;
         white-space: nowrap !important;
+        cursor: pointer !important;
     }
 }
 
 
 div.fp04-field .field {
-    border-top: 2px solid #0000ff !important;
-    border-right: 2px solid #0000ff !important;
-    border-bottom: 2px solid #0000ff !important;
-    border-left: 2px solid #0000ff !important;
+    border-top: 0px solid #0000ff !important;
+    border-right: 0px solid #0000ff !important;
+    border-bottom: 0px solid #0000ff !important;
+    border-left: 0px solid #0000ff !important;
+    display: none !important;
     flex: 1 1 auto !important;
     width: 100% !important;
     padding-right: 50px !important;
     outline: none !important;
+    text-align: right !important;
 }
 
 
 @media (max-width: 768px) {
     div.fp04-field .field {
+        display: none !important;
         flex: 1 1 auto !important;
         width: 100% !important;
         padding-right: 50px !important;
         outline: none !important;
+        text-align: right !important;
     }
 }
 
 
 @media (max-width: 320px) {
     div.fp04-field .field {
+        display: none !important;
         flex: 1 1 auto !important;
         width: 100% !important;
         padding-right: 50px !important;
         outline: none !important;
+        text-align: right !important;
+    }
+}
+
+
+div.fp04-field.selected .content-.field {
+    display: block !important;
+}
+
+
+@media (max-width: 768px) {
+    div.fp04-field.selected .content-.field {
+        display: block !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    div.fp04-field.selected .content-.field {
+        display: block !important;
     }
 }
 
 
 div.fp04-field .content-suffix {
     color: rgba(0, 0, 0, 0.6) !important;
-    border-top: 2px solid #000000 !important;
-    border-right: 2px solid #000000 !important;
-    border-bottom: 2px solid #000000 !important;
-    border-left: 2px solid #000000 !important;
+    border-top: 0px solid #000000 !important;
+    border-right: 0px solid #000000 !important;
+    border-bottom: 0px solid #000000 !important;
+    border-left: 0px solid #000000 !important;
+    display: none !important;
     margin-left: -40px !important;
     pointer-events: none !important;
     z-index: 1 !important;
@@ -2370,6 +2528,7 @@ div.fp04-field .content-suffix {
 
 @media (max-width: 768px) {
     div.fp04-field .content-suffix {
+        display: none !important;
         margin-left: -40px !important;
         pointer-events: none !important;
         z-index: 1 !important;
@@ -2380,6 +2539,7 @@ div.fp04-field .content-suffix {
 
 @media (max-width: 320px) {
     div.fp04-field .content-suffix {
+        display: none !important;
         margin-left: -40px !important;
         pointer-events: none !important;
         z-index: 1 !important;
@@ -2388,13 +2548,73 @@ div.fp04-field .content-suffix {
 }
 
 
+div.fp04-field.selected .content-suffix {
+    display: inline !important;
+}
+
+
+@media (max-width: 768px) {
+    div.fp04-field.selected .content-suffix {
+        display: inline !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    div.fp04-field.selected .content-suffix {
+        display: inline !important;
+    }
+}
+
+
+div.all-sum {
+    text-align: right !important;
+    padding-top: 15px !important;
+}
+
+
+@media (max-width: 768px) {
+    div.all-sum {
+        text-align: right !important;
+        padding-top: 12px !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    div.all-sum {
+        text-align: right !important;
+        padding-top: 10px !important;
+    }
+}
+
+
+div.all-sum label {
+    text-align: right !important;
+}
+
+
+@media (max-width: 768px) {
+    div.all-sum label {
+        text-align: right !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    div.all-sum label {
+        text-align: right !important;
+    }
+}
+
+
 .gr8 {
-    border-top: 5px solid #008000 !important;
-    border-right: 5px solid #008000 !important;
-    border-bottom: 5px solid #008000 !important;
-    border-left: 5px solid #008000 !important;
-    margin: 10px !important;
-    padding: 10px !important;
+    border-top: 0px solid #008000 !important;
+    border-right: 0px solid #008000 !important;
+    border-bottom: 0px solid #008000 !important;
+    border-left: 0px solid #008000 !important;
+    margin: 0px !important;
+    padding: 0px !important;
     gap: 10px !important;
     box-sizing: border-box !important;
 }
@@ -2402,7 +2622,7 @@ div.fp04-field .content-suffix {
 
 @media (max-width: 768px) {
     .gr8 {
-        gap: 20px !important;
+        gap: 10px !important;
         box-sizing: border-box !important;
     }
 }
@@ -2410,7 +2630,7 @@ div.fp04-field .content-suffix {
 
 @media (max-width: 320px) {
     .gr8 {
-        gap: 10px !important;
+        gap: 6px !important;
         box-sizing: border-box !important;
     }
 }
@@ -2427,10 +2647,11 @@ div.field-paymet {
     align-items: stretch !important;
     min-height: 48px !important;
     row-gap: 0px !important;
-    column-gap: 10px !important;
+    column-gap: 6px !important;
     box-sizing: border-box !important;
     min-width: 0 !important;
     padding*: 10px !important;
+    border-radius: 5px !important;
 }
 
 
@@ -2440,12 +2661,13 @@ div.field-paymet {
         display: grid !important;
         grid-template-columns: minmax(0, 20%) minmax(0, 80%) !important;
         align-items: stretch !important;
-        min-height: 130px !important;
+        min-height: 72px !important;
         row-gap: 0px !important;
-        column-gap: 10px !important;
+        column-gap: 6px !important;
         box-sizing: border-box !important;
         min-width: 0 !important;
-        padding*: 10px !important;
+        padding*: 8px !important;
+        border-radius: 5px !important;
     }
 }
 
@@ -2456,32 +2678,35 @@ div.field-paymet {
         display: grid !important;
         grid-template-columns: minmax(0, 20%) minmax(0, 80%) !important;
         align-items: stretch !important;
-        min-height: 130px !important;
+        min-height: 56px !important;
         row-gap: 0px !important;
-        column-gap: 10px !important;
+        column-gap: 5px !important;
         box-sizing: border-box !important;
         min-width: 0 !important;
-        padding*: 10px !important;
+        padding*: 6px !important;
+        border-radius: 5px !important;
     }
 }
 
 
 div.field-paymet .1-col {
-    border-top: 1px solid #ff0000 !important;
-    border-right: 1px solid #ff0000 !important;
-    border-bottom: 1px solid #ff0000 !important;
-    border-left: 1px solid #ff0000 !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
     display: flex !important;
-    align-items: center !important;
+    align-items: stretch !important;
     align-self: stretch !important;
+    min-height: 48px !important;
 }
 
 
 @media (max-width: 768px) {
     div.field-paymet .1-col {
         display: flex !important;
-        align-items: center !important;
+        align-items: stretch !important;
         align-self: stretch !important;
+        min-height: 72px !important;
     }
 }
 
@@ -2489,17 +2714,18 @@ div.field-paymet .1-col {
 @media (max-width: 320px) {
     div.field-paymet .1-col {
         display: flex !important;
-        align-items: center !important;
+        align-items: stretch !important;
         align-self: stretch !important;
+        min-height: 56px !important;
     }
 }
 
 
 div.field-paymet .2-col {
-    border-top: 1px solid #000000 !important;
-    border-right: 1px solid #000000 !important;
-    border-bottom: 1px solid #000000 !important;
-    border-left: 1px solid #000000 !important;
+    border-top: 0px solid #000000 !important;
+    border-right: 0px solid #000000 !important;
+    border-bottom: 0px solid #000000 !important;
+    border-left: 0px solid #000000 !important;
     display: flex !important;
     flex-wrap: wrap !important;
     align-items: center !important;
@@ -2507,6 +2733,7 @@ div.field-paymet .2-col {
     width: fit-content !important;
     max-width: fit-content !important;
     justify-self: start !important;
+    row-gap: 2px !important;
 }
 
 
@@ -2519,6 +2746,7 @@ div.field-paymet .2-col {
         width: fit-content !important;
         max-width: fit-content !important;
         justify-self: start !important;
+        row-gap: 2px !important;
     }
 }
 
@@ -2532,15 +2760,16 @@ div.field-paymet .2-col {
         width: fit-content !important;
         max-width: fit-content !important;
         justify-self: start !important;
+        row-gap: 2px !important;
     }
 }
 
 
 div.field-paymet:has(input:checked) {
-    border-top: 5px solid #0000ff !important;
-    border-right: 5px solid #0000ff !important;
-    border-bottom: 5px solid #0000ff !important;
-    border-left: 5px solid #0000ff !important;
+    border-top: 2px solid #0000ff !important;
+    border-right: 2px solid #0000ff !important;
+    border-bottom: 2px solid #0000ff !important;
+    border-left: 2px solid #0000ff !important;
 }
 
 
@@ -2581,50 +2810,61 @@ div.field-paymet input {
 
 
 div.field-paymet img {
-    border-top: 2px solid #008000 !important;
-    border-right: 2px solid #008000 !important;
-    border-bottom: 2px solid #008000 !important;
-    border-left: 2px solid #008000 !important;
-    min-width: 20px !important;
-    min-height: 20px !important;
+    border-top: 0px solid #008000 !important;
+    border-right: 0px solid #008000 !important;
+    border-bottom: 0px solid #008000 !important;
+    border-left: 0px solid #008000 !important;
+    height: 100% !important;
+    width: 100% !important;
+    min-height: 22px !important;
+    max-height: none !important;
     max-width: 40px !important;
-    max-height: 40px !important;
-    object-fit: contain !important;
+    object-fit: cover !important;
+    object-position: center !important;
     display: block !important;
+    border-radius: 3px !important;
 }
 
 
 @media (max-width: 768px) {
     div.field-paymet img {
-        min-width: 50px !important;
-        min-height: 50px !important;
+        height: 100% !important;
+        width: 100% !important;
+        min-height: 22px !important;
+        max-height: none !important;
         max-width: 100px !important;
-        max-height: 100px !important;
-        object-fit: contain !important;
+        object-fit: cover !important;
+        object-position: center !important;
         display: block !important;
+        border-radius: 5px !important;
     }
 }
 
 
 @media (max-width: 320px) {
     div.field-paymet img {
-        min-width: 50px !important;
-        min-height: 50px !important;
+        height: 100% !important;
+        width: 100% !important;
+        min-height: 22px !important;
+        max-height: none !important;
         max-width: 100px !important;
-        max-height: 100px !important;
-        object-fit: contain !important;
+        object-fit: cover !important;
+        object-position: center !important;
         display: block !important;
+        border-radius: 5px !important;
     }
 }
 
 
 div.field-paymet label {
-    border-top: 1px solid #ff0000 !important;
-    border-right: 1px solid #ff0000 !important;
-    border-bottom: 1px solid #ff0000 !important;
-    border-left: 1px solid #ff0000 !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
     flex-basis: 100% !important;
     white-space: nowrap !important;
+    font-size: 14px !important;
+    margin-bottom: 0px !important;
 }
 
 
@@ -2632,6 +2872,8 @@ div.field-paymet label {
     div.field-paymet label {
         flex-basis: 100% !important;
         white-space: nowrap !important;
+        font-size: 13px !important;
+        margin-bottom: 0px !important;
     }
 }
 
@@ -2640,18 +2882,22 @@ div.field-paymet label {
     div.field-paymet label {
         flex-basis: 100% !important;
         white-space: nowrap !important;
+        font-size: 12px !important;
+        margin-bottom: 0px !important;
     }
 }
 
 
 div.field-paymet .content-percent {
-    border-top: 2px solid #ff0000 !important;
-    border-right: 2px solid #ff0000 !important;
-    border-bottom: 2px solid #ff0000 !important;
-    border-left: 2px solid #ff0000 !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
     display: inline-block !important;
     white-space: nowrap !important;
     width: fit-content !important;
+    font-size: 14px !important;
+    margin-top: -12px !important;
 }
 
 
@@ -2660,6 +2906,8 @@ div.field-paymet .content-percent {
         display: block !important;
         white-space: normal !important;
         width: auto !important;
+        font-size: 13px !important;
+        margin-top: -12px !important;
     }
 }
 
@@ -2669,18 +2917,22 @@ div.field-paymet .content-percent {
         display: block !important;
         white-space: normal !important;
         width: auto !important;
+        font-size: 12px !important;
+        margin-top: -12px !important;
     }
 }
 
 
 div.field-paymet .content-prefix {
-    border-top: 1px solid #00ffff !important;
-    border-right: 1px solid #00ffff !important;
-    border-bottom: 1px solid #00ffff !important;
-    border-left: 1px solid #00ffff !important;
+    border-top: 0px solid #00ffff !important;
+    border-right: 0px solid #00ffff !important;
+    border-bottom: 0px solid #00ffff !important;
+    border-left: 0px solid #00ffff !important;
     display: inline-block !important;
     white-space: nowrap !important;
     width: fit-content !important;
+    font-size: 14px !important;
+    margin-top: -12px !important;
 }
 
 
@@ -2689,6 +2941,8 @@ div.field-paymet .content-prefix {
         display: block !important;
         white-space: normal !important;
         width: auto !important;
+        font-size: 13px !important;
+        margin-top: -12px !important;
     }
 }
 
@@ -2698,12 +2952,18 @@ div.field-paymet .content-prefix {
         display: block !important;
         white-space: normal !important;
         width: auto !important;
+        font-size: 12px !important;
+        margin-top: -12px !important;
     }
 }
 
 
 div.modal1 {
     background-color: rgba(0, 0, 0, 0.5) !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
     display: none !important;
     position: fixed !important;
     top: 0 !important;
@@ -2719,6 +2979,9 @@ div.modal1 {
     gap: 0 !important;
     padding-top: 20px !important;
     padding-bottom: 20px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    border-radius: 10px !important;
 }
 
 
@@ -2737,8 +3000,11 @@ div.modal1 {
         overflow-y: auto !important;
         box-sizing: border-box !important;
         gap: 0 !important;
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border-radius: 0px !important;
     }
 }
 
@@ -2758,8 +3024,11 @@ div.modal1 {
         overflow-y: auto !important;
         box-sizing: border-box !important;
         gap: 0 !important;
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border-radius: 0px !important;
     }
 }
 
@@ -2803,7 +3072,7 @@ div.gr4 {
         justify-content: space-between !important;
         align-items: center !important;
         padding: 15px !important;
-        border-radius: 10px !important;
+        border-radius: 0px !important;
         border-bottom-left-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
         max-width: 400px !important;
@@ -2817,7 +3086,7 @@ div.gr4 {
         display: flex !important;
         justify-content: space-between !important;
         align-items: center !important;
-        padding: 10px !important;
+        padding: 0px !important;
         border-radius: 0px !important;
         border-bottom-left-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
@@ -2883,7 +3152,7 @@ div.gr4 {
 
 @media (max-width: 320px) {
     [data-path='form'] text {
-        padding: 10px !important;
+        padding: 20px !important;
         border-radius: 0px !important;
         border-top-left-radius: 0 !important;
         border-top-right-radius: 0 !important;
@@ -2929,18 +3198,42 @@ div.gr4 {
 
 
 div.wr-fields {
-    border-top: 2px dotted #000000 !important;
-    border-right: 2px dotted #000000 !important;
-    border-bottom: 2px dotted #000000 !important;
-    border-left: 2px dotted #000000 !important;
+    border-top: 0px dotted #000000 !important;
+    border-right: 0px dotted #000000 !important;
+    border-bottom: 0px dotted #000000 !important;
+    border-left: 0px dotted #000000 !important;
 }
 
 
 div.wr-fields .content-tit {
-    border-top: 2px solid #ff0000 !important;
-    border-right: 2px solid #ff0000 !important;
-    border-bottom: 2px solid #ff0000 !important;
-    border-left: 2px solid #ff0000 !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    display: block !important;
+    padding-bottom: 10px !important;
+}
+
+
+@media (max-width: 768px) {
+    div.wr-fields .content-tit {
+        font-size: 17px !important;
+        font-weight: 700 !important;
+        display: block !important;
+        padding-bottom: 10px !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    div.wr-fields .content-tit {
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        display: block !important;
+        padding-bottom: 10px !important;
+    }
 }
 
 
@@ -2981,18 +3274,25 @@ div.wr-fields .content-tit {
 
 
 body[data-page='shino'] div.fp04-field {
-    border-top: 1px solid #000000 !important;
-    border-right: 1px solid #000000 !important;
-    border-bottom: 1px solid #000000 !important;
-    border-left: 1px solid #000000 !important;
+    border-top: 1px solid #666666 !important;
+    border-right: 1px solid #666666 !important;
+    border-bottom: 1px solid #666666 !important;
+    border-left: 1px solid #666666 !important;
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    gap: 10px !important;
+    width: 100% !important;
+    gap: 5px !important;
+    min-height: 48px !important;
+    background: white !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
     position: relative !important;
-    margin-bottom: 10px !important;
+    margin-bottom*: 10px !important;
+    cursor: pointer !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    border-radius: 5px !important;
 }
 
 
@@ -3001,11 +3301,18 @@ body[data-page='shino'] div.fp04-field {
         display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
-        gap: 10px !important;
+        width: 100% !important;
+        gap: 5px !important;
+        min-height: 48px !important;
+        background: white !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
         position: relative !important;
-        margin-bottom: 10px !important;
+        margin-bottom*: 10px !important;
+        cursor: pointer !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border-radius: 5px !important;
     }
 }
 
@@ -3015,23 +3322,63 @@ body[data-page='shino'] div.fp04-field {
         display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
-        gap: 10px !important;
+        width: 100% !important;
+        gap: 5px !important;
+        min-height: 48px !important;
+        background: white !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
         position: relative !important;
-        margin-bottom: 10px !important;
+        margin-bottom*: 10px !important;
+        cursor: pointer !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border-radius: 5px !important;
+    }
+}
+
+
+body[data-page='shino'] div.fp04-field.selected {
+    border-top: 1px solid #0000ff !important;
+    border-right: 1px solid #0000ff !important;
+    border-bottom: 1px solid #0000ff !important;
+    border-left: 1px solid #0000ff !important;
+    box-shadow: 0 0 0 1px !important;
+    background: white !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.fp04-field.selected {
+        box-shadow: 1 1 1 1 !important;
+        background: white !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.fp04-field.selected {
+        box-shadow: #0000ff !important;
+        background: white !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
     }
 }
 
 
 body[data-page='shino'] div.fp04-field label {
-    border-top: 2px solid #000000 !important;
-    border-right: 2px solid #000000 !important;
-    border-bottom: 2px solid #000000 !important;
-    border-left: 2px solid #000000 !important;
+    border-top: 0px solid #000000 !important;
+    border-right: 0px solid #000000 !important;
+    border-bottom: 0px solid #000000 !important;
+    border-left: 0px solid #000000 !important;
     flex: 0 0 50% !important;
     max-width: 50% !important;
     white-space: nowrap !important;
+    cursor: pointer !important;
 }
 
 
@@ -3040,6 +3387,7 @@ body[data-page='shino'] div.fp04-field label {
         flex: 0 0 30% !important;
         max-width: 30% !important;
         white-space: nowrap !important;
+        cursor: pointer !important;
     }
 }
 
@@ -3049,48 +3397,75 @@ body[data-page='shino'] div.fp04-field label {
         flex: 0 0 30% !important;
         max-width: 30% !important;
         white-space: nowrap !important;
+        cursor: pointer !important;
     }
 }
 
 
 body[data-page='shino'] div.fp04-field .field {
-    border-top: 2px solid #0000ff !important;
-    border-right: 2px solid #0000ff !important;
-    border-bottom: 2px solid #0000ff !important;
-    border-left: 2px solid #0000ff !important;
+    border-top: 0px solid #0000ff !important;
+    border-right: 0px solid #0000ff !important;
+    border-bottom: 0px solid #0000ff !important;
+    border-left: 0px solid #0000ff !important;
+    display: none !important;
     flex: 1 1 auto !important;
     width: 100% !important;
     padding-right: 50px !important;
     outline: none !important;
+    text-align: right !important;
 }
 
 
 @media (max-width: 768px) {
     body[data-page='shino'] div.fp04-field .field {
+        display: none !important;
         flex: 1 1 auto !important;
         width: 100% !important;
         padding-right: 50px !important;
         outline: none !important;
+        text-align: right !important;
     }
 }
 
 
 @media (max-width: 320px) {
     body[data-page='shino'] div.fp04-field .field {
+        display: none !important;
         flex: 1 1 auto !important;
         width: 100% !important;
         padding-right: 50px !important;
         outline: none !important;
+        text-align: right !important;
+    }
+}
+
+
+body[data-page='shino'] div.fp04-field.selected .content-.field {
+    display: block !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.fp04-field.selected .content-.field {
+        display: block !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.fp04-field.selected .content-.field {
+        display: block !important;
     }
 }
 
 
 body[data-page='shino'] div.fp04-field .content-suffix {
     color: rgba(0, 0, 0, 0.6) !important;
-    border-top: 2px solid #000000 !important;
-    border-right: 2px solid #000000 !important;
-    border-bottom: 2px solid #000000 !important;
-    border-left: 2px solid #000000 !important;
+    border-top: 0px solid #000000 !important;
+    border-right: 0px solid #000000 !important;
+    border-bottom: 0px solid #000000 !important;
+    border-left: 0px solid #000000 !important;
+    display: none !important;
     margin-left: -40px !important;
     pointer-events: none !important;
     z-index: 1 !important;
@@ -3100,6 +3475,7 @@ body[data-page='shino'] div.fp04-field .content-suffix {
 
 @media (max-width: 768px) {
     body[data-page='shino'] div.fp04-field .content-suffix {
+        display: none !important;
         margin-left: -40px !important;
         pointer-events: none !important;
         z-index: 1 !important;
@@ -3110,6 +3486,7 @@ body[data-page='shino'] div.fp04-field .content-suffix {
 
 @media (max-width: 320px) {
     body[data-page='shino'] div.fp04-field .content-suffix {
+        display: none !important;
         margin-left: -40px !important;
         pointer-events: none !important;
         z-index: 1 !important;
@@ -3118,13 +3495,73 @@ body[data-page='shino'] div.fp04-field .content-suffix {
 }
 
 
+body[data-page='shino'] div.fp04-field.selected .content-suffix {
+    display: inline !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.fp04-field.selected .content-suffix {
+        display: inline !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.fp04-field.selected .content-suffix {
+        display: inline !important;
+    }
+}
+
+
+body[data-page='shino'] div.all-sum {
+    text-align: right !important;
+    padding-top: 15px !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.all-sum {
+        text-align: right !important;
+        padding-top: 12px !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.all-sum {
+        text-align: right !important;
+        padding-top: 10px !important;
+    }
+}
+
+
+body[data-page='shino'] div.all-sum label {
+    text-align: right !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.all-sum label {
+        text-align: right !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.all-sum label {
+        text-align: right !important;
+    }
+}
+
+
 body[data-page='shino'] .gr8 {
-    border-top: 5px solid #008000 !important;
-    border-right: 5px solid #008000 !important;
-    border-bottom: 5px solid #008000 !important;
-    border-left: 5px solid #008000 !important;
-    margin: 10px !important;
-    padding: 10px !important;
+    border-top: 0px solid #008000 !important;
+    border-right: 0px solid #008000 !important;
+    border-bottom: 0px solid #008000 !important;
+    border-left: 0px solid #008000 !important;
+    margin: 0px !important;
+    padding: 0px !important;
     gap: 10px !important;
     box-sizing: border-box !important;
 }
@@ -3132,7 +3569,7 @@ body[data-page='shino'] .gr8 {
 
 @media (max-width: 768px) {
     body[data-page='shino'] .gr8 {
-        gap: 20px !important;
+        gap: 10px !important;
         box-sizing: border-box !important;
     }
 }
@@ -3140,7 +3577,7 @@ body[data-page='shino'] .gr8 {
 
 @media (max-width: 320px) {
     body[data-page='shino'] .gr8 {
-        gap: 10px !important;
+        gap: 6px !important;
         box-sizing: border-box !important;
     }
 }
@@ -3157,10 +3594,11 @@ body[data-page='shino'] div.field-paymet {
     align-items: stretch !important;
     min-height: 48px !important;
     row-gap: 0px !important;
-    column-gap: 10px !important;
+    column-gap: 6px !important;
     box-sizing: border-box !important;
     min-width: 0 !important;
     padding*: 10px !important;
+    border-radius: 5px !important;
 }
 
 
@@ -3170,12 +3608,13 @@ body[data-page='shino'] div.field-paymet {
         display: grid !important;
         grid-template-columns: minmax(0, 20%) minmax(0, 80%) !important;
         align-items: stretch !important;
-        min-height: 130px !important;
+        min-height: 72px !important;
         row-gap: 0px !important;
-        column-gap: 10px !important;
+        column-gap: 6px !important;
         box-sizing: border-box !important;
         min-width: 0 !important;
-        padding*: 10px !important;
+        padding*: 8px !important;
+        border-radius: 5px !important;
     }
 }
 
@@ -3186,32 +3625,35 @@ body[data-page='shino'] div.field-paymet {
         display: grid !important;
         grid-template-columns: minmax(0, 20%) minmax(0, 80%) !important;
         align-items: stretch !important;
-        min-height: 130px !important;
+        min-height: 56px !important;
         row-gap: 0px !important;
-        column-gap: 10px !important;
+        column-gap: 5px !important;
         box-sizing: border-box !important;
         min-width: 0 !important;
-        padding*: 10px !important;
+        padding*: 6px !important;
+        border-radius: 5px !important;
     }
 }
 
 
 body[data-page='shino'] div.field-paymet .1-col {
-    border-top: 1px solid #ff0000 !important;
-    border-right: 1px solid #ff0000 !important;
-    border-bottom: 1px solid #ff0000 !important;
-    border-left: 1px solid #ff0000 !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
     display: flex !important;
-    align-items: center !important;
+    align-items: stretch !important;
     align-self: stretch !important;
+    min-height: 48px !important;
 }
 
 
 @media (max-width: 768px) {
     body[data-page='shino'] div.field-paymet .1-col {
         display: flex !important;
-        align-items: center !important;
+        align-items: stretch !important;
         align-self: stretch !important;
+        min-height: 72px !important;
     }
 }
 
@@ -3219,17 +3661,18 @@ body[data-page='shino'] div.field-paymet .1-col {
 @media (max-width: 320px) {
     body[data-page='shino'] div.field-paymet .1-col {
         display: flex !important;
-        align-items: center !important;
+        align-items: stretch !important;
         align-self: stretch !important;
+        min-height: 56px !important;
     }
 }
 
 
 body[data-page='shino'] div.field-paymet .2-col {
-    border-top: 1px solid #000000 !important;
-    border-right: 1px solid #000000 !important;
-    border-bottom: 1px solid #000000 !important;
-    border-left: 1px solid #000000 !important;
+    border-top: 0px solid #000000 !important;
+    border-right: 0px solid #000000 !important;
+    border-bottom: 0px solid #000000 !important;
+    border-left: 0px solid #000000 !important;
     display: flex !important;
     flex-wrap: wrap !important;
     align-items: center !important;
@@ -3237,6 +3680,7 @@ body[data-page='shino'] div.field-paymet .2-col {
     width: fit-content !important;
     max-width: fit-content !important;
     justify-self: start !important;
+    row-gap: 2px !important;
 }
 
 
@@ -3249,6 +3693,7 @@ body[data-page='shino'] div.field-paymet .2-col {
         width: fit-content !important;
         max-width: fit-content !important;
         justify-self: start !important;
+        row-gap: 2px !important;
     }
 }
 
@@ -3262,15 +3707,16 @@ body[data-page='shino'] div.field-paymet .2-col {
         width: fit-content !important;
         max-width: fit-content !important;
         justify-self: start !important;
+        row-gap: 2px !important;
     }
 }
 
 
 body[data-page='shino'] div.field-paymet:has(input:checked) {
-    border-top: 5px solid #0000ff !important;
-    border-right: 5px solid #0000ff !important;
-    border-bottom: 5px solid #0000ff !important;
-    border-left: 5px solid #0000ff !important;
+    border-top: 2px solid #0000ff !important;
+    border-right: 2px solid #0000ff !important;
+    border-bottom: 2px solid #0000ff !important;
+    border-left: 2px solid #0000ff !important;
 }
 
 
@@ -3311,50 +3757,61 @@ body[data-page='shino'] div.field-paymet input {
 
 
 body[data-page='shino'] div.field-paymet img {
-    border-top: 2px solid #008000 !important;
-    border-right: 2px solid #008000 !important;
-    border-bottom: 2px solid #008000 !important;
-    border-left: 2px solid #008000 !important;
-    min-width: 20px !important;
-    min-height: 20px !important;
+    border-top: 0px solid #008000 !important;
+    border-right: 0px solid #008000 !important;
+    border-bottom: 0px solid #008000 !important;
+    border-left: 0px solid #008000 !important;
+    height: 100% !important;
+    width: 100% !important;
+    min-height: 22px !important;
+    max-height: none !important;
     max-width: 40px !important;
-    max-height: 40px !important;
-    object-fit: contain !important;
+    object-fit: cover !important;
+    object-position: center !important;
     display: block !important;
+    border-radius: 3px !important;
 }
 
 
 @media (max-width: 768px) {
     body[data-page='shino'] div.field-paymet img {
-        min-width: 50px !important;
-        min-height: 50px !important;
+        height: 100% !important;
+        width: 100% !important;
+        min-height: 22px !important;
+        max-height: none !important;
         max-width: 100px !important;
-        max-height: 100px !important;
-        object-fit: contain !important;
+        object-fit: cover !important;
+        object-position: center !important;
         display: block !important;
+        border-radius: 5px !important;
     }
 }
 
 
 @media (max-width: 320px) {
     body[data-page='shino'] div.field-paymet img {
-        min-width: 50px !important;
-        min-height: 50px !important;
+        height: 100% !important;
+        width: 100% !important;
+        min-height: 22px !important;
+        max-height: none !important;
         max-width: 100px !important;
-        max-height: 100px !important;
-        object-fit: contain !important;
+        object-fit: cover !important;
+        object-position: center !important;
         display: block !important;
+        border-radius: 5px !important;
     }
 }
 
 
 body[data-page='shino'] div.field-paymet label {
-    border-top: 1px solid #ff0000 !important;
-    border-right: 1px solid #ff0000 !important;
-    border-bottom: 1px solid #ff0000 !important;
-    border-left: 1px solid #ff0000 !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
     flex-basis: 100% !important;
     white-space: nowrap !important;
+    font-size: 14px !important;
+    margin-bottom: 0px !important;
 }
 
 
@@ -3362,6 +3819,8 @@ body[data-page='shino'] div.field-paymet label {
     body[data-page='shino'] div.field-paymet label {
         flex-basis: 100% !important;
         white-space: nowrap !important;
+        font-size: 13px !important;
+        margin-bottom: 0px !important;
     }
 }
 
@@ -3370,18 +3829,22 @@ body[data-page='shino'] div.field-paymet label {
     body[data-page='shino'] div.field-paymet label {
         flex-basis: 100% !important;
         white-space: nowrap !important;
+        font-size: 12px !important;
+        margin-bottom: 0px !important;
     }
 }
 
 
 body[data-page='shino'] div.field-paymet .content-percent {
-    border-top: 2px solid #ff0000 !important;
-    border-right: 2px solid #ff0000 !important;
-    border-bottom: 2px solid #ff0000 !important;
-    border-left: 2px solid #ff0000 !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
     display: inline-block !important;
     white-space: nowrap !important;
     width: fit-content !important;
+    font-size: 14px !important;
+    margin-top: -12px !important;
 }
 
 
@@ -3390,6 +3853,8 @@ body[data-page='shino'] div.field-paymet .content-percent {
         display: block !important;
         white-space: normal !important;
         width: auto !important;
+        font-size: 13px !important;
+        margin-top: -12px !important;
     }
 }
 
@@ -3399,18 +3864,22 @@ body[data-page='shino'] div.field-paymet .content-percent {
         display: block !important;
         white-space: normal !important;
         width: auto !important;
+        font-size: 12px !important;
+        margin-top: -12px !important;
     }
 }
 
 
 body[data-page='shino'] div.field-paymet .content-prefix {
-    border-top: 1px solid #00ffff !important;
-    border-right: 1px solid #00ffff !important;
-    border-bottom: 1px solid #00ffff !important;
-    border-left: 1px solid #00ffff !important;
+    border-top: 0px solid #00ffff !important;
+    border-right: 0px solid #00ffff !important;
+    border-bottom: 0px solid #00ffff !important;
+    border-left: 0px solid #00ffff !important;
     display: inline-block !important;
     white-space: nowrap !important;
     width: fit-content !important;
+    font-size: 14px !important;
+    margin-top: -12px !important;
 }
 
 
@@ -3419,6 +3888,8 @@ body[data-page='shino'] div.field-paymet .content-prefix {
         display: block !important;
         white-space: normal !important;
         width: auto !important;
+        font-size: 13px !important;
+        margin-top: -12px !important;
     }
 }
 
@@ -3428,12 +3899,18 @@ body[data-page='shino'] div.field-paymet .content-prefix {
         display: block !important;
         white-space: normal !important;
         width: auto !important;
+        font-size: 12px !important;
+        margin-top: -12px !important;
     }
 }
 
 
 body[data-page='shino'] div.modal1 {
     background-color: rgba(0, 0, 0, 0.5) !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
     display: none !important;
     position: fixed !important;
     top: 0 !important;
@@ -3449,6 +3926,9 @@ body[data-page='shino'] div.modal1 {
     gap: 0 !important;
     padding-top: 20px !important;
     padding-bottom: 20px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    border-radius: 10px !important;
 }
 
 
@@ -3467,8 +3947,11 @@ body[data-page='shino'] div.modal1 {
         overflow-y: auto !important;
         box-sizing: border-box !important;
         gap: 0 !important;
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border-radius: 0px !important;
     }
 }
 
@@ -3488,8 +3971,11 @@ body[data-page='shino'] div.modal1 {
         overflow-y: auto !important;
         box-sizing: border-box !important;
         gap: 0 !important;
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border-radius: 0px !important;
     }
 }
 
@@ -3533,7 +4019,7 @@ body[data-page='shino'] div.gr4 {
         justify-content: space-between !important;
         align-items: center !important;
         padding: 15px !important;
-        border-radius: 10px !important;
+        border-radius: 0px !important;
         border-bottom-left-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
         max-width: 400px !important;
@@ -3547,7 +4033,7 @@ body[data-page='shino'] div.gr4 {
         display: flex !important;
         justify-content: space-between !important;
         align-items: center !important;
-        padding: 10px !important;
+        padding: 0px !important;
         border-radius: 0px !important;
         border-bottom-left-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
@@ -3613,7 +4099,7 @@ body[data-page='shino'] [data-path='form'] text {
 
 @media (max-width: 320px) {
     body[data-page='shino'] [data-path='form'] text {
-        padding: 10px !important;
+        padding: 20px !important;
         border-radius: 0px !important;
         border-top-left-radius: 0 !important;
         border-top-right-radius: 0 !important;
@@ -3659,18 +4145,42 @@ body[data-page='shino'] [data-path='input'] text {
 
 
 body[data-page='shino'] div.wr-fields {
-    border-top: 2px dotted #000000 !important;
-    border-right: 2px dotted #000000 !important;
-    border-bottom: 2px dotted #000000 !important;
-    border-left: 2px dotted #000000 !important;
+    border-top: 0px dotted #000000 !important;
+    border-right: 0px dotted #000000 !important;
+    border-bottom: 0px dotted #000000 !important;
+    border-left: 0px dotted #000000 !important;
 }
 
 
 body[data-page='shino'] div.wr-fields .content-tit {
-    border-top: 2px solid #ff0000 !important;
-    border-right: 2px solid #ff0000 !important;
-    border-bottom: 2px solid #ff0000 !important;
-    border-left: 2px solid #ff0000 !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    display: block !important;
+    padding-bottom: 10px !important;
+}
+
+
+@media (max-width: 768px) {
+    body[data-page='shino'] div.wr-fields .content-tit {
+        font-size: 17px !important;
+        font-weight: 700 !important;
+        display: block !important;
+        padding-bottom: 10px !important;
+    }
+}
+
+
+@media (max-width: 320px) {
+    body[data-page='shino'] div.wr-fields .content-tit {
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        display: block !important;
+        padding-bottom: 10px !important;
+    }
 }
 
 

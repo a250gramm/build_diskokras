@@ -9,7 +9,7 @@
                 },
                 "form_form2":{
                     "1.div_wr-fields": {
-                        "tit":         ["text",    "text:Услуги111"],
+                        "tit":         ["text",    "text:Услуги"],
                         "servi":       ["include", "shino/servi"]
                     },
                     "2.div_wr-fields": {
@@ -38,8 +38,13 @@
             "overflow-y": ["auto", "auto", "auto"],
             "box-sizing": ["border-box", "border-box", "border-box"],
             "gap": [0, 0, 0],
-            "padding-top": [20, 20, 20, "px"],
-            "padding-bottom": [20, 20, 20, "px"]
+            "padding-top": [20, 0, 0, "px"],
+            "padding-bottom": [20, 0, 0, "px"],
+            "padding-left": [10, 10, 10, "px"],
+            "padding-right": [10, 10, 10, "px"],
+            "border-radius": [10, 0, 0, "px"],
+            "border": ["0px solid", "1 1 1 1", "red.100"]
+
         },
         "div_modal1.active": {
             "display": ["flex", "flex", "flex"]
@@ -49,8 +54,8 @@
             "justify-content": ["space-between", "space-between", "space-between"],
             "align-items": ["center", "center", "center"],
             "bg-color": ["white", 100],
-            "padding": [20, 15, 10, "px"],
-            "border-radius": [10, 10, 0, "px"],
+            "padding": [20, 15, 0, "px"],
+            "border-radius": [10, 0, 0, "px"],
             "border-bottom-left-radius": [0, 0, 0],
             "border-bottom-right-radius": [0, 0, 0],
             "max-width": ["500px", "400px", "100%"],
@@ -63,7 +68,7 @@
         },
         "form": {
             "bg-color": ["white", 100],
-            "padding": [20, 15, 10, "px"],
+            "padding": [20, 15, 20, "px"],
             "border-radius": [10, 10, 0, "px"],
             "border-top-left-radius": [0, 0, 0],
             "border-top-right-radius": [0, 0, 0],
@@ -82,10 +87,14 @@
             "box-sizing": ["border-box", "border-box", "border-box"]
         },
         "div_wr-fields": {
-            "border": ["2px dotted", "1 1 1 1", "black.100"]
+            "border": ["0px dotted", "1 1 1 1", "black.100"]
         },
         "div_wr-fields tit": {
-            "border": ["2px solid", "1 1 1 1", "red.100"]
+            "border": ["0px solid", "1 1 1 1", "red.100"],
+            "font-size": [18, 17, 16, "px"],
+            "font-weight": [700, 700, 700],
+            "display": ["block", "block", "block"],
+            "padding-bottom": [10, 10, 10, "px"]
         },
         "form button": {
             "width": [100, 100, 100, "%"],

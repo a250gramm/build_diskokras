@@ -258,6 +258,19 @@ class ObjectsCSSProcessor:
         
         flat_objects_css = self.flatten_objects_css()
         
+        # Инклюды перезаписывают design только для main_btn: "main_btn X" подмешиваем стили из "X"
+        # (стили из pay_met.json перекрывают objects_css.json для модалки; search, turn и др. не трогаем)
+        for element_key in list(flat_objects_css.keys()):
+            if ' ' in element_key:
+                parts = element_key.split(' ', 1)
+                if len(parts) == 2:
+                    prefix, tail = parts
+                    if prefix == 'main_btn' and tail in flat_objects_css and tail != element_key:
+                        design_styles = flat_objects_css[element_key]
+                        include_styles = flat_objects_css[tail]
+                        if isinstance(design_styles, dict) and isinstance(include_styles, dict):
+                            flat_objects_css[element_key] = {**design_styles, **include_styles}
+        
         for element_key, element_styles in flat_objects_css.items():
             # Пропускаем правила, которые заканчиваются на * (отключенные правила)
             if element_key.endswith('*') or (' ' in element_key and element_key.split()[-1].endswith('*')):

@@ -267,7 +267,10 @@
             "border": ["2px dotted", "1 1 1 1", "black.100"]
         },
         "main_btn div_wr-fields tit":{
-            "border": ["2px solid", "1 1 1 1", "red.100"]
+            "border": ["2px solid", "1 1 1 1", "red.100"],
+            "display": ["block", "block", "block"],
+            "font-size": [18, 17, 16, "px"],
+            "padding-bottom": [10, 10, 10, "px"]
         }
     },
     
