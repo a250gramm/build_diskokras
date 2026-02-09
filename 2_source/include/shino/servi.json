@@ -53,7 +53,8 @@
         "max-width": ["50%", "30%", "30%"],
         "white-space": ["nowrap", "nowrap", "nowrap"],
         "border": ["0px solid", "1 1 1 1", "black.100"],
-        "cursor": ["pointer", "pointer", "pointer"]
+        "cursor": ["pointer", "pointer", "pointer"],
+        "font-size": [16, 16, 16, "px"]
     },
     "div_fp04-field .field":{
         "display": ["none", "none", "none"],

@@ -28,6 +28,8 @@
             "position": ["fixed", "fixed", "fixed"],
             "top": [0, 0, 0],
             "left": [0, 0, 0],
+            "right": [0, 0, 0],
+            "bottom": [0, 0, 0],
             "width": [100, 100, 100, "%"],
             "height": [100, 100, 100, "%"],
             "bg-color": ["black", 50],
@@ -35,6 +37,7 @@
             "align-items": ["center", "center", "center"],
             "justify-content": ["flex-start", "flex-start", "flex-start"],
             "flex-direction": ["column", "column", "column"],
+            "overflow-x": ["hidden", "hidden", "hidden"],
             "overflow-y": ["auto", "auto", "auto"],
             "box-sizing": ["border-box", "border-box", "border-box"],
             "gap": [0, 0, 0],
@@ -54,7 +57,7 @@
             "justify-content": ["space-between", "space-between", "space-between"],
             "align-items": ["center", "center", "center"],
             "bg-color": ["white", 100],
-            "padding": [20, 15, 0, "px"],
+            "padding": [20, 15, 10, "px"],
             "border-radius": [10, 0, 0, "px"],
             "border-bottom-left-radius": [0, 0, 0],
             "border-bottom-right-radius": [0, 0, 0],
@@ -63,8 +66,8 @@
         },
         "close": {
             "cursor": ["pointer", "pointer", "pointer"],
-            "width": [24, 20, 18, "px"],
-            "height": [24, 20, 18, "px"]
+            "width": [24, 24, 44, "px"],
+            "height": [24, 24, 44, "px"]
         },
         "form": {
             "bg-color": ["white", 100],
@@ -78,14 +81,7 @@
             "flex-direction": ["column", "column", "column"],
             "gap": [15, 10, 10, "px"]
         },
-        "input": {
-            "width": [100, 100, 100, "%"],
-            "padding": [12, 10, 8, "px"],
-            "border*": ["1px solid", "1 1 1 1", "black.20"],
-            "border-radius*": [5, 5, 5, "px"],
-            "outline": ["none"],
-            "box-sizing": ["border-box", "border-box", "border-box"]
-        },
+
         "div_wr-fields": {
             "border": ["0px dotted", "1 1 1 1", "black.100"]
         },

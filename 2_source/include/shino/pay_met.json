@@ -89,7 +89,7 @@
     "div_field-paymet label":{
         "flex-basis": ["100%", "100%", "100%"],
         "white-space": ["nowrap", "nowrap", "nowrap"],
-        "font-size": [14, 13, 12, "px"],
+        "font-size": [16, 16, 16, "px"],
         "margin-bottom": [0, 0, 0, "px"],
         "border": ["0px solid", "1 1 1 1", "red.100"]
     },
