@@ -1,7 +1,7 @@
 {
 "api":{
-    "api1":        ["bd",   "front_pay_met"],
-    "api2":        ["bd",   "front_wall", "link:api1.id_wallet"]
+    "api1":        ["bd",   "pay_met"],
+    "api2":        ["bd",   "wall", "link:api1.id_wallet"]
 },
 
 "html":{

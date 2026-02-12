@@ -16,7 +16,8 @@
                         "tit":         ["text",    "text:Способ оплаты"],
                         "pay_met":     ["include", "shino/pay_met"]
                     },
-                    "button_1": ["button_json", "shino", "text:Отправить"]
+                    "button_1": ["button_json", "shino", "text:Получить JSON"],
+                    "button_2": ["button_json", "shino", "text:Отправить BD", "save_bd", "shino2"]
                 }
             }
             }

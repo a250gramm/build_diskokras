@@ -64,6 +64,7 @@ def main():
         (output_dir / 'php').mkdir(exist_ok=True)
         (output_dir / 'bd').mkdir(exist_ok=True)
         (output_dir / 'button_json').mkdir(exist_ok=True)
+        (output_dir / 'tmp').mkdir(exist_ok=True)
 
         # Копируем конфиги button_json (shino.json, result.json и т.д.)
         source_button_json_dir = source_dir / 'button_json'

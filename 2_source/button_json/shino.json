@@ -1,32 +1,26 @@
 {
-  "collect": [
-    {
-      "name_key": "front_servi111",
-      "source": "front_servi",
-      "rowsSelector": ".fp04-field",
-      "data": {
-        "id": "bd",
-        "sub_cat": "bd",
-        "price": "input_number"
-      }
-    },
-    {
-      "name_key": "pay_met",
-      "source": "front_pay_met",
-      "radioName": "pay_method",
-      "data": {
-        "id": "bd",
-        "sub_cat": "bd",
-        "percent": "bd",
-        "prefix": "bd",
-        "id_wallet": "bd"
-      }
-    },
-    {
-      "name_key": "form",
-      "data": {
-        "total_price": "number"
-      }
+  "servi": {
+    "rowsSelector": ".fp04-field",
+    "data": {
+      "id": "bd",
+      "sub_cat": "bd",
+      "price": "input_number"
     }
-  ]
+  },
+  "pay_met": {
+    "radioName": "pay_method",
+    "data": {
+      "id": "bd",
+      "sub_cat": "bd",
+      "percent": "bd",
+      "id_wallet": "bd"
+    }
+  },
+  "calc": {
+    "data": {
+      "total_price": ["sum", "servi.price", "number"],
+      "total_percent": ["percent_of", "calc.total_price", "pay_met.percent", "number", "negative"],
+      "net_income": ["sum", "calc.total_price", "calc.total_percent", "number"]
+    }
+  }
 }

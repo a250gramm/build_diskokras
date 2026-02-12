@@ -1,7 +1,7 @@
 
 {
 "api":{
-    "api1":        ["bd",   "front_servi", "filter:id_dep_from=shino"]
+    "api1":        ["bd",   "servi", "filter:id_dep_from=shino"]
 
 },
 "fun":{

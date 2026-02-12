@@ -1,0 +1,7 @@
+{
+    "bd": {
+        "id": "bd",
+        "sub_cat": "bd",
+        "price": "input_number"
+    }
+}
