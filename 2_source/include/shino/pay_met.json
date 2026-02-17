@@ -1,6 +1,6 @@
 {
 "api":{
-    "api1":        ["bd",   "pay_met"],
+    "api1":        ["bd",   "pay_met", "filter:id=pay_met_0,pay_met_1"],
     "api2":        ["bd",   "wall", "link:api1.id_wallet"]
 },
 

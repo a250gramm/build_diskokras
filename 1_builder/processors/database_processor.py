@@ -73,17 +73,19 @@ class DatabaseProcessor:
             if opt.startswith('link:'):
                 link_attr = f' data-bd-link="{opt}"'
             elif opt.startswith('filter:'):
-                filter_spec = opt  # "filter:id_dep_from=shino"
+                filter_spec = opt  # "filter:id=val" или "filter:id=val1,val2,val3"
                 # Парсим "field=value" для фильтрации списка записей
                 eq = opt.find('=', len('filter:'))
                 if eq > 0:
                     field = opt[len('filter:'):eq].strip()
                     filter_value = opt[eq + 1:].strip()
                     if field and filter_value is not None:
-                        def _predicate(record, f=field, v=filter_value):
+                        # Несколько значений через запятую = "поле входит в список"
+                        allowed = [v.strip() for v in filter_value.split(',')]
+                        def _predicate(record, f=field, vals=allowed):
                             if not isinstance(record, dict):
                                 return False
-                            return str(record.get(f)) == str(v)
+                            return str(record.get(f)) in vals
                         filter_predicate = _predicate
         
         return link_attr, filter_spec, filter_predicate

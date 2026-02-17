@@ -64,7 +64,8 @@ def main():
         (output_dir / 'php').mkdir(exist_ok=True)
         (output_dir / 'bd').mkdir(exist_ok=True)
         (output_dir / 'button_json').mkdir(exist_ok=True)
-        (output_dir / 'tmp').mkdir(exist_ok=True)
+        (output_dir / 'data').mkdir(exist_ok=True)
+        (output_dir / 'data' / 'tmp').mkdir(exist_ok=True)
 
         # Копируем конфиги button_json (shino.json, result.json и т.д.)
         source_button_json_dir = source_dir / 'button_json'
@@ -75,6 +76,26 @@ def main():
                 if json_file.is_file():
                     shutil.copy2(json_file, output_button_json_dir / json_file.name)
             count = len(list(output_button_json_dir.glob('*.json')))
+            if count:
+                print(f"   ✅ Скопировано файлов: {count}")
+            print()
+
+        # Копируем конфиги save_bd (shino2.json, include.json, run_create_price.php и т.д.)
+        source_save_bd_dir = source_dir / 'save_bd'
+        output_save_bd_dir = output_dir / 'save_bd'
+        if source_save_bd_dir.exists():
+            output_save_bd_dir.mkdir(exist_ok=True)
+            print("📦 Копирование конфигов save_bd...")
+            for json_file in source_save_bd_dir.glob('*.json'):
+                if json_file.is_file():
+                    shutil.copy2(json_file, output_save_bd_dir / json_file.name)
+            for php_file in source_save_bd_dir.glob('*.php'):
+                if php_file.is_file():
+                    shutil.copy2(php_file, output_save_bd_dir / php_file.name)
+            for sql_file in source_save_bd_dir.glob('*.sql'):
+                if sql_file.is_file():
+                    shutil.copy2(sql_file, output_save_bd_dir / sql_file.name)
+            count = len(list(output_save_bd_dir.iterdir()))
             if count:
                 print(f"   ✅ Скопировано файлов: {count}")
             print()
@@ -126,6 +147,10 @@ def main():
             for php_file in source_php_dir.glob('*.php'):
                 if php_file.is_file():
                     shutil.copy2(php_file, output_php_dir / php_file.name)
+            # view_table.php — в data/ для просмотра таблиц
+            view_table = source_php_dir / 'view_table.php'
+            if view_table.is_file():
+                shutil.copy2(view_table, output_dir / 'data' / 'view_table.php')
             print(f"   ✅ PHP скрипты скопированы")
             print()
         
@@ -169,7 +194,9 @@ def main():
         
         # ЭТАП 4: Генерация страниц
         print("📑 Генерация страниц...")
-        page_gen = PageGenerator(config_manager, sections_html, source_dir)
+        from datetime import datetime
+        build_version = datetime.now().strftime('%Y%m%d%H%M')
+        page_gen = PageGenerator(config_manager, sections_html, source_dir, build_version=build_version)
         pages_html = page_gen.generate_all()
         page_gen.save_all(pages_html, output_dir / 'pages')
         print(f"   ✅ Создано страниц: {len(pages_html)}")

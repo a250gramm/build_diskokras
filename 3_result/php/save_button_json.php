@@ -13,7 +13,7 @@ if ($data === null || !is_array($data)) {
     exit;
 }
 
-$tmpDir = __DIR__ . '/../tmp';
+$tmpDir = __DIR__ . '/../data/tmp';
 if (!is_dir($tmpDir)) {
     @mkdir($tmpDir, 0755, true);
 }

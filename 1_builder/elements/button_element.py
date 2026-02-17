@@ -50,6 +50,13 @@ class ButtonElement(BaseElement):
                 if len(self.value) >= 4:
                     button_content = self.value[3]
         
+        # save_bd: если в параметрах есть "save_bd", добавляем data-save-bd и data-save-bd-config
+        save_bd_attr = ''
+        if is_button_json and 'save_bd' in self.value:
+            idx = self.value.index('save_bd')
+            save_bd_config = self.value[idx + 1] if idx + 1 < len(self.value) else ''
+            save_bd_attr = f' data-save-bd="1" data-save-bd-config="{save_bd_config}"'
+
         # Определяем тип контента
         content_html = self.resolve_content(button_content)
         
@@ -62,5 +69,5 @@ class ButtonElement(BaseElement):
         if is_button_json:
             css_classes = f"{css_classes} button_json"
         
-        return f'<button{button_type}{modal_attr}{button_json_attr}{button_json_config_attr} class="{css_classes}">{content_html}</button>'
+        return f'<button{button_type}{modal_attr}{button_json_attr}{button_json_config_attr}{save_bd_attr} class="{css_classes}">{content_html}</button>'
 

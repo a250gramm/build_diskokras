@@ -13,16 +13,18 @@ from core.config_manager import ConfigManager
 class PageGenerator:
     """Генерирует HTML страницы"""
     
-    def __init__(self, config_manager: ConfigManager, sections_html: Dict[str, str], source_dir: Path = None):
+    def __init__(self, config_manager: ConfigManager, sections_html: Dict[str, str], source_dir: Path = None, build_version: str = None):
         """
         Args:
             config_manager: Менеджер конфигураций
             sections_html: Словарь с HTML секций (может быть пустым, используется как кэш)
             source_dir: Путь к исходникам (для загрузки JSON из bd/)
+            build_version: Версия сборки для сброса кэша (?v= в URL скриптов и конфигов)
         """
         self.config = config_manager
         self.sections_html = sections_html  # Используется как кэш
         self.source_dir = source_dir
+        self.build_version = build_version or ''
         # Импортируем здесь для избежания циклических зависимостей
         from generators.section_generator import SectionGenerator
         self.section_generator = SectionGenerator(config_manager, source_dir)
@@ -77,13 +79,14 @@ class PageGenerator:
     
     def _generate_head(self, title: str, description: str, keywords: str) -> str:
         """Генерирует HEAD секцию"""
+        css_href = f'../css/style.css?v={self.build_version}' if self.build_version else '../css/style.css'
         return f'''<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="{description}">
     <meta name="keywords" content="{keywords}">
     <title>{title}</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="{css_href}">
 </head>'''
     
     def _generate_body(self, page_name: str, section_keys: list) -> str:
@@ -135,11 +138,14 @@ class PageGenerator:
         
         from datetime import datetime
         build_marker = f'<!-- build: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")} -->'
+        v = self.build_version
+        version_script = f'<script>window.BUILD_VERSION="{v}";</script>\n    ' if v else ''
+        script_src = f'../js/script.js?v={v}' if v else '../js/script.js'
         return f'''<body data-page="{page_name}">
     {build_marker}
     {body_content}
 {('    ' + scripts_html + '\n') if scripts_html else ''}
-    <script src="../js/script.js"></script>
+    {version_script}<script src="{script_src}"></script>
 </body>'''
     
     def _generate_bd_scripts(self, skip_sources: set = None) -> str:

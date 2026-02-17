@@ -1,0 +1,10 @@
+{
+    "db_connection": {
+        "driver": "pgsql",
+        "host": "localhost",
+        "database": "pavel_sto",
+        "username": "ps_b1_user",
+        "password": "0ZQwxJwbEyvZV2kw",
+        "schema": "public"
+    }
+}

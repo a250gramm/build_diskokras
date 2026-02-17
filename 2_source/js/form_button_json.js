@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 for (var k = 0; k < keys.length; k++) {
                     var src = keys[k];
                     var it = config[src];
-                    if (it && typeof it === 'object') {
+                    if (it && typeof it === 'object' && !isIfBlock(it)) {
                         items.push({ src: src, dataSpec: it.data || {}, rowsSelector: it.rowsSelector, radioName: it.radioName, hasData: !!it.data });
                     }
                 }
@@ -47,12 +47,41 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             }
+            resolveIfBlocks(config, out);
             var isLocal = (typeof location !== 'undefined' && (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.protocol === 'file:'));
-            if (isLocal) {
+            var saveBd = btn.getAttribute('data-save-bd') === '1';
+            var saveBdConfig = btn.getAttribute('data-save-bd-config') || '';
+            if (isLocal && !saveBd) {
                 downloadJson(out, name + '_result.json');
-            } else {
+            } else if (saveBd && saveBdConfig) {
+                saveToBd(out, saveBdConfig);
+            } else if (!isLocal) {
                 saveJsonToServer(out, name);
+            } else {
+                downloadJson(out, name + '_result.json');
             }
+        }
+
+        function saveToBd(data, configName) {
+            var onlyNew = typeof localStorage !== 'undefined' && localStorage.getItem('save_bd_only_new_data') === '1';
+            if (onlyNew) data.replace_all = true;
+            var url = '../php/save_bd.php?config=' + encodeURIComponent(configName);
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+                .then(function(res) { return res.json(); })
+                .then(function(r) {
+                    if (r.ok) {
+                        window.open('../data/view_table.php', '_blank');
+                    } else {
+                        alert('Ошибка: ' + (r.error || 'unknown'));
+                    }
+                })
+                .catch(function(err) {
+                    alert('Ошибка сохранения в БД');
+                });
         }
 
         function saveJsonToServer(data, name) {
@@ -65,13 +94,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(function(res) { return res.json(); })
                 .then(function(r) {
                     if (r.ok) {
-                        window.open('../tmp/' + r.file, '_blank');
+                        window.open('../data/tmp/' + r.file, '_blank');
                     }
                 })
                 .catch(function() {});
         }
 
         var configUrl = '../button_json/' + configName + '.json';
+        if (typeof window !== 'undefined' && window.BUILD_VERSION) configUrl += '?v=' + window.BUILD_VERSION;
         fetch(configUrl)
             .then(function(res) {
                 if (res.ok) return res.json();
@@ -147,6 +177,54 @@ document.addEventListener('DOMContentLoaded', function() {
         return false;
     }
 
+    function hasIdBranches(obj) {
+        if (!obj || typeof obj !== 'object') return false;
+        for (var q in obj) if (String(q).indexOf('id=') === 0) return true;
+        return false;
+    }
+
+    function isIfBlock(obj) {
+        if (!obj || typeof obj !== 'object' || obj.data !== undefined || obj.rowsSelector !== undefined || obj.radioName !== undefined) return false;
+        for (var k in obj) {
+            var sub = obj[k];
+            if (sub && typeof sub === 'object') {
+                for (var q in sub) if (String(q).indexOf('id=') === 0) return true;
+                for (var q in sub) if (sub[q] && typeof sub[q] === 'object' && hasIdBranches(sub[q])) return true;
+            }
+        }
+        return false;
+    }
+
+    function resolveIfBlocks(config, out) {
+        var keys = Object.keys(config);
+        for (var ki = 0; ki < keys.length; ki++) {
+            var blockKey = keys[ki];
+            var block = config[blockKey];
+            if (!isIfBlock(block)) continue;
+            var branches = null, resultKey = blockKey, computeKey = blockKey;
+            if (block.pay_met && hasIdBranches(block.pay_met)) {
+                branches = block.pay_met;
+                computeKey = blockKey;
+            } else if (block.if && block.if.pay_met && hasIdBranches(block.if.pay_met)) {
+                branches = block.if.pay_met;
+                resultKey = blockKey;
+                computeKey = 'if';
+            }
+            if (!branches) continue;
+            var sourceData = out.pay_met;
+            var id = sourceData && sourceData.id !== undefined ? String(sourceData.id) : '';
+            var branchKey = 'id=' + id;
+            var branchSpec = branches[branchKey];
+            if (!branchSpec || !isFormulaBlock(branchSpec)) continue;
+            out[computeKey] = computeFormulas(out, branchSpec, computeKey);
+            if (resultKey !== computeKey) {
+                out[resultKey] = out[computeKey];
+                delete out[computeKey];
+            }
+            break;
+        }
+    }
+
     function getValue(out, path) {
         var parts = path.split('.');
         var key = parts[0];
@@ -188,6 +266,8 @@ document.addEventListener('DOMContentLoaded', function() {
             var formula = dataSpec[key];
             if (Array.isArray(formula) && formula.length >= 2) {
                 out[src][key] = evalFormula(out, formula);
+            } else if (typeof formula === 'number') {
+                out[src][key] = formula;
             }
         }
         return out[src];
