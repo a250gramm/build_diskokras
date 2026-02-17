@@ -21,22 +21,28 @@
   "if":{
     "pay_met": {
        "id=pay_met_0": {
-          "комментарий": "коммисии банка нет",
+          "комментарий": "коммисии банка нет, план",
           "total_price":   ["sum", "servi.price", "number"],
           "total_percent": ["percent_of", "if.total_price", "pay_met.percent", "number", "negative"],
           "net_income":    ["sum", "if.total_price", "if.total_percent", "number"],
           "revenu_100":    ["sum", "if.total_price"],
           "revenu_fact":   ["percent_of", "if.total_price", "pay_met.percent", "number"],
-          "revenu_plan":   ["sum", "if.total_price"]
+          "revenu_plan":   ["sum", "if.total_price"],
+          "fin_op": {
+            "status":     ["text",   "plan"]
+          }        
        },
        "id=pay_met_1": {
-          "комментарий": "коммисии банка есть",
+          "комментарий": "коммисии банка есть, факт",
           "total_price":   ["sum", "servi.price", "number"],
           "total_percent": ["percent_of", "if.total_price", "pay_met.percent", "number", "negative"],
           "net_income":    ["sum", "if.total_price", "if.total_percent", "number"],
           "revenu_100":    ["sum", "if.total_price"],
           "revenu_fact":   ["sum", "if.total_price"],
-          "revenu_plan":   ["sum", "0", "number"]
+          "revenu_plan":   ["sum", "0", "number"],
+          "fin_op": {
+            "status":     ["text",   "fact"]
+          } 
        }
     }
   }

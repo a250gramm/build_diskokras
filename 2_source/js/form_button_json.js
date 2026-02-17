@@ -240,9 +240,25 @@ document.addEventListener('DOMContentLoaded', function() {
         return val[rest] !== undefined ? Number(val[rest]) || 0 : 0;
     }
 
+    function resolveLiteralSpec(obj) {
+        var out = {};
+        for (var k in obj) {
+            var v = obj[k];
+            if (Array.isArray(v) && v.length >= 2 && v[0] === 'text') {
+                out[k] = v[1];
+            } else if (v && typeof v === 'object' && !Array.isArray(v)) {
+                out[k] = resolveLiteralSpec(v);
+            } else {
+                out[k] = v;
+            }
+        }
+        return out;
+    }
+
     function evalFormula(out, formula) {
         if (!Array.isArray(formula) || formula.length < 2) return 0;
         var cmd = formula[0];
+        if (cmd === 'text' && formula.length >= 2) return formula[1];
         var negative = formula[formula.length - 1] === 'negative';
         var args = negative ? formula.slice(1, -1) : formula.slice(1);
         var result = 0;
@@ -268,6 +284,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 out[src][key] = evalFormula(out, formula);
             } else if (typeof formula === 'number') {
                 out[src][key] = formula;
+            } else if (formula && typeof formula === 'object' && !Array.isArray(formula)) {
+                out[src][key] = resolveLiteralSpec(formula);
             }
         }
         return out[src];

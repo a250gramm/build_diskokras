@@ -1,19 +1,29 @@
 {
     "order": {
-        "id": ["create", "uuid"]
+        "id":         ["create", "uuid"]
     },
     "sub_order": {
-        "id": ["create", "uuid"],
-        "order_id": ["link", "order.uuid"],
-        "revenu_100": ["json", "calc.revenu_100"],
+        "id":          ["create", "uuid"],
+        "order_id":    ["link", "order.uuid"],
+        "revenu_100":  ["json", "calc.revenu_100"],
         "revenu_fact": ["json", "calc.revenu_fact"],
         "revenu_plan": ["json", "calc.revenu_plan"]
     },
     "price": {
-        "cycle": ["json", "servi"],
-        "id": ["create", "uuid"],
+        "cycle":        ["json", "servi"],
+        "id":           ["create", "uuid"],
         "sub_order_id": ["link", "sub_order.uuid"],
-        "servi_id": ["json", "servi.id"],
-        "price": ["json", "servi.price"]
+        "servi_id":     ["json", "servi.id"],
+        "price":        ["json", "servi.price"]
+    },
+    "fin_op": {
+        "row_1":{
+            "id":         ["create", "uuid"],
+            "status":     ["text",   "revenu"],
+            "goal":       ["json",   "revenu"],
+            "type":       ["json", "fin_op.type"],
+            "money":      ["json", "fin_op.money"],
+            "test_data":  ["json", "fin_op.test_data"]
+        }
     }
 }

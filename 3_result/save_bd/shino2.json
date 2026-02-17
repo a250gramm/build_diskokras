@@ -15,5 +15,9 @@
         "sub_order_id": ["link", "sub_order.uuid"],
         "servi_id": ["json", "servi.id"],
         "price": ["json", "servi.price"]
+    },
+    "fin_op": {
+        "id": ["create", "uuid"],
+
     }
 }

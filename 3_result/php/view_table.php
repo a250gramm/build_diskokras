@@ -34,7 +34,7 @@ try {
     exit;
 }
 
-$tables = ['price', 'sub_order', 'order'];
+$tables = ['price', 'sub_order', 'order', 'fin_op'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_all'])) {
     foreach ($tables as $t) {
         $pdo->exec('DELETE FROM "' . $t . '"');
@@ -76,12 +76,12 @@ foreach ($tables as $t) {
 <body>
 <div class="header-row">
     <label class="cb-wrap"><input type="checkbox" id="only_new_data" name="only_new_data"> Только новые данные</label>
-    <form method="post" onsubmit="return confirm('Удалить все записи из order, sub_order, price?');" style="margin:0">
+    <form method="post" onsubmit="return confirm('Удалить все записи из order, sub_order, price, fin_op?');" style="margin:0">
         <button type="submit" name="delete_all" value="1" class="btn-delete">Удалить все записи</button>
     </form>
 </div>
 
-<?php foreach (['order', 'sub_order', 'price'] as $t): ?>
+<?php foreach (['order', 'sub_order', 'price', 'fin_op'] as $t): ?>
 <?php $cnt = count($data[$t] ?? []); $word = ($cnt === 1) ? 'запись' : (($cnt >= 2 && $cnt <= 4) ? 'записи' : 'записей'); ?>
 <h2><?= htmlspecialchars($t) ?> <span class="tbl-count">(<?= $cnt ?> <?= $word ?>)</span></h2>
 <?php $rows = $data[$t] ?? []; ?>
