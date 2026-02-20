@@ -121,8 +121,8 @@ section {
     box-sizing: border-box !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    width: auto !important;
-    flex: 0 0 auto !important;
+    width: 100% !important;
+    flex: 1 1 0% !important;
 }
 
 
@@ -3253,6 +3253,422 @@ div.wr-fields .content-tit {
 }
 
 
+div.orders_list {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 16px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 800px) {
+    div.orders_list {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.orders_list {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+div.card_1 {
+    background-color: rgba(255, 255, 255, 1.0) !important;
+    border-top: 1px solid #d8d8d8 !important;
+    border-right: 1px solid #d8d8d8 !important;
+    border-bottom: 1px solid #d8d8d8 !important;
+    border-left: 1px solid #d8d8d8 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 800px) {
+    div.card_1 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 14px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.card_1 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+div.card_2 {
+    background-color: rgba(255, 255, 255, 1.0) !important;
+    border-top: 1px solid #d8d8d8 !important;
+    border-right: 1px solid #d8d8d8 !important;
+    border-bottom: 1px solid #d8d8d8 !important;
+    border-left: 1px solid #d8d8d8 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 800px) {
+    div.card_2 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 14px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.card_2 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+div.card_3 {
+    background-color: rgba(255, 255, 255, 1.0) !important;
+    border-top: 1px solid #d8d8d8 !important;
+    border-right: 1px solid #d8d8d8 !important;
+    border-bottom: 1px solid #d8d8d8 !important;
+    border-left: 1px solid #d8d8d8 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 800px) {
+    div.card_3 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 14px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.card_3 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+div.card_4 {
+    background-color: rgba(255, 255, 255, 1.0) !important;
+    border-top: 1px solid #d8d8d8 !important;
+    border-right: 1px solid #d8d8d8 !important;
+    border-bottom: 1px solid #d8d8d8 !important;
+    border-left: 1px solid #d8d8d8 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 800px) {
+    div.card_4 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 14px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.card_4 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+div.orders_list .content-sum_1 {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+
+@media (max-width: 800px) {
+    div.orders_list .content-sum_1 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.orders_list .content-sum_1 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+div.orders_list .content-status_1 {
+    color: rgba(0, 0, 0, 0.7) !important;
+    font-size: 14px !important;
+}
+
+
+@media (max-width: 800px) {
+    div.orders_list .content-status_1 {
+        font-size: 14px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.orders_list .content-status_1 {
+        font-size: 14px !important;
+    }
+}
+
+
+div.orders_list .content-sum_2 {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+
+@media (max-width: 800px) {
+    div.orders_list .content-sum_2 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.orders_list .content-sum_2 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+div.orders_list .content-status_2 {
+    color: rgba(0, 0, 0, 0.7) !important;
+    font-size: 14px !important;
+}
+
+
+@media (max-width: 800px) {
+    div.orders_list .content-status_2 {
+        font-size: 14px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.orders_list .content-status_2 {
+        font-size: 14px !important;
+    }
+}
+
+
+div.orders_list .content-sum_3 {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+
+@media (max-width: 800px) {
+    div.orders_list .content-sum_3 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.orders_list .content-sum_3 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+div.orders_list .content-status_3 {
+    color: rgba(0, 0, 0, 0.7) !important;
+    font-size: 14px !important;
+}
+
+
+@media (max-width: 800px) {
+    div.orders_list .content-status_3 {
+        font-size: 14px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.orders_list .content-status_3 {
+        font-size: 14px !important;
+    }
+}
+
+
+div.orders_list .content-sum_4 {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+
+@media (max-width: 800px) {
+    div.orders_list .content-sum_4 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.orders_list .content-sum_4 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+div.orders_list .content-status_4 {
+    color: rgba(0, 0, 0, 0.7) !important;
+    font-size: 14px !important;
+}
+
+
+@media (max-width: 800px) {
+    div.orders_list .content-status_4 {
+        font-size: 14px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.orders_list .content-status_4 {
+        font-size: 14px !important;
+    }
+}
+
+
+div.orders_list button {
+    background-color: rgba(0, 0, 0, 1.0) !important;
+    color: rgba(255, 255, 255, 1.0) !important;
+    border: 0px 0 0 0 0 !important;
+    width: 100% !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+}
+
+
+@media (max-width: 800px) {
+    div.orders_list button {
+        width: 100% !important;
+        padding: 10px !important;
+        border-radius: 6px !important;
+        cursor: pointer !important;
+        font-size: 14px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.orders_list button {
+        width: 100% !important;
+        padding: 12px !important;
+        border-radius: 6px !important;
+        cursor: pointer !important;
+        font-size: 14px !important;
+    }
+}
+
+
 
 /* ===== СТИЛИ ИНКЛУДОВ: страница shino ===== */
 
@@ -4179,6 +4595,422 @@ body[data-page='shino'] [data-path='form'] button {
         border-radius: 5px !important;
         font-size: 16px !important;
         min-height: 48px !important;
+    }
+}
+
+
+body[data-page='shino'] div.orders_list {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 16px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.orders_list {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.orders_list {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+body[data-page='shino'] div.card_1 {
+    background-color: rgba(255, 255, 255, 1.0) !important;
+    border-top: 1px solid #d8d8d8 !important;
+    border-right: 1px solid #d8d8d8 !important;
+    border-bottom: 1px solid #d8d8d8 !important;
+    border-left: 1px solid #d8d8d8 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.card_1 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 14px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.card_1 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+body[data-page='shino'] div.card_2 {
+    background-color: rgba(255, 255, 255, 1.0) !important;
+    border-top: 1px solid #d8d8d8 !important;
+    border-right: 1px solid #d8d8d8 !important;
+    border-bottom: 1px solid #d8d8d8 !important;
+    border-left: 1px solid #d8d8d8 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.card_2 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 14px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.card_2 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+body[data-page='shino'] div.card_3 {
+    background-color: rgba(255, 255, 255, 1.0) !important;
+    border-top: 1px solid #d8d8d8 !important;
+    border-right: 1px solid #d8d8d8 !important;
+    border-bottom: 1px solid #d8d8d8 !important;
+    border-left: 1px solid #d8d8d8 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.card_3 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 14px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.card_3 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+body[data-page='shino'] div.card_4 {
+    background-color: rgba(255, 255, 255, 1.0) !important;
+    border-top: 1px solid #d8d8d8 !important;
+    border-right: 1px solid #d8d8d8 !important;
+    border-bottom: 1px solid #d8d8d8 !important;
+    border-left: 1px solid #d8d8d8 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.card_4 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 14px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.card_4 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+body[data-page='shino'] div.orders_list .content-sum_1 {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.orders_list .content-sum_1 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.orders_list .content-sum_1 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+body[data-page='shino'] div.orders_list .content-status_1 {
+    color: rgba(0, 0, 0, 0.7) !important;
+    font-size: 14px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.orders_list .content-status_1 {
+        font-size: 14px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.orders_list .content-status_1 {
+        font-size: 14px !important;
+    }
+}
+
+
+body[data-page='shino'] div.orders_list .content-sum_2 {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.orders_list .content-sum_2 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.orders_list .content-sum_2 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+body[data-page='shino'] div.orders_list .content-status_2 {
+    color: rgba(0, 0, 0, 0.7) !important;
+    font-size: 14px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.orders_list .content-status_2 {
+        font-size: 14px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.orders_list .content-status_2 {
+        font-size: 14px !important;
+    }
+}
+
+
+body[data-page='shino'] div.orders_list .content-sum_3 {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.orders_list .content-sum_3 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.orders_list .content-sum_3 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+body[data-page='shino'] div.orders_list .content-status_3 {
+    color: rgba(0, 0, 0, 0.7) !important;
+    font-size: 14px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.orders_list .content-status_3 {
+        font-size: 14px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.orders_list .content-status_3 {
+        font-size: 14px !important;
+    }
+}
+
+
+body[data-page='shino'] div.orders_list .content-sum_4 {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.orders_list .content-sum_4 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.orders_list .content-sum_4 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+body[data-page='shino'] div.orders_list .content-status_4 {
+    color: rgba(0, 0, 0, 0.7) !important;
+    font-size: 14px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.orders_list .content-status_4 {
+        font-size: 14px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.orders_list .content-status_4 {
+        font-size: 14px !important;
+    }
+}
+
+
+body[data-page='shino'] div.orders_list button {
+    background-color: rgba(0, 0, 0, 1.0) !important;
+    color: rgba(255, 255, 255, 1.0) !important;
+    border: 0px 0 0 0 0 !important;
+    width: 100% !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.orders_list button {
+        width: 100% !important;
+        padding: 10px !important;
+        border-radius: 6px !important;
+        cursor: pointer !important;
+        font-size: 14px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.orders_list button {
+        width: 100% !important;
+        padding: 12px !important;
+        border-radius: 6px !important;
+        cursor: pointer !important;
+        font-size: 14px !important;
     }
 }
 

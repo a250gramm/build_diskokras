@@ -1,0 +1,126 @@
+{
+    "html": {
+        "div_orders_list": {
+            "div_card_1": {
+                "sum_1":    ["text", "text:Сумма 5000 тг"],
+                "status_1": ["text", "text:Статус: Оплачено"],
+                "btn_finish_1": ["button", "text:Завершить заказ"]
+            },
+            "div_card_2": {
+                "sum_2":    ["text", "text:Сумма 3200 тг"],
+                "status_2": ["text", "text:Статус: В работе"],
+                "btn_finish_2": ["button", "text:Завершить заказ"]
+            },
+            "div_card_3": {
+                "sum_3":    ["text", "text:Сумма 7800 тг"],
+                "status_3": ["text", "text:Статус: Оплачено"],
+                "btn_finish_3": ["button", "text:Завершить заказ"]
+            },
+            "div_card_4": {
+                "sum_4":    ["text", "text:Сумма 1500 тг"],
+                "status_4": ["text", "text:Статус: Ожидает оплаты"],
+                "btn_finish_4": ["button", "text:Завершить заказ"]
+            }
+        }
+    },
+    "css": {
+        "div_orders_list": {
+            "display": ["grid", "grid", "grid"],
+            "grid-template-columns": ["repeat(4, 1fr)", "repeat(2, 1fr)", "1fr"],
+            "gap": [16, 12, 12, "px"],
+            "width": [100, 100, 100, "%"],
+            "min-width": [0, 0, 0],
+            "box-sizing": ["border-box", "border-box", "border-box"]
+        },
+        "div_card_1": {
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["column", "column", "column"],
+            "gap": [12, 10, 10, "px"],
+            "padding": [16, 14, 12, "px"],
+            "width": [100, 100, 100, "%"],
+            "min-width": [0, 0, 0],
+            "bg-color": ["white", 100],
+            "border": ["1px solid", "1 1 1 1", "black.15"],
+            "border-radius": [10, 8, 8, "px"],
+            "box-sizing": ["border-box", "border-box", "border-box"]
+        },
+        "div_card_2": {
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["column", "column", "column"],
+            "gap": [12, 10, 10, "px"],
+            "padding": [16, 14, 12, "px"],
+            "width": [100, 100, 100, "%"],
+            "min-width": [0, 0, 0],
+            "bg-color": ["white", 100],
+            "border": ["1px solid", "1 1 1 1", "black.15"],
+            "border-radius": [10, 8, 8, "px"],
+            "box-sizing": ["border-box", "border-box", "border-box"]
+        },
+        "div_card_3": {
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["column", "column", "column"],
+            "gap": [12, 10, 10, "px"],
+            "padding": [16, 14, 12, "px"],
+            "width": [100, 100, 100, "%"],
+            "min-width": [0, 0, 0],
+            "bg-color": ["white", 100],
+            "border": ["1px solid", "1 1 1 1", "black.15"],
+            "border-radius": [10, 8, 8, "px"],
+            "box-sizing": ["border-box", "border-box", "border-box"]
+        },
+        "div_card_4": {
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["column", "column", "column"],
+            "gap": [12, 10, 10, "px"],
+            "padding": [16, 14, 12, "px"],
+            "width": [100, 100, 100, "%"],
+            "min-width": [0, 0, 0],
+            "bg-color": ["white", 100],
+            "border": ["1px solid", "1 1 1 1", "black.15"],
+            "border-radius": [10, 8, 8, "px"],
+            "box-sizing": ["border-box", "border-box", "border-box"]
+        },
+        "div_orders_list sum_1": {
+            "font-size": [16, 15, 15, "px"],
+            "font-weight": [600, 600, 600]
+        },
+        "div_orders_list status_1": {
+            "font-size": [14, 14, 14, "px"],
+            "color": ["black", 70]
+        },
+        "div_orders_list sum_2": {
+            "font-size": [16, 15, 15, "px"],
+            "font-weight": [600, 600, 600]
+        },
+        "div_orders_list status_2": {
+            "font-size": [14, 14, 14, "px"],
+            "color": ["black", 70]
+        },
+        "div_orders_list sum_3": {
+            "font-size": [16, 15, 15, "px"],
+            "font-weight": [600, 600, 600]
+        },
+        "div_orders_list status_3": {
+            "font-size": [14, 14, 14, "px"],
+            "color": ["black", 70]
+        },
+        "div_orders_list sum_4": {
+            "font-size": [16, 15, 15, "px"],
+            "font-weight": [600, 600, 600]
+        },
+        "div_orders_list status_4": {
+            "font-size": [14, 14, 14, "px"],
+            "color": ["black", 70]
+        },
+        "div_orders_list button": {
+            "width": [100, 100, 100, "%"],
+            "padding": [10, 10, 12, "px"],
+            "bg-color": ["black", 100],
+            "color": ["white", 100],
+            "border": ["0px", "0 0 0 0"],
+            "border-radius": [6, 6, 6, "px"],
+            "cursor": ["pointer", "pointer", "pointer"],
+            "font-size": [14, 14, 14, "px"]
+        }
+    }
+}

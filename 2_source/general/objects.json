@@ -183,7 +183,7 @@
     },
     "list_orders": {
         "if": {
-            "/shino":        ["list"],
+            "/shino":        ["include", "shino/list"],
             "/pokras":       ["list"],
             "/hranenie":     ["list"],
             "/geo":          ["list"],
