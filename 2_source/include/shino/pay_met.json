@@ -1,13 +1,13 @@
 {
 "api":{
-    "api1":        ["bd",   "pay_met", "filter:id=pay_met_0,pay_met_1"],
-    "api2":        ["bd",   "wall", "link:api1.id_wallet"]
+    "api1":        ["bd_local",           "pay_met", "filter:id=pay_met_0,pay_met_1"],
+    "api2":        ["PostgreSQL",   "wall", "link:api1.id_wallet"]
 },
 
 "html":{
     "cycle_gr8 col:2,1,1": {
         "div_field-paymet col:2,2,2": {
-            "field": ["input", "radio", "api1:id", "name:pay_method"],
+            "field": ["input", "required", "radio", "api1:id", "name:pay_method"],
             "div_1-col:20%": {
                 "photo":     ["img",   "api2:img"]
             },

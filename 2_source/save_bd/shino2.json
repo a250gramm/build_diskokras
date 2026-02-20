@@ -10,20 +10,36 @@
         "revenu_plan": ["json", "calc.revenu_plan"]
     },
     "price": {
-        "cycle":        ["json", "servi"],
-        "id":           ["create", "uuid"],
-        "sub_order_id": ["link", "sub_order.uuid"],
-        "servi_id":     ["json", "servi.id"],
-        "price":        ["json", "servi.price"]
+        "cycle:json-servi": {
+            "id":           ["create", "uuid"],
+            "sub_order_id": ["link",   "sub_order.uuid"],
+            "servi_id":     ["json",   "servi.id"],
+            "price":        ["json",   "servi.price"]
+        }
     },
     "fin_op": {
         "row_1":{
             "id":         ["create", "uuid"],
-            "status":     ["text",   "revenu"],
-            "goal":       ["json",   "revenu"],
-            "type":       ["json", "fin_op.type"],
-            "money":      ["json", "fin_op.money"],
-            "test_data":  ["json", "fin_op.test_data"]
+            "status":     ["json",   "fin_op.status"],
+            "goal":       ["text",   "revenu"],
+            "type":       ["text",   "income"],
+            "money":      ["json",   "calc.net_income"],
+            "id_wallet":  ["json",   "pay_met.id_wallet"]
+        },
+        "row_2":{
+            "id":         ["create", "uuid"],
+            "status":     ["json",   "fin_op.status"],
+            "goal":       ["text",   "COGS_com_bank"],
+            "type":       ["text",   "expense"],
+            "money":      ["json",   "calc.total_percent"],
+            "id_wallet":  ["json",   "pay_met.id_wallet"]
+
+        }
+    },
+    "wall": {
+        "search:json-pay_met.id_wallet": {
+            "balance": ["up",  "sum",  "json.calc.net_income"]
+
         }
     }
 }

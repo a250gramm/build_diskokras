@@ -13,6 +13,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
         e.preventDefault();
 
+        if (!validateRequiredFields(form)) return;
+
+        function validateRequiredFields(form) {
+            var missing = [];
+            var seenRadioNames = {};
+            // Группы «хоть одно»: data-required-one="groupId"
+            var requiredOneEls = form.querySelectorAll('[data-required-one]');
+            var groupsDone = {};
+            for (var i = 0; i < requiredOneEls.length; i++) {
+                var g = requiredOneEls[i].getAttribute('data-required-one');
+                if (groupsDone[g]) continue;
+                groupsDone[g] = true;
+                var inGroup = form.querySelectorAll('[data-required-one="' + g + '"]');
+                var hasOne = false;
+                for (var j = 0; j < inGroup.length; j++) {
+                    if ((inGroup[j].value || '').trim() !== '') { hasOne = true; break; }
+                }
+                if (!hasOne) missing.push('Укажите хотя бы одну услугу (сумму)');
+            }
+            // Обычные required
+            var required = form.querySelectorAll('input[required], textarea[required], select[required]');
+            for (var i = 0; i < required.length; i++) {
+                var el = required[i];
+                if (el.type === 'radio') {
+                    var name = el.name;
+                    if (seenRadioNames[name]) continue;
+                    seenRadioNames[name] = true;
+                    var checked = form.querySelector('input[name="' + name + '"]:checked');
+                    if (!checked) missing.push(el.placeholder || (el.closest('label') ? (el.closest('label').textContent || '').trim() : '') || name);
+                } else {
+                    var val = (el.value || '').trim();
+                    if (val === '') missing.push(el.placeholder || el.name || 'поле');
+                }
+            }
+            if (missing.length === 0) return true;
+            var msg = missing.length === 1
+                ? missing[0]
+                : 'Заполните обязательные поля, чтобы отправить:\n• ' + missing.join('\n• ');
+            alert(msg);
+            return false;
+        }
+
         function runCollect(config, name) {
             var out = {};
             var items = [];
@@ -74,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(function(res) { return res.json(); })
                 .then(function(r) {
                     if (r.ok) {
-                        window.open('../data/view_table.php', '_blank');
+                        window.open('../owner/bd/view_table.php', '_blank');
                     } else {
                         alert('Ошибка: ' + (r.error || 'unknown'));
                     }
@@ -137,7 +179,9 @@ document.addEventListener('DOMContentLoaded', function() {
         var rows = form.querySelectorAll(rowsSelector);
         var arr = [];
         for (var i = 0; i < rows.length && i < records.length; i++) {
-            var input = rows[i].querySelector('input, textarea');
+            var row = rows[i];
+            if (row.classList.contains('fp04-field') && !row.classList.contains('selected')) continue;
+            var input = row.querySelector('input, textarea');
             var price = input ? String(input.value || '').trim() : '';
             if (price === '') continue;
             var rec = records[i];
@@ -220,6 +264,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (resultKey !== computeKey) {
                 out[resultKey] = out[computeKey];
                 delete out[computeKey];
+            }
+            if (out[resultKey] && out[resultKey].fin_op) {
+                out.fin_op = out[resultKey].fin_op;
+                delete out[resultKey].fin_op;
             }
             break;
         }

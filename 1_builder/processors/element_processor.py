@@ -288,7 +288,7 @@ class ElementProcessor:
                 # Обрабатываем значение
                 if isinstance(value, list):
                     # Проверяем формат ["bd", "table_name", ...] для базы данных
-                    if len(value) >= 2 and value[0] == 'bd':
+                    if len(value) >= 2 and value[0] in ('bd', 'bd_local'):
                         bd_html = self.database_processor.generate_bd_element(key, value, base_path)
                         html_parts.append(bd_html)
                     else:

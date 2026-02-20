@@ -38,7 +38,7 @@ class DatabaseProcessor:
             return self.bd_cache[table_name]
         
         # Путь к JSON файлу
-        json_path = self.source_dir / 'bd' / f'{table_name}.json'
+        json_path = self.source_dir / 'bd_local' / f'{table_name}.json'
         
         if not json_path.exists():
             return None
@@ -96,17 +96,24 @@ class DatabaseProcessor:
         
         Args:
             key: Ключ элемента (имя источника api1, api2, ...)
-            value: Массив с данными БД ["bd", "table_name", ...]
+            value: Массив с данными БД ["bd", "table_name", ...] или ["PostgreSQL", "table_name", ...]
             base_path: Базовый путь для отладки
             
         Returns:
-            HTML строка с span и script тегом
+            HTML строка с span и script тегом (для bd)
         """
-        if len(value) < 2 or value[0] != 'bd':
+        if len(value) < 2 or value[0] not in ('bd', 'bd_local', 'PostgreSQL'):
             return ''
         
         table_name = value[1]
         link_attr, filter_spec, filter_predicate = self._parse_bd_options(value)
+        
+        # PostgreSQL: fetch через PHP API, не встраиваем данные
+        if value[0] == 'PostgreSQL':
+            filter_attr = f' data-bd-filter="{filter_spec}"' if filter_spec else ''
+            bd_html = f'<span data-bd-api="{key}" data-bd-source="{table_name}" data-bd-url="../php/fetch_table.php?table={table_name}"{link_attr}{filter_attr} style="display:none;"></span>'
+            print(f'   ✅ PostgreSQL источник {table_name} (загрузка через fetch_table.php)')
+            return bd_html
         
         # Используем ключ как имя источника (api1, api2, ...)
         api_name = key
@@ -126,7 +133,7 @@ class DatabaseProcessor:
         
         filter_attr = f' data-bd-filter="{filter_spec}"' if filter_spec else ''
         # Генерируем span с data-атрибутами (скрытый элемент для JavaScript)
-        bd_html = f'<span data-bd-api="{api_name}" data-bd-source="{table_name}" data-bd-url="../bd/{table_name}.json"{link_attr}{filter_attr} style="display:none;"></span>'
+        bd_html = f'<span data-bd-api="{api_name}" data-bd-source="{table_name}" data-bd-url="../bd_local/{table_name}.json"{link_attr}{filter_attr} style="display:none;"></span>'
         
         html_parts = [bd_html]
         
@@ -155,7 +162,7 @@ class DatabaseProcessor:
             bd_sources.update(parent_bd_sources)
         
         for key, value in data.items():
-            if isinstance(value, list) and len(value) >= 2 and value[0] == 'bd':
+            if isinstance(value, list) and len(value) >= 2 and value[0] in ('bd', 'bd_local', 'PostgreSQL'):
                 table_name = value[1]
                 link_raw = ''
                 filter_raw = ''

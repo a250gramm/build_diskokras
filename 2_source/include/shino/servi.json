@@ -1,7 +1,7 @@
 
 {
 "api":{
-    "api1":        ["bd",   "servi", "filter:id_dep_from=shino"]
+    "api1":        ["bd_local",   "servi", "filter:id_dep_from=shino"]
 
 },
 "fun":{
@@ -13,7 +13,7 @@
     "cycle_fp04 col:1,1,1": {
         "div_fp04-field": {
             "label":   ["text",  "api1:sub_cat"],
-            "field":   ["input", "number:Введите сумму"],
+            "field":   ["input", "required_one:servi", "number:Введите сумму"],
             "suffix":  ["text",  "text:тг."]
         }
     },

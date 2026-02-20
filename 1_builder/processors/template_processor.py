@@ -29,7 +29,7 @@ class TemplateProcessor:
             True если элемент является шаблоном
         """
         has_bd_direct = any(
-            isinstance(v, list) and len(v) >= 2 and v[0] == 'bd'
+            isinstance(v, list) and len(v) >= 2 and v[0] in ('bd', 'bd_local')
             for v in element_dict.values()
         )
         
@@ -91,7 +91,7 @@ class TemplateProcessor:
         
         # Также проверяем наличие источников БД (api1, api2, ...)
         has_bd_source = any(
-            isinstance(v, list) and len(v) >= 2 and v[0] == 'bd'
+            isinstance(v, list) and len(v) >= 2 and v[0] in ('bd', 'bd_local')
             for v in element_dict.values()
         )
         

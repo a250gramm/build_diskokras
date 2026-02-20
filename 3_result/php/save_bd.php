@@ -1,7 +1,10 @@
 <?php
 /**
  * При клике «Отправить BD» — создаёт записи в PostgreSQL по конфигу shino2.json.
- * Формат: cycle: ["json","path"] — цикл по массиву; поля: ["create","uuid"], ["link","table.uuid"], ["json","path"]
+ * Формат: cycle: ["json","path"] или cycle:json-<path> — цикл по массиву;
+ * search:json-<path> — найти строку (path = массив.поле для id) и UPDATE; поля: ["up","sum","json.path"] — прибавить к balance;
+ * row_1, row_2... — фиксированное число строк;
+ * поля: ["create","uuid"], ["link","table.uuid"], ["json","path"], ["text","значение"]
  */
 header('Content-Type: application/json; charset=utf-8');
 
@@ -48,9 +51,11 @@ if (($conn['driver'] ?? '') !== 'pgsql') {
     exit;
 }
 
+$port = isset($conn['port']) ? ';port=' . $conn['port'] : '';
 $dsn = sprintf(
-    'pgsql:host=%s;dbname=%s',
+    'pgsql:host=%s%s;dbname=%s',
     $conn['host'] ?? 'localhost',
+    $port,
     $conn['database'] ?? ''
 );
 $user = $conn['username'] ?? '';
@@ -66,7 +71,7 @@ try {
 }
 
 if ($replaceAll) {
-    foreach (['price', 'sub_order', 'order'] as $t) {
+    foreach (['price', 'sub_order', 'order', 'fin_op'] as $t) {
         $pdo->exec('DELETE FROM "' . $t . '"');
     }
 }
@@ -120,15 +125,127 @@ try {
     foreach ($config as $table => $fields) {
         if (!is_array($fields)) continue;
 
+        $searchKey = null;
+        $searchFields = null;
+        foreach (array_keys($fields) as $k) {
+            if (preg_match('/^search:json-(.+)$/', $k, $m)) {
+                $searchKey = $m[1];
+                $searchFields = $fields[$k];
+                break;
+            }
+        }
+
+        if ($searchKey !== null && is_array($searchFields)) {
+            $pathParts = explode('.', $searchKey, 2);
+            $arrKey = $pathParts[0];
+            $idField = $pathParts[1] ?? 'id';
+            $items = $postData[$arrKey] ?? [];
+            if (!is_array($items)) $items = [];
+            if ($items && !isset($items[0]) && isset($items[$idField])) {
+                $items = [$items];
+            }
+            foreach ($items as $item) {
+                $rowId = is_array($item) ? ($item[$idField] ?? null) : null;
+                if ($rowId === null) continue;
+                foreach ($searchFields as $field => $type) {
+                    if (!is_array($type) || ($type[0] ?? '') !== 'up') continue;
+                    $op = $type[1] ?? '';
+                    $path = isset($type[2]) ? preg_replace('/^json\./', '', $type[2]) : '';
+                    if ($op === 'sum' && $path !== '') {
+                        $pathFirst = explode('.', $path, 2)[0];
+                        $useItem = ($pathFirst === $arrKey) ? $item : null;
+                        $addVal = (float) resolveJsonPath($path, $postData, $useItem);
+                        $stmt = $pdo->prepare('UPDATE "' . $table . '" SET "' . $field . '" = "' . $field . '" + ? WHERE id = ?');
+                        $stmt->execute([$addVal, $rowId]);
+                    }
+                }
+            }
+            continue;
+        }
+
         $cycleArrayKey = null;
-        if (isset($fields['cycle'])) {
+        $rowKeys = [];
+        $cycleFields = null;
+
+        foreach (array_keys($fields) as $k) {
+            if (preg_match('/^cycle:json-(.+)$/', $k, $m)) {
+                $path = $m[1];
+                if (is_array($postData[$path] ?? null)) {
+                    $cycleArrayKey = $path;
+                    $cycleFields = $fields[$k];
+                }
+                break;
+            }
+        }
+
+        if ($cycleFields === null && isset($fields['cycle'])) {
             $c = $fields['cycle'];
             if (is_array($c) && ($c[0] ?? '') === 'json' && isset($c[1])) {
                 $path = $c[1];
                 if (is_array($postData[$path] ?? null)) {
                     $cycleArrayKey = $path;
+                    $cycleFields = $fields;
                 }
             }
+        }
+
+        if ($cycleFields === null) {
+            foreach (array_keys($fields) as $k) {
+                if (preg_match('/^row_\d+$/', $k)) {
+                    $rowKeys[] = $k;
+                }
+            }
+            usort($rowKeys, function ($a, $b) {
+                return (int) substr($a, 4) - (int) substr($b, 4);
+            });
+        }
+
+        if ($cycleFields !== null) {
+            $fields = $cycleFields;
+        }
+
+        if (!empty($rowKeys)) {
+            foreach ($rowKeys as $rk) {
+                $rowFields = $fields[$rk] ?? [];
+                if (!is_array($rowFields)) continue;
+                $cols = [];
+                $vals = [];
+                foreach ($rowFields as $field => $type) {
+                    if (!is_array($type) || !isset($type[0])) continue;
+                    $action = $type[0];
+                    $arg = $type[1] ?? '';
+                    if ($action === 'create' && $arg === 'uuid') {
+                        $val = genUuid();
+                        $cols[] = $field;
+                        $vals[] = $val;
+                        if (!isset($ctx[$table . '_' . $rk])) $ctx[$table . '_' . $rk] = [];
+                        $ctx[$table . '_' . $rk][$field] = $val;
+                        $ctx[$table . '_' . $rk]['uuid'] = $val;
+                        if ($table === 'order' && $field === 'id') $resultId = $val;
+                    } elseif ($action === 'link' && $arg !== '') {
+                        $val = resolveRef($arg, $ctx);
+                        if ($val !== null) {
+                            $cols[] = $field;
+                            $vals[] = $val;
+                        }
+                    } elseif ($action === 'json' && $arg !== '') {
+                        $val = resolveJsonPath($arg, $postData, null);
+                        if ($val !== null) {
+                            $cols[] = $field;
+                            $vals[] = $val;
+                        }
+                    } elseif ($action === 'text') {
+                        $cols[] = $field;
+                        $vals[] = $arg;
+                    }
+                }
+                if (!empty($cols)) {
+                    $placeholders = implode(', ', array_fill(0, count($cols), '?'));
+                    $stmt = $pdo->prepare('INSERT INTO "' . $table . '" (' . implode(', ', $cols) . ') VALUES (' . $placeholders . ')');
+                    $stmt->execute($vals);
+                }
+            }
+            continue;
         }
 
         $rowsToInsert = $cycleArrayKey !== null ? ($postData[$cycleArrayKey] ?? []) : [null];
@@ -139,7 +256,7 @@ try {
             $vals = [];
 
             foreach ($fields as $field => $type) {
-                if ($field === 'cycle') continue;
+                if ($field === 'cycle' || preg_match('/^cycle:/', $field)) continue;
                 if (!is_array($type) || !isset($type[0])) continue;
 
                 $action = $type[0];
@@ -165,6 +282,9 @@ try {
                         $cols[] = $field;
                         $vals[] = $val;
                     }
+                } elseif ($action === 'text') {
+                    $cols[] = $field;
+                    $vals[] = $arg;
                 }
             }
 

@@ -62,7 +62,7 @@ def main():
         (output_dir / 'js').mkdir(exist_ok=True)
         (output_dir / 'img').mkdir(exist_ok=True)
         (output_dir / 'php').mkdir(exist_ok=True)
-        (output_dir / 'bd').mkdir(exist_ok=True)
+        (output_dir / 'bd_local').mkdir(exist_ok=True)
         (output_dir / 'button_json').mkdir(exist_ok=True)
         (output_dir / 'data').mkdir(exist_ok=True)
         (output_dir / 'data' / 'tmp').mkdir(exist_ok=True)
@@ -128,9 +128,9 @@ def main():
                 print(f"   ✅ JS создан")
             print()
         
-        # Копируем JSON файлы из bd
-        source_bd_dir = source_dir / 'bd'
-        output_bd_dir = output_dir / 'bd'
+        # Копируем JSON файлы из bd_local
+        source_bd_dir = source_dir / 'bd_local'
+        output_bd_dir = output_dir / 'bd_local'
         if source_bd_dir.exists():
             print("💾 Копирование JSON из базы данных...")
             for json_file in source_bd_dir.glob('*.json'):
@@ -147,16 +147,22 @@ def main():
             for php_file in source_php_dir.glob('*.php'):
                 if php_file.is_file():
                     shutil.copy2(php_file, output_php_dir / php_file.name)
-            # view_table.php — в data/ для просмотра таблиц
+            # view_table.php — в owner/bd/ для просмотра таблиц
             view_table = source_php_dir / 'view_table.php'
             if view_table.is_file():
-                shutil.copy2(view_table, output_dir / 'data' / 'view_table.php')
+                (output_dir / 'owner' / 'bd').mkdir(parents=True, exist_ok=True)
+                dest = output_dir / 'owner' / 'bd' / 'view_table.php'
+                shutil.copy2(view_table, dest)
+                # путь к include для owner/bd (на 2 уровня выше)
+                content = dest.read_text(encoding='utf-8')
+                content = content.replace("__DIR__ . '/../save_bd/", "__DIR__ . '/../../save_bd/")
+                dest.write_text(content, encoding='utf-8')
             print(f"   ✅ PHP скрипты скопированы")
             print()
         
         # Копируем JSON файлы из базы данных
-        source_bd_dir = source_dir / 'bd'
-        output_bd_dir = output_dir / 'bd'
+        source_bd_dir = source_dir / 'bd_local'
+        output_bd_dir = output_dir / 'bd_local'
         if source_bd_dir.exists():
             print("💾 Копирование данных БД...")
             for json_file in source_bd_dir.glob('*.json'):
@@ -200,6 +206,18 @@ def main():
         pages_html = page_gen.generate_all()
         page_gen.save_all(pages_html, output_dir / 'pages')
         print(f"   ✅ Создано страниц: {len(pages_html)}")
+
+        # Корневой index.html — перенаправление на главную (чтобы / загружал страницу с верными путями к CSS/JS)
+        root_index = output_dir / 'index.html'
+        root_index.write_text(
+            '<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8">'
+            '<meta http-equiv="refresh" content="0;url=pages/index.html">'
+            '<title>DISKOKRAS CRM</title>'
+            '<script>location.replace("pages/index.html");</script>'
+            '</head><body><p><a href="pages/index.html">Перейти на главную</a></p></body></html>',
+            encoding='utf-8'
+        )
+        print("   ✅ Корневой index.html (редирект на pages/index.html)")
         print()
         
         # ЭТАП 5: Генерация CSS

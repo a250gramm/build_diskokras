@@ -4,7 +4,7 @@
  */
 header('Content-Type: text/html; charset=utf-8');
 
-$includePath = __DIR__ . '/../save_bd/include.json';
+$includePath = __DIR__ . '/../../save_bd/include.json';
 if (!is_file($includePath)) {
     echo '<h1>Ошибка</h1><p>include.json не найден.</p>';
     exit;

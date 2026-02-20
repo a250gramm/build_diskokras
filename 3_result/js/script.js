@@ -118,6 +118,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
         e.preventDefault();
 
+        if (!validateRequiredFields(form)) return;
+
+        function validateRequiredFields(form) {
+            var missing = [];
+            var seenRadioNames = {};
+            // Группы «хоть одно»: data-required-one="groupId"
+            var requiredOneEls = form.querySelectorAll('[data-required-one]');
+            var groupsDone = {};
+            for (var i = 0; i < requiredOneEls.length; i++) {
+                var g = requiredOneEls[i].getAttribute('data-required-one');
+                if (groupsDone[g]) continue;
+                groupsDone[g] = true;
+                var inGroup = form.querySelectorAll('[data-required-one="' + g + '"]');
+                var hasOne = false;
+                for (var j = 0; j < inGroup.length; j++) {
+                    if ((inGroup[j].value || '').trim() !== '') { hasOne = true; break; }
+                }
+                if (!hasOne) missing.push('Укажите хотя бы одну услугу (сумму)');
+            }
+            // Обычные required
+            var required = form.querySelectorAll('input[required], textarea[required], select[required]');
+            for (var i = 0; i < required.length; i++) {
+                var el = required[i];
+                if (el.type === 'radio') {
+                    var name = el.name;
+                    if (seenRadioNames[name]) continue;
+                    seenRadioNames[name] = true;
+                    var checked = form.querySelector('input[name="' + name + '"]:checked');
+                    if (!checked) missing.push(el.placeholder || (el.closest('label') ? (el.closest('label').textContent || '').trim() : '') || name);
+                } else {
+                    var val = (el.value || '').trim();
+                    if (val === '') missing.push(el.placeholder || el.name || 'поле');
+                }
+            }
+            if (missing.length === 0) return true;
+            var msg = missing.length === 1
+                ? missing[0]
+                : 'Заполните обязательные поля, чтобы отправить:\n• ' + missing.join('\n• ');
+            alert(msg);
+            return false;
+        }
+
         function runCollect(config, name) {
             var out = {};
             var items = [];
@@ -179,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(function(res) { return res.json(); })
                 .then(function(r) {
                     if (r.ok) {
-                        window.open('../data/view_table.php', '_blank');
+                        window.open('../owner/bd/view_table.php', '_blank');
                     } else {
                         alert('Ошибка: ' + (r.error || 'unknown'));
                     }
@@ -242,7 +284,9 @@ document.addEventListener('DOMContentLoaded', function() {
         var rows = form.querySelectorAll(rowsSelector);
         var arr = [];
         for (var i = 0; i < rows.length && i < records.length; i++) {
-            var input = rows[i].querySelector('input, textarea');
+            var row = rows[i];
+            if (row.classList.contains('fp04-field') && !row.classList.contains('selected')) continue;
+            var input = row.querySelector('input, textarea');
             var price = input ? String(input.value || '').trim() : '';
             if (price === '') continue;
             var rec = records[i];
@@ -326,6 +370,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 out[resultKey] = out[computeKey];
                 delete out[computeKey];
             }
+            if (out[resultKey] && out[resultKey].fin_op) {
+                out.fin_op = out[resultKey].fin_op;
+                delete out[resultKey].fin_op;
+            }
             break;
         }
     }
@@ -345,9 +393,25 @@ document.addEventListener('DOMContentLoaded', function() {
         return val[rest] !== undefined ? Number(val[rest]) || 0 : 0;
     }
 
+    function resolveLiteralSpec(obj) {
+        var out = {};
+        for (var k in obj) {
+            var v = obj[k];
+            if (Array.isArray(v) && v.length >= 2 && v[0] === 'text') {
+                out[k] = v[1];
+            } else if (v && typeof v === 'object' && !Array.isArray(v)) {
+                out[k] = resolveLiteralSpec(v);
+            } else {
+                out[k] = v;
+            }
+        }
+        return out;
+    }
+
     function evalFormula(out, formula) {
         if (!Array.isArray(formula) || formula.length < 2) return 0;
         var cmd = formula[0];
+        if (cmd === 'text' && formula.length >= 2) return formula[1];
         var negative = formula[formula.length - 1] === 'negative';
         var args = negative ? formula.slice(1, -1) : formula.slice(1);
         var result = 0;
@@ -373,6 +437,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 out[src][key] = evalFormula(out, formula);
             } else if (typeof formula === 'number') {
                 out[src][key] = formula;
+            } else if (formula && typeof formula === 'object' && !Array.isArray(formula)) {
+                out[src][key] = resolveLiteralSpec(formula);
             }
         }
         return out[src];
@@ -1109,15 +1175,28 @@ class DatabaseRenderer {
                 }
                 // Если fieldValue пустое - не создаем элемент text, чтобы не было пустого места
             } else if (elementType === 'input') {
-                const inputSubtype = (value.length > 1) ? value[1] : 'text';
+                // Маркеры "required" или "required_one:groupId" — подтип со следующего индекса
+                let idx = 1;
+                let isRequired = false;
+                let requiredOneGroup = null;
+                if (value.length > 1 && typeof value[1] === 'string') {
+                    if (value[1] === 'required') {
+                        isRequired = true;
+                        idx = 2;
+                    } else if (value[1].startsWith('required_one:')) {
+                        requiredOneGroup = value[1].replace(/^required_one:/, '');
+                        idx = 2;
+                    }
+                }
+                const inputSubtype = (value.length > idx) ? value[idx] : 'text';
                 const inputEl = document.createElement('input');
                 if (inputSubtype === 'radio' || inputSubtype === 'checkbox') {
                     inputEl.type = inputSubtype;
                     inputEl.className = `${key} input`;
-                    const radioValue = (value.length >= 3) ? this.resolveValue(value[2], record, bdSources) : fieldValue;
+                    const radioValue = (value.length >= idx + 2) ? this.resolveValue(value[idx + 1], record, bdSources) : fieldValue;
                     inputEl.value = (radioValue != null && radioValue !== '') ? String(radioValue) : '';
-                    if (value.length > 3 && typeof value[3] === 'string' && value[3].startsWith('name:')) {
-                        inputEl.name = value[3].replace(/^name:/, '');
+                    if (value.length > idx + 2 && typeof value[idx + 2] === 'string' && value[idx + 2].startsWith('name:')) {
+                        inputEl.name = value[idx + 2].replace(/^name:/, '');
                     }
                 } else {
                     // Формат "type:placeholder" (например "number:Введите сумму") — тип для мобильной клавиатуры
@@ -1144,6 +1223,12 @@ class DatabaseRenderer {
                         inputEl.setAttribute('data-function-sum', sumVar);
                     }
                 }
+                if (isRequired) {
+                    inputEl.setAttribute('required', '');
+                }
+                if (requiredOneGroup) {
+                    inputEl.setAttribute('data-required-one', requiredOneGroup);
+                }
                 element.appendChild(inputEl);
             } else if (elementType === 'img') {
                 // Создаем img элемент только если есть значение
@@ -1155,11 +1240,13 @@ class DatabaseRenderer {
                     if (imgValue.startsWith('/')) {
                         // Если путь начинается с /, преобразуем в относительный
                         // /pavel_sto/... -> ../...
-                        // /logo_0.png -> ../img/logo_0.png (если это просто имя файла)
+                        // /img/pm_kaspi.png -> ../img/pm_kaspi.png
+                        // /logo_0.png -> ../img/logo_0.png (просто имя файла)
                         if (imgValue.includes('/pavel_sto')) {
                             imgEl.src = imgValue.replace('/pavel_sto', '..');
+                        } else if (imgValue.startsWith('/img')) {
+                            imgEl.src = '..' + imgValue;
                         } else {
-                            // Если путь типа /logo_0.png, предполагаем что это в img/
                             const fileName = imgValue.replace(/^\//, '');
                             imgEl.src = `../img/${fileName}`;
                         }

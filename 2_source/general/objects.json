@@ -118,8 +118,8 @@
                             "2.div_wr-fields": {
                                 "tit":         ["text", "text:Способ оплаты"],
                                 "cycle_gr8 col:2,1,1": {
-                                    "api1": ["bd", "front_pay_met"],
-                                    "api2": ["bd", "front_wall", "link:api1.id_wallet"],
+                                    "api1": ["bd_local", "front_pay_met"],
+                                    "api2": ["bd_local", "front_wall", "link:api1.id_wallet"],
                                     "div_field-paymet col:2,2,2": {
                                         "field": ["input", "radio", "api1:id", "name:pay_method"],
                                         "div_1-col:20%": {

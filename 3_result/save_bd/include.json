@@ -1,10 +1,11 @@
 {
     "db_connection": {
         "driver": "pgsql",
-        "host": "localhost",
-        "database": "pavel_sto",
-        "username": "ps_b1_user",
-        "password": "0ZQwxJwbEyvZV2kw",
+        "host": "srv-db-pgsql01.ps.kz",
+        "port": 5432,
+        "database": "diskokr1_posSQL",
+        "username": "diskokr1_ivan_posSQL",
+        "password": "eKn#KzAd@1oxb9o5",
         "schema": "public"
     }
 }

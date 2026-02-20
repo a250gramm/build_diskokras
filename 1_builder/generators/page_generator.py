@@ -120,11 +120,15 @@ class PageGenerator:
         body_content = '\n    '.join(sections_html_parts)
         
         # Источники bd, уже вставленные из секций (с data-bd-api и фильтрами) — не дублировать
+        # Также не добавляем script для PostgreSQL-источников (span с data-bd-url fetch_table.php)
         skip_sources = set()
         for tag in script_tags:
             m = re.search(r'data-bd-source="([^"]+)"', tag)
             if m:
                 skip_sources.add(m.group(1))
+        # Добавляем в skip все data-bd-source из body (включая span для PostgreSQL)
+        for m in re.finditer(r'data-bd-source="([^"]+)"', body_content):
+            skip_sources.add(m.group(1))
         
         scripts_html = self._generate_bd_scripts(skip_sources=skip_sources)
         if script_tags:
@@ -153,7 +157,7 @@ class PageGenerator:
         if not self.source_dir:
             return ''
         
-        bd_dir = self.source_dir / 'bd'
+        bd_dir = self.source_dir / 'bd_local'
         if not bd_dir.exists():
             return ''
         
