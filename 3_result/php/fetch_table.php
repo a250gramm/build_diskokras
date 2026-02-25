@@ -6,7 +6,7 @@
 header('Content-Type: application/json; charset=utf-8');
 
 $table = $_GET['table'] ?? '';
-if ($table === '' || !preg_match('/^[a-z_]+$/', $table)) {
+if ($table === '' || !preg_match('/^[a-z0-9_]+$/', $table)) {
     http_response_code(400);
     echo json_encode(['error' => 'Invalid table']);
     exit;

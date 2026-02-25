@@ -1,5 +1,6 @@
 {
 
+  "page": "shino",  
   "servi": {
     "rowsSelector": ".fp04-field",
     "data": {
@@ -30,7 +31,11 @@
           "revenu_plan":   ["sum", "if.total_price"],
           "fin_op": {
             "status":     ["text",   "plan"]
-          }        
+          },
+          "sub_order": {
+            "stat_pay":    ["text",   "none"],
+            "stat_ready":  ["text",   "creat"]
+          }
        },
        "id=pay_met_1": {
           "комментарий": "коммисии банка есть, факт",
@@ -42,7 +47,11 @@
           "revenu_plan":   ["sum", "0", "number"],
           "fin_op": {
             "status":     ["text",   "fact"]
-          } 
+          },
+          "sub_order": {
+            "stat_pay":   ["text",   "full"],
+            "stat_ready":  ["text",   "in_prog"]
+          }
        }
     }
   }

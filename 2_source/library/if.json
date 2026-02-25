@@ -14,5 +14,16 @@
         "/geo":        ["text:Создать заказ в Геометрии"],
         "/deliv":      ["text:Создать заказ в Доставке"],
         "/poss_point": ["text:Принять оплату в Кассе"]
+    },
+    "stat_pay":{
+        "full":  ["text:оплачен"],
+        "part":  ["text:частично"],
+        "none":  ["text:не оплачен"]
+    },
+    "stat_ready":{
+        "creat":   ["text:создан"],
+        "in_prog": ["text:в работе"],
+        "over":    ["text:выполнен"],
+        "accept":  ["text:сдан"]
     }
 }

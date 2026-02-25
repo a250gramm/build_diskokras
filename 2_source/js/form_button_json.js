@@ -70,6 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     var it = config[src];
                     if (it && typeof it === 'object' && !isIfBlock(it)) {
                         items.push({ src: src, dataSpec: it.data || {}, rowsSelector: it.rowsSelector, radioName: it.radioName, hasData: !!it.data });
+                    } else if (it !== undefined && it !== null && (typeof it === 'string' || typeof it === 'number' || typeof it === 'boolean')) {
+                        out[src] = it;
                     }
                 }
             }
@@ -268,6 +270,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (out[resultKey] && out[resultKey].fin_op) {
                 out.fin_op = out[resultKey].fin_op;
                 delete out[resultKey].fin_op;
+            }
+            // sub_order из ветки (как fin_op): явно берём из branchSpec, т.к. вложенный объект может не попасть в computeFormulas
+            if (branchSpec && branchSpec.sub_order) {
+                out[resultKey] = out[resultKey] || {};
+                out[resultKey].sub_order = resolveLiteralSpec(branchSpec.sub_order);
+            }
+            if (out[resultKey] && out[resultKey].sub_order) {
+                out.sub_order = out[resultKey].sub_order;
+                delete out[resultKey].sub_order;
             }
             break;
         }

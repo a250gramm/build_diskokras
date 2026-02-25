@@ -164,7 +164,7 @@
                 ]
             },
             "/deliv":        ["button", "text:Создать заказ",    "modal",    "form"],
-            "/poss_point":   ["button", "text:Принять оплату",   "modal",    "form"]
+            "/poss_point":   ["include", "shino/form"]
         }
     },
     "main_btn_new":{

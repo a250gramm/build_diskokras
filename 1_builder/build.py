@@ -80,7 +80,8 @@ def main():
                 print(f"   ✅ Скопировано файлов: {count}")
             print()
 
-        # Копируем конфиги save_bd (shino2.json, include.json, run_create_price.php и т.д.)
+        # Копируем save_bd только из корня папки (include.json, shino2.json, run_*.php и т.д.)
+        # Подпапки с * в имени (например sql*) не копируются
         source_save_bd_dir = source_dir / 'save_bd'
         output_save_bd_dir = output_dir / 'save_bd'
         if source_save_bd_dir.exists():
@@ -144,11 +145,12 @@ def main():
         output_php_dir = output_dir / 'php'
         if source_php_dir.exists():
             print("🐘 Копирование PHP скриптов...")
+            view_table_name = 'view_table.php'
             for php_file in source_php_dir.glob('*.php'):
-                if php_file.is_file():
+                if php_file.is_file() and php_file.name != view_table_name:
                     shutil.copy2(php_file, output_php_dir / php_file.name)
-            # view_table.php — в owner/bd/ для просмотра таблиц
-            view_table = source_php_dir / 'view_table.php'
+            # view_table.php — только в owner/bd/ (не дублируем в php/)
+            view_table = source_php_dir / view_table_name
             if view_table.is_file():
                 (output_dir / 'owner' / 'bd').mkdir(parents=True, exist_ok=True)
                 dest = output_dir / 'owner' / 'bd' / 'view_table.php'

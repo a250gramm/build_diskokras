@@ -139,6 +139,10 @@ class PageGenerator:
         button_json_scripts = self._generate_button_json_config_scripts(body_content)
         if button_json_scripts:
             scripts_html = scripts_html + '\n    ' + button_json_scripts if scripts_html else button_json_scripts
+
+        if_labels_script = self._generate_if_labels_script()
+        if if_labels_script:
+            scripts_html = scripts_html + '\n    ' + if_labels_script if scripts_html else if_labels_script
         
         from datetime import datetime
         build_marker = f'<!-- build: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")} -->'
@@ -176,6 +180,14 @@ class PageGenerator:
                 print(f"   ⚠️ Ошибка загрузки {json_file}: {e}")
         
         return '\n    '.join(scripts) if scripts else ''
+
+    def _generate_if_labels_script(self) -> str:
+        """Скрипт с переводами из if.json (stat_pay, stat_ready) для подстановки в списках по значению из API."""
+        if_values = getattr(self.config, 'if_values', None) or {}
+        labels = {k: v for k, v in if_values.items() if isinstance(v, dict) and v and not any(str(key).startswith('/') for key in v.keys())}
+        if not labels:
+            return ''
+        return f'<script type="application/json" data-if-labels>{json.dumps(labels, ensure_ascii=False)}</script>'
 
     def _generate_button_json_config_scripts(self, page_html: str) -> str:
         """Находит data-button-json=\"X\" на странице, подставляет конфиг из button_json/X.json — fallback при недоступном fetch."""

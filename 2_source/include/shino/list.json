@@ -1,38 +1,46 @@
 {
+    "api": {
+        "api1": ["PostgreSQL", "1_full_order", "filter:page=shino"]
+    },
     "html": {
         "div_orders_list": {
-            "div_card_1": {
-                "sum_1":    ["text", "text:Сумма 5000 тг"],
-                "status_1": ["text", "text:Статус: Оплачено"],
-                "btn_finish_1": ["button", "text:Завершить заказ"]
-            },
-            "div_card_2": {
-                "sum_2":    ["text", "text:Сумма 3200 тг"],
-                "status_2": ["text", "text:Статус: В работе"],
-                "btn_finish_2": ["button", "text:Завершить заказ"]
-            },
-            "div_card_3": {
-                "sum_3":    ["text", "text:Сумма 7800 тг"],
-                "status_3": ["text", "text:Статус: Оплачено"],
-                "btn_finish_3": ["button", "text:Завершить заказ"]
-            },
-            "div_card_4": {
-                "sum_4":    ["text", "text:Сумма 1500 тг"],
-                "status_4": ["text", "text:Статус: Ожидает оплаты"],
-                "btn_finish_4": ["button", "text:Завершить заказ"]
+            "cycle_list col:1,1,1": {
+                "div_card": {
+                    "div_card_header": {
+                        "num":         ["text", "api1:num"],
+                        "stat_pay":    ["text", "api1:stat_pay", "if:stat_pay"],
+                        "pay_percent": ["text", "api1:pay_percent"],
+                        "sim_percent": ["text", "text:%"],
+                        "stat_ready":  ["text", "api1:stat_ready", "if:stat_ready"]
+                    },
+                    "div_card_content": {
+                        "revenu_100": ["text", "api1:revenu_100"],
+                        "sum_suffix": ["text", "text: тг"]
+                    },
+                    "div_card_footer": {
+                        "div_spoiler": {
+                            "btn_details": ["button", "text:Детали"],
+                            "spoiler_text": ["text", "text:тест это"]
+                        },
+                        "btn_finish": ["button", "text:Завершить заказ"]
+                    }
+                }
             }
         }
     },
     "css": {
+        "div_orders_list .list": {
+            "display": ["contents", "contents", "contents"]
+        },
         "div_orders_list": {
             "display": ["grid", "grid", "grid"],
-            "grid-template-columns": ["repeat(4, 1fr)", "repeat(2, 1fr)", "1fr"],
+            "grid-template-columns": ["repeat(4, 1fr)", "1fr", "1fr"],
             "gap": [16, 12, 12, "px"],
             "width": [100, 100, 100, "%"],
             "min-width": [0, 0, 0],
             "box-sizing": ["border-box", "border-box", "border-box"]
         },
-        "div_card_1": {
+        "div_card": {
             "display": ["flex", "flex", "flex"],
             "flex-direction": ["column", "column", "column"],
             "gap": [12, 10, 10, "px"],
@@ -44,71 +52,53 @@
             "border-radius": [10, 8, 8, "px"],
             "box-sizing": ["border-box", "border-box", "border-box"]
         },
-        "div_card_2": {
+        "div_card_header": {
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["row", "row", "row"],
+            "flex-wrap": ["wrap", "wrap", "wrap"],
+            "gap": [8, 6, 6, "px"],
+            "align-items": ["center", "center", "center"]
+        },
+        "div_card_content": {
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["row", "row", "row"],
+            "flex-wrap": ["wrap", "wrap", "wrap"],
+            "gap": [4, 4, 4, "px"],
+            "align-items": ["baseline", "baseline", "baseline"]
+        },
+        "div_card_footer": {
             "display": ["flex", "flex", "flex"],
             "flex-direction": ["column", "column", "column"],
-            "gap": [12, 10, 10, "px"],
-            "padding": [16, 14, 12, "px"],
-            "width": [100, 100, 100, "%"],
-            "min-width": [0, 0, 0],
-            "bg-color": ["white", 100],
-            "border": ["1px solid", "1 1 1 1", "black.15"],
-            "border-radius": [10, 8, 8, "px"],
-            "box-sizing": ["border-box", "border-box", "border-box"]
+            "align-items": ["stretch", "stretch", "stretch"],
+            "gap": [8, 8, 8, "px"]
         },
-        "div_card_3": {
-            "display": ["flex", "flex", "flex"],
-            "flex-direction": ["column", "column", "column"],
-            "gap": [12, 10, 10, "px"],
-            "padding": [16, 14, 12, "px"],
-            "width": [100, 100, 100, "%"],
-            "min-width": [0, 0, 0],
-            "bg-color": ["white", 100],
-            "border": ["1px solid", "1 1 1 1", "black.15"],
-            "border-radius": [10, 8, 8, "px"],
-            "box-sizing": ["border-box", "border-box", "border-box"]
+        "div_card_footer .spoiler .content-spoiler_text": {
+            "display": ["none", "none", "none"]
         },
-        "div_card_4": {
-            "display": ["flex", "flex", "flex"],
-            "flex-direction": ["column", "column", "column"],
-            "gap": [12, 10, 10, "px"],
-            "padding": [16, 14, 12, "px"],
-            "width": [100, 100, 100, "%"],
-            "min-width": [0, 0, 0],
-            "bg-color": ["white", 100],
-            "border": ["1px solid", "1 1 1 1", "black.15"],
-            "border-radius": [10, 8, 8, "px"],
-            "box-sizing": ["border-box", "border-box", "border-box"]
+        "div_card_footer .spoiler.open .content-spoiler_text": {
+            "display": ["block", "block", "block"]
         },
-        "div_orders_list sum_1": {
+        "div_card_footer .spoiler .btn_details": {
+            "width": ["auto", "auto", "auto"],
+            "padding": [4, 6, 6, "px"],
+            "font-size": [12, 12, 12, "px"],
+            "bg-color": ["black", 25],
+            "color": ["black", 80],
+            "align-self": ["flex-start", "flex-start", "flex-start"]
+        },
+        "div_card sum_label": {
             "font-size": [16, 15, 15, "px"],
             "font-weight": [600, 600, 600]
         },
-        "div_orders_list status_1": {
-            "font-size": [14, 14, 14, "px"],
-            "color": ["black", 70]
-        },
-        "div_orders_list sum_2": {
+        "div_card sum_val": {
             "font-size": [16, 15, 15, "px"],
             "font-weight": [600, 600, 600]
         },
-        "div_orders_list status_2": {
-            "font-size": [14, 14, 14, "px"],
-            "color": ["black", 70]
-        },
-        "div_orders_list sum_3": {
+        "div_card sum_suffix": {
             "font-size": [16, 15, 15, "px"],
             "font-weight": [600, 600, 600]
         },
-        "div_orders_list status_3": {
-            "font-size": [14, 14, 14, "px"],
-            "color": ["black", 70]
-        },
-        "div_orders_list sum_4": {
-            "font-size": [16, 15, 15, "px"],
-            "font-weight": [600, 600, 600]
-        },
-        "div_orders_list status_4": {
+        "div_orders_list status": {
             "font-size": [14, 14, 14, "px"],
             "color": ["black", 70]
         },

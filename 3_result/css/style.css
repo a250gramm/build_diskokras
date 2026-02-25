@@ -3253,6 +3253,25 @@ div.wr-fields .content-tit {
 }
 
 
+div.orders_list .list {
+    display: contents !important;
+}
+
+
+@media (max-width: 800px) {
+    div.orders_list .list {
+        display: contents !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.orders_list .list {
+        display: contents !important;
+    }
+}
+
+
 div.orders_list {
     display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
@@ -3266,7 +3285,7 @@ div.orders_list {
 @media (max-width: 800px) {
     div.orders_list {
         display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-columns: 1fr !important;
         gap: 12px !important;
         width: 100% !important;
         min-width: 0 !important;
@@ -3287,7 +3306,7 @@ div.orders_list {
 }
 
 
-div.card_1 {
+div.card {
     background-color: rgba(255, 255, 255, 1.0) !important;
     border-top: 1px solid #d8d8d8 !important;
     border-right: 1px solid #d8d8d8 !important;
@@ -3305,7 +3324,7 @@ div.card_1 {
 
 
 @media (max-width: 800px) {
-    div.card_1 {
+    div.card {
         display: flex !important;
         flex-direction: column !important;
         gap: 10px !important;
@@ -3319,7 +3338,7 @@ div.card_1 {
 
 
 @media (max-width: 600px) {
-    div.card_1 {
+    div.card {
         display: flex !important;
         flex-direction: column !important;
         gap: 10px !important;
@@ -3332,149 +3351,172 @@ div.card_1 {
 }
 
 
-div.card_2 {
-    background-color: rgba(255, 255, 255, 1.0) !important;
-    border-top: 1px solid #d8d8d8 !important;
-    border-right: 1px solid #d8d8d8 !important;
-    border-bottom: 1px solid #d8d8d8 !important;
-    border-left: 1px solid #d8d8d8 !important;
+div.card_header {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    align-items: center !important;
+}
+
+
+@media (max-width: 800px) {
+    div.card_header {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        align-items: center !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.card_header {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        align-items: center !important;
+    }
+}
+
+
+div.card_content {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+    align-items: baseline !important;
+}
+
+
+@media (max-width: 800px) {
+    div.card_content {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 4px !important;
+        align-items: baseline !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.card_content {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 4px !important;
+        align-items: baseline !important;
+    }
+}
+
+
+div.card_footer {
     display: flex !important;
     flex-direction: column !important;
-    gap: 12px !important;
-    padding: 16px !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    border-radius: 10px !important;
-    box-sizing: border-box !important;
+    align-items: stretch !important;
+    gap: 8px !important;
 }
 
 
 @media (max-width: 800px) {
-    div.card_2 {
+    div.card_footer {
         display: flex !important;
         flex-direction: column !important;
-        gap: 10px !important;
-        padding: 14px !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        border-radius: 8px !important;
-        box-sizing: border-box !important;
+        align-items: stretch !important;
+        gap: 8px !important;
     }
 }
 
 
 @media (max-width: 600px) {
-    div.card_2 {
+    div.card_footer {
         display: flex !important;
         flex-direction: column !important;
-        gap: 10px !important;
-        padding: 12px !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        border-radius: 8px !important;
-        box-sizing: border-box !important;
+        align-items: stretch !important;
+        gap: 8px !important;
     }
 }
 
 
-div.card_3 {
-    background-color: rgba(255, 255, 255, 1.0) !important;
-    border-top: 1px solid #d8d8d8 !important;
-    border-right: 1px solid #d8d8d8 !important;
-    border-bottom: 1px solid #d8d8d8 !important;
-    border-left: 1px solid #d8d8d8 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px !important;
-    padding: 16px !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    border-radius: 10px !important;
-    box-sizing: border-box !important;
+div.card_footer .spoiler .content-spoiler_text {
+    display: none !important;
 }
 
 
 @media (max-width: 800px) {
-    div.card_3 {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-        padding: 14px !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        border-radius: 8px !important;
-        box-sizing: border-box !important;
+    div.card_footer .spoiler .content-spoiler_text {
+        display: none !important;
     }
 }
 
 
 @media (max-width: 600px) {
-    div.card_3 {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-        padding: 12px !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        border-radius: 8px !important;
-        box-sizing: border-box !important;
+    div.card_footer .spoiler .content-spoiler_text {
+        display: none !important;
     }
 }
 
 
-div.card_4 {
-    background-color: rgba(255, 255, 255, 1.0) !important;
-    border-top: 1px solid #d8d8d8 !important;
-    border-right: 1px solid #d8d8d8 !important;
-    border-bottom: 1px solid #d8d8d8 !important;
-    border-left: 1px solid #d8d8d8 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px !important;
-    padding: 16px !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    border-radius: 10px !important;
-    box-sizing: border-box !important;
+div.card_footer .spoiler.open .content-spoiler_text {
+    display: block !important;
 }
 
 
 @media (max-width: 800px) {
-    div.card_4 {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-        padding: 14px !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        border-radius: 8px !important;
-        box-sizing: border-box !important;
+    div.card_footer .spoiler.open .content-spoiler_text {
+        display: block !important;
     }
 }
 
 
 @media (max-width: 600px) {
-    div.card_4 {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-        padding: 12px !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        border-radius: 8px !important;
-        box-sizing: border-box !important;
+    div.card_footer .spoiler.open .content-spoiler_text {
+        display: block !important;
     }
 }
 
 
-div.orders_list .content-sum_1 {
+div.card_footer .spoiler .btn_details {
+    background-color: rgba(0, 0, 0, 0.25) !important;
+    color: rgba(0, 0, 0, 0.8) !important;
+    width: auto !important;
+    padding: 4px !important;
+    font-size: 12px !important;
+    align-self: flex-start !important;
+}
+
+
+@media (max-width: 800px) {
+    div.card_footer .spoiler .btn_details {
+        width: auto !important;
+        padding: 6px !important;
+        font-size: 12px !important;
+        align-self: flex-start !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    div.card_footer .spoiler .btn_details {
+        width: auto !important;
+        padding: 6px !important;
+        font-size: 12px !important;
+        align-self: flex-start !important;
+    }
+}
+
+
+div.card .content-sum_label {
     font-size: 16px !important;
     font-weight: 600 !important;
 }
 
 
 @media (max-width: 800px) {
-    div.orders_list .content-sum_1 {
+    div.card .content-sum_label {
         font-size: 15px !important;
         font-weight: 600 !important;
     }
@@ -3482,41 +3524,21 @@ div.orders_list .content-sum_1 {
 
 
 @media (max-width: 600px) {
-    div.orders_list .content-sum_1 {
+    div.card .content-sum_label {
         font-size: 15px !important;
         font-weight: 600 !important;
     }
 }
 
 
-div.orders_list .content-status_1 {
-    color: rgba(0, 0, 0, 0.7) !important;
-    font-size: 14px !important;
-}
-
-
-@media (max-width: 800px) {
-    div.orders_list .content-status_1 {
-        font-size: 14px !important;
-    }
-}
-
-
-@media (max-width: 600px) {
-    div.orders_list .content-status_1 {
-        font-size: 14px !important;
-    }
-}
-
-
-div.orders_list .content-sum_2 {
+div.card .content-sum_val {
     font-size: 16px !important;
     font-weight: 600 !important;
 }
 
 
 @media (max-width: 800px) {
-    div.orders_list .content-sum_2 {
+    div.card .content-sum_val {
         font-size: 15px !important;
         font-weight: 600 !important;
     }
@@ -3524,41 +3546,21 @@ div.orders_list .content-sum_2 {
 
 
 @media (max-width: 600px) {
-    div.orders_list .content-sum_2 {
+    div.card .content-sum_val {
         font-size: 15px !important;
         font-weight: 600 !important;
     }
 }
 
 
-div.orders_list .content-status_2 {
-    color: rgba(0, 0, 0, 0.7) !important;
-    font-size: 14px !important;
-}
-
-
-@media (max-width: 800px) {
-    div.orders_list .content-status_2 {
-        font-size: 14px !important;
-    }
-}
-
-
-@media (max-width: 600px) {
-    div.orders_list .content-status_2 {
-        font-size: 14px !important;
-    }
-}
-
-
-div.orders_list .content-sum_3 {
+div.card .content-sum_suffix {
     font-size: 16px !important;
     font-weight: 600 !important;
 }
 
 
 @media (max-width: 800px) {
-    div.orders_list .content-sum_3 {
+    div.card .content-sum_suffix {
         font-size: 15px !important;
         font-weight: 600 !important;
     }
@@ -3566,70 +3568,28 @@ div.orders_list .content-sum_3 {
 
 
 @media (max-width: 600px) {
-    div.orders_list .content-sum_3 {
+    div.card .content-sum_suffix {
         font-size: 15px !important;
         font-weight: 600 !important;
     }
 }
 
 
-div.orders_list .content-status_3 {
+div.orders_list .content-status {
     color: rgba(0, 0, 0, 0.7) !important;
     font-size: 14px !important;
 }
 
 
 @media (max-width: 800px) {
-    div.orders_list .content-status_3 {
+    div.orders_list .content-status {
         font-size: 14px !important;
     }
 }
 
 
 @media (max-width: 600px) {
-    div.orders_list .content-status_3 {
-        font-size: 14px !important;
-    }
-}
-
-
-div.orders_list .content-sum_4 {
-    font-size: 16px !important;
-    font-weight: 600 !important;
-}
-
-
-@media (max-width: 800px) {
-    div.orders_list .content-sum_4 {
-        font-size: 15px !important;
-        font-weight: 600 !important;
-    }
-}
-
-
-@media (max-width: 600px) {
-    div.orders_list .content-sum_4 {
-        font-size: 15px !important;
-        font-weight: 600 !important;
-    }
-}
-
-
-div.orders_list .content-status_4 {
-    color: rgba(0, 0, 0, 0.7) !important;
-    font-size: 14px !important;
-}
-
-
-@media (max-width: 800px) {
-    div.orders_list .content-status_4 {
-        font-size: 14px !important;
-    }
-}
-
-
-@media (max-width: 600px) {
-    div.orders_list .content-status_4 {
+    div.orders_list .content-status {
         font-size: 14px !important;
     }
 }
@@ -4599,6 +4559,25 @@ body[data-page='shino'] [data-path='form'] button {
 }
 
 
+body[data-page='shino'] div.orders_list .list {
+    display: contents !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.orders_list .list {
+        display: contents !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.orders_list .list {
+        display: contents !important;
+    }
+}
+
+
 body[data-page='shino'] div.orders_list {
     display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
@@ -4612,7 +4591,7 @@ body[data-page='shino'] div.orders_list {
 @media (max-width: 800px) {
     body[data-page='shino'] div.orders_list {
         display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-columns: 1fr !important;
         gap: 12px !important;
         width: 100% !important;
         min-width: 0 !important;
@@ -4633,7 +4612,7 @@ body[data-page='shino'] div.orders_list {
 }
 
 
-body[data-page='shino'] div.card_1 {
+body[data-page='shino'] div.card {
     background-color: rgba(255, 255, 255, 1.0) !important;
     border-top: 1px solid #d8d8d8 !important;
     border-right: 1px solid #d8d8d8 !important;
@@ -4651,7 +4630,7 @@ body[data-page='shino'] div.card_1 {
 
 
 @media (max-width: 800px) {
-    body[data-page='shino'] div.card_1 {
+    body[data-page='shino'] div.card {
         display: flex !important;
         flex-direction: column !important;
         gap: 10px !important;
@@ -4665,7 +4644,7 @@ body[data-page='shino'] div.card_1 {
 
 
 @media (max-width: 600px) {
-    body[data-page='shino'] div.card_1 {
+    body[data-page='shino'] div.card {
         display: flex !important;
         flex-direction: column !important;
         gap: 10px !important;
@@ -4678,149 +4657,172 @@ body[data-page='shino'] div.card_1 {
 }
 
 
-body[data-page='shino'] div.card_2 {
-    background-color: rgba(255, 255, 255, 1.0) !important;
-    border-top: 1px solid #d8d8d8 !important;
-    border-right: 1px solid #d8d8d8 !important;
-    border-bottom: 1px solid #d8d8d8 !important;
-    border-left: 1px solid #d8d8d8 !important;
+body[data-page='shino'] div.card_header {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    align-items: center !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.card_header {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        align-items: center !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.card_header {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        align-items: center !important;
+    }
+}
+
+
+body[data-page='shino'] div.card_content {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+    align-items: baseline !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.card_content {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 4px !important;
+        align-items: baseline !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.card_content {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 4px !important;
+        align-items: baseline !important;
+    }
+}
+
+
+body[data-page='shino'] div.card_footer {
     display: flex !important;
     flex-direction: column !important;
-    gap: 12px !important;
-    padding: 16px !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    border-radius: 10px !important;
-    box-sizing: border-box !important;
+    align-items: stretch !important;
+    gap: 8px !important;
 }
 
 
 @media (max-width: 800px) {
-    body[data-page='shino'] div.card_2 {
+    body[data-page='shino'] div.card_footer {
         display: flex !important;
         flex-direction: column !important;
-        gap: 10px !important;
-        padding: 14px !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        border-radius: 8px !important;
-        box-sizing: border-box !important;
+        align-items: stretch !important;
+        gap: 8px !important;
     }
 }
 
 
 @media (max-width: 600px) {
-    body[data-page='shino'] div.card_2 {
+    body[data-page='shino'] div.card_footer {
         display: flex !important;
         flex-direction: column !important;
-        gap: 10px !important;
-        padding: 12px !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        border-radius: 8px !important;
-        box-sizing: border-box !important;
+        align-items: stretch !important;
+        gap: 8px !important;
     }
 }
 
 
-body[data-page='shino'] div.card_3 {
-    background-color: rgba(255, 255, 255, 1.0) !important;
-    border-top: 1px solid #d8d8d8 !important;
-    border-right: 1px solid #d8d8d8 !important;
-    border-bottom: 1px solid #d8d8d8 !important;
-    border-left: 1px solid #d8d8d8 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px !important;
-    padding: 16px !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    border-radius: 10px !important;
-    box-sizing: border-box !important;
+body[data-page='shino'] div.card_footer .spoiler .content-spoiler_text {
+    display: none !important;
 }
 
 
 @media (max-width: 800px) {
-    body[data-page='shino'] div.card_3 {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-        padding: 14px !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        border-radius: 8px !important;
-        box-sizing: border-box !important;
+    body[data-page='shino'] div.card_footer .spoiler .content-spoiler_text {
+        display: none !important;
     }
 }
 
 
 @media (max-width: 600px) {
-    body[data-page='shino'] div.card_3 {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-        padding: 12px !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        border-radius: 8px !important;
-        box-sizing: border-box !important;
+    body[data-page='shino'] div.card_footer .spoiler .content-spoiler_text {
+        display: none !important;
     }
 }
 
 
-body[data-page='shino'] div.card_4 {
-    background-color: rgba(255, 255, 255, 1.0) !important;
-    border-top: 1px solid #d8d8d8 !important;
-    border-right: 1px solid #d8d8d8 !important;
-    border-bottom: 1px solid #d8d8d8 !important;
-    border-left: 1px solid #d8d8d8 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px !important;
-    padding: 16px !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    border-radius: 10px !important;
-    box-sizing: border-box !important;
+body[data-page='shino'] div.card_footer .spoiler.open .content-spoiler_text {
+    display: block !important;
 }
 
 
 @media (max-width: 800px) {
-    body[data-page='shino'] div.card_4 {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-        padding: 14px !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        border-radius: 8px !important;
-        box-sizing: border-box !important;
+    body[data-page='shino'] div.card_footer .spoiler.open .content-spoiler_text {
+        display: block !important;
     }
 }
 
 
 @media (max-width: 600px) {
-    body[data-page='shino'] div.card_4 {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-        padding: 12px !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        border-radius: 8px !important;
-        box-sizing: border-box !important;
+    body[data-page='shino'] div.card_footer .spoiler.open .content-spoiler_text {
+        display: block !important;
     }
 }
 
 
-body[data-page='shino'] div.orders_list .content-sum_1 {
+body[data-page='shino'] div.card_footer .spoiler .btn_details {
+    background-color: rgba(0, 0, 0, 0.25) !important;
+    color: rgba(0, 0, 0, 0.8) !important;
+    width: auto !important;
+    padding: 4px !important;
+    font-size: 12px !important;
+    align-self: flex-start !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='shino'] div.card_footer .spoiler .btn_details {
+        width: auto !important;
+        padding: 6px !important;
+        font-size: 12px !important;
+        align-self: flex-start !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='shino'] div.card_footer .spoiler .btn_details {
+        width: auto !important;
+        padding: 6px !important;
+        font-size: 12px !important;
+        align-self: flex-start !important;
+    }
+}
+
+
+body[data-page='shino'] div.card .content-sum_label {
     font-size: 16px !important;
     font-weight: 600 !important;
 }
 
 
 @media (max-width: 800px) {
-    body[data-page='shino'] div.orders_list .content-sum_1 {
+    body[data-page='shino'] div.card .content-sum_label {
         font-size: 15px !important;
         font-weight: 600 !important;
     }
@@ -4828,41 +4830,21 @@ body[data-page='shino'] div.orders_list .content-sum_1 {
 
 
 @media (max-width: 600px) {
-    body[data-page='shino'] div.orders_list .content-sum_1 {
+    body[data-page='shino'] div.card .content-sum_label {
         font-size: 15px !important;
         font-weight: 600 !important;
     }
 }
 
 
-body[data-page='shino'] div.orders_list .content-status_1 {
-    color: rgba(0, 0, 0, 0.7) !important;
-    font-size: 14px !important;
-}
-
-
-@media (max-width: 800px) {
-    body[data-page='shino'] div.orders_list .content-status_1 {
-        font-size: 14px !important;
-    }
-}
-
-
-@media (max-width: 600px) {
-    body[data-page='shino'] div.orders_list .content-status_1 {
-        font-size: 14px !important;
-    }
-}
-
-
-body[data-page='shino'] div.orders_list .content-sum_2 {
+body[data-page='shino'] div.card .content-sum_val {
     font-size: 16px !important;
     font-weight: 600 !important;
 }
 
 
 @media (max-width: 800px) {
-    body[data-page='shino'] div.orders_list .content-sum_2 {
+    body[data-page='shino'] div.card .content-sum_val {
         font-size: 15px !important;
         font-weight: 600 !important;
     }
@@ -4870,41 +4852,21 @@ body[data-page='shino'] div.orders_list .content-sum_2 {
 
 
 @media (max-width: 600px) {
-    body[data-page='shino'] div.orders_list .content-sum_2 {
+    body[data-page='shino'] div.card .content-sum_val {
         font-size: 15px !important;
         font-weight: 600 !important;
     }
 }
 
 
-body[data-page='shino'] div.orders_list .content-status_2 {
-    color: rgba(0, 0, 0, 0.7) !important;
-    font-size: 14px !important;
-}
-
-
-@media (max-width: 800px) {
-    body[data-page='shino'] div.orders_list .content-status_2 {
-        font-size: 14px !important;
-    }
-}
-
-
-@media (max-width: 600px) {
-    body[data-page='shino'] div.orders_list .content-status_2 {
-        font-size: 14px !important;
-    }
-}
-
-
-body[data-page='shino'] div.orders_list .content-sum_3 {
+body[data-page='shino'] div.card .content-sum_suffix {
     font-size: 16px !important;
     font-weight: 600 !important;
 }
 
 
 @media (max-width: 800px) {
-    body[data-page='shino'] div.orders_list .content-sum_3 {
+    body[data-page='shino'] div.card .content-sum_suffix {
         font-size: 15px !important;
         font-weight: 600 !important;
     }
@@ -4912,70 +4874,28 @@ body[data-page='shino'] div.orders_list .content-sum_3 {
 
 
 @media (max-width: 600px) {
-    body[data-page='shino'] div.orders_list .content-sum_3 {
+    body[data-page='shino'] div.card .content-sum_suffix {
         font-size: 15px !important;
         font-weight: 600 !important;
     }
 }
 
 
-body[data-page='shino'] div.orders_list .content-status_3 {
+body[data-page='shino'] div.orders_list .content-status {
     color: rgba(0, 0, 0, 0.7) !important;
     font-size: 14px !important;
 }
 
 
 @media (max-width: 800px) {
-    body[data-page='shino'] div.orders_list .content-status_3 {
+    body[data-page='shino'] div.orders_list .content-status {
         font-size: 14px !important;
     }
 }
 
 
 @media (max-width: 600px) {
-    body[data-page='shino'] div.orders_list .content-status_3 {
-        font-size: 14px !important;
-    }
-}
-
-
-body[data-page='shino'] div.orders_list .content-sum_4 {
-    font-size: 16px !important;
-    font-weight: 600 !important;
-}
-
-
-@media (max-width: 800px) {
-    body[data-page='shino'] div.orders_list .content-sum_4 {
-        font-size: 15px !important;
-        font-weight: 600 !important;
-    }
-}
-
-
-@media (max-width: 600px) {
-    body[data-page='shino'] div.orders_list .content-sum_4 {
-        font-size: 15px !important;
-        font-weight: 600 !important;
-    }
-}
-
-
-body[data-page='shino'] div.orders_list .content-status_4 {
-    color: rgba(0, 0, 0, 0.7) !important;
-    font-size: 14px !important;
-}
-
-
-@media (max-width: 800px) {
-    body[data-page='shino'] div.orders_list .content-status_4 {
-        font-size: 14px !important;
-    }
-}
-
-
-@media (max-width: 600px) {
-    body[data-page='shino'] div.orders_list .content-status_4 {
+    body[data-page='shino'] div.orders_list .content-status {
         font-size: 14px !important;
     }
 }
@@ -5011,6 +4931,936 @@ body[data-page='shino'] div.orders_list button {
         border-radius: 6px !important;
         cursor: pointer !important;
         font-size: 14px !important;
+    }
+}
+
+
+
+/* ===== СТИЛИ ИНКЛУДОВ: страница poss_point ===== */
+
+
+body[data-page='poss_point'] div.fp04-field {
+    border-top: 1px solid #666666 !important;
+    border-right: 1px solid #666666 !important;
+    border-bottom: 1px solid #666666 !important;
+    border-left: 1px solid #666666 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 5px !important;
+    min-height: 48px !important;
+    background: white !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    position: relative !important;
+    margin-bottom*: 10px !important;
+    cursor: pointer !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    border-radius: 5px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.fp04-field {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        width: 100% !important;
+        gap: 5px !important;
+        min-height: 48px !important;
+        background: white !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        position: relative !important;
+        margin-bottom*: 10px !important;
+        cursor: pointer !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border-radius: 5px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.fp04-field {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        width: 100% !important;
+        gap: 5px !important;
+        min-height: 48px !important;
+        background: white !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        position: relative !important;
+        margin-bottom*: 10px !important;
+        cursor: pointer !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border-radius: 5px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.fp04-field.selected {
+    border-top: 1px solid #0000ff !important;
+    border-right: 1px solid #0000ff !important;
+    border-bottom: 1px solid #0000ff !important;
+    border-left: 1px solid #0000ff !important;
+    box-shadow: 0 0 0 1px !important;
+    background: white !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.fp04-field.selected {
+        box-shadow: 1 1 1 1 !important;
+        background: white !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.fp04-field.selected {
+        box-shadow: #0000ff !important;
+        background: white !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.fp04-field label {
+    border-top: 0px solid #000000 !important;
+    border-right: 0px solid #000000 !important;
+    border-bottom: 0px solid #000000 !important;
+    border-left: 0px solid #000000 !important;
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+    font-size: 16px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.fp04-field label {
+        flex: 0 0 30% !important;
+        max-width: 30% !important;
+        white-space: nowrap !important;
+        cursor: pointer !important;
+        font-size: 16px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.fp04-field label {
+        flex: 0 0 30% !important;
+        max-width: 30% !important;
+        white-space: nowrap !important;
+        cursor: pointer !important;
+        font-size: 16px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.fp04-field .field {
+    border-top: 0px solid #0000ff !important;
+    border-right: 0px solid #0000ff !important;
+    border-bottom: 0px solid #0000ff !important;
+    border-left: 0px solid #0000ff !important;
+    display: none !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    padding-right: 50px !important;
+    outline: none !important;
+    text-align: right !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.fp04-field .field {
+        display: none !important;
+        flex: 1 1 auto !important;
+        width: 100% !important;
+        padding-right: 50px !important;
+        outline: none !important;
+        text-align: right !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.fp04-field .field {
+        display: none !important;
+        flex: 1 1 auto !important;
+        width: 100% !important;
+        padding-right: 50px !important;
+        outline: none !important;
+        text-align: right !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.fp04-field.selected .content-.field {
+    display: block !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.fp04-field.selected .content-.field {
+        display: block !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.fp04-field.selected .content-.field {
+        display: block !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.fp04-field .content-suffix {
+    color: rgba(0, 0, 0, 0.6) !important;
+    border-top: 0px solid #000000 !important;
+    border-right: 0px solid #000000 !important;
+    border-bottom: 0px solid #000000 !important;
+    border-left: 0px solid #000000 !important;
+    display: none !important;
+    margin-left: -40px !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    position: relative !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.fp04-field .content-suffix {
+        display: none !important;
+        margin-left: -40px !important;
+        pointer-events: none !important;
+        z-index: 1 !important;
+        position: relative !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.fp04-field .content-suffix {
+        display: none !important;
+        margin-left: -40px !important;
+        pointer-events: none !important;
+        z-index: 1 !important;
+        position: relative !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.fp04-field.selected .content-suffix {
+    display: inline !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.fp04-field.selected .content-suffix {
+        display: inline !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.fp04-field.selected .content-suffix {
+        display: inline !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.all-sum {
+    text-align: right !important;
+    padding-top: 15px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.all-sum {
+        text-align: right !important;
+        padding-top: 12px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.all-sum {
+        text-align: right !important;
+        padding-top: 10px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.all-sum label {
+    text-align: right !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.all-sum label {
+        text-align: right !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.all-sum label {
+        text-align: right !important;
+    }
+}
+
+
+body[data-page='poss_point'] .gr8 {
+    border-top: 0px solid #008000 !important;
+    border-right: 0px solid #008000 !important;
+    border-bottom: 0px solid #008000 !important;
+    border-left: 0px solid #008000 !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] .gr8 {
+        gap: 10px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] .gr8 {
+        gap: 6px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.field-paymet {
+    border-top: 1px solid #000000 !important;
+    border-right: 1px solid #000000 !important;
+    border-bottom: 1px solid #000000 !important;
+    border-left: 1px solid #000000 !important;
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 20%) minmax(0, 80%) !important;
+    align-items: stretch !important;
+    min-height: 48px !important;
+    row-gap: 0px !important;
+    column-gap: 6px !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    padding*: 10px !important;
+    border-radius: 5px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.field-paymet {
+        position: relative !important;
+        display: grid !important;
+        grid-template-columns: minmax(0, 20%) minmax(0, 80%) !important;
+        align-items: stretch !important;
+        min-height: 72px !important;
+        row-gap: 0px !important;
+        column-gap: 6px !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
+        padding*: 8px !important;
+        border-radius: 5px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.field-paymet {
+        position: relative !important;
+        display: grid !important;
+        grid-template-columns: minmax(0, 20%) minmax(0, 80%) !important;
+        align-items: stretch !important;
+        min-height: 56px !important;
+        row-gap: 0px !important;
+        column-gap: 5px !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
+        padding*: 6px !important;
+        border-radius: 5px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.field-paymet .1-col {
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
+    display: flex !important;
+    align-items: stretch !important;
+    align-self: stretch !important;
+    min-height: 48px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.field-paymet .1-col {
+        display: flex !important;
+        align-items: stretch !important;
+        align-self: stretch !important;
+        min-height: 72px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.field-paymet .1-col {
+        display: flex !important;
+        align-items: stretch !important;
+        align-self: stretch !important;
+        min-height: 56px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.field-paymet .2-col {
+    border-top: 0px solid #000000 !important;
+    border-right: 0px solid #000000 !important;
+    border-bottom: 0px solid #000000 !important;
+    border-left: 0px solid #000000 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    align-self: stretch !important;
+    width: fit-content !important;
+    max-width: fit-content !important;
+    justify-self: start !important;
+    row-gap: 2px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.field-paymet .2-col {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        align-self: stretch !important;
+        width: fit-content !important;
+        max-width: fit-content !important;
+        justify-self: start !important;
+        row-gap: 2px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.field-paymet .2-col {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        align-self: stretch !important;
+        width: fit-content !important;
+        max-width: fit-content !important;
+        justify-self: start !important;
+        row-gap: 2px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.field-paymet:has(input:checked) {
+    border-top: 2px solid #0000ff !important;
+    border-right: 2px solid #0000ff !important;
+    border-bottom: 2px solid #0000ff !important;
+    border-left: 2px solid #0000ff !important;
+}
+
+
+body[data-page='poss_point'] div.field-paymet input {
+    inset: 0 !important;
+    margin: 0 !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 0 !important;
+    cursor: pointer !important;
+    z-index: 1 !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.field-paymet input {
+        position: absolute !important;
+        width: 100% !important;
+        height: 100% !important;
+        opacity: 0 !important;
+        cursor: pointer !important;
+        z-index: 1 !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.field-paymet input {
+        position: absolute !important;
+        width: 100% !important;
+        height: 100% !important;
+        opacity: 0 !important;
+        cursor: pointer !important;
+        z-index: 1 !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.field-paymet img {
+    border-top: 0px solid #008000 !important;
+    border-right: 0px solid #008000 !important;
+    border-bottom: 0px solid #008000 !important;
+    border-left: 0px solid #008000 !important;
+    height: 100% !important;
+    width: 100% !important;
+    min-height: 22px !important;
+    max-height: none !important;
+    max-width: 40px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    border-radius: 3px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.field-paymet img {
+        height: 100% !important;
+        width: 100% !important;
+        min-height: 22px !important;
+        max-height: none !important;
+        max-width: 100px !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        display: block !important;
+        border-radius: 5px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.field-paymet img {
+        height: 100% !important;
+        width: 100% !important;
+        min-height: 22px !important;
+        max-height: none !important;
+        max-width: 100px !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        display: block !important;
+        border-radius: 5px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.field-paymet label {
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
+    flex-basis: 100% !important;
+    white-space: nowrap !important;
+    font-size: 16px !important;
+    margin-bottom: 0px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.field-paymet label {
+        flex-basis: 100% !important;
+        white-space: nowrap !important;
+        font-size: 16px !important;
+        margin-bottom: 0px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.field-paymet label {
+        flex-basis: 100% !important;
+        white-space: nowrap !important;
+        font-size: 16px !important;
+        margin-bottom: 0px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.field-paymet .content-percent {
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
+    display: inline-block !important;
+    white-space: nowrap !important;
+    width: fit-content !important;
+    font-size: 14px !important;
+    margin-top: -12px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.field-paymet .content-percent {
+        display: block !important;
+        white-space: normal !important;
+        width: auto !important;
+        font-size: 13px !important;
+        margin-top: -12px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.field-paymet .content-percent {
+        display: block !important;
+        white-space: normal !important;
+        width: auto !important;
+        font-size: 12px !important;
+        margin-top: -12px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.field-paymet .content-prefix {
+    border-top: 0px solid #00ffff !important;
+    border-right: 0px solid #00ffff !important;
+    border-bottom: 0px solid #00ffff !important;
+    border-left: 0px solid #00ffff !important;
+    display: inline-block !important;
+    white-space: nowrap !important;
+    width: fit-content !important;
+    font-size: 14px !important;
+    margin-top: -12px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.field-paymet .content-prefix {
+        display: block !important;
+        white-space: normal !important;
+        width: auto !important;
+        font-size: 13px !important;
+        margin-top: -12px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.field-paymet .content-prefix {
+        display: block !important;
+        white-space: normal !important;
+        width: auto !important;
+        font-size: 12px !important;
+        margin-top: -12px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.modal1 {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
+    display: none !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1000 !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex-direction: column !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+    gap: 0 !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    border-radius: 0px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.modal1 {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 1000 !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        flex-direction: column !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        box-sizing: border-box !important;
+        gap: 0 !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border-radius: 0px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.modal1 {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 1000 !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        flex-direction: column !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        box-sizing: border-box !important;
+        gap: 0 !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border-radius: 0px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.modal1.active {
+    display: flex !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.modal1.active {
+        display: flex !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.modal1.active {
+        display: flex !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.gr4 {
+    background-color: rgba(255, 255, 255, 1.0) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 20px !important;
+    border-radius: 10px !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    max-width: 500px !important;
+    width: 100% !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.gr4 {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 15px !important;
+        border-radius: 0px !important;
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        max-width: 400px !important;
+        width: 100% !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.gr4 {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 10px !important;
+        border-radius: 0px !important;
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
+
+
+body[data-page='poss_point'] [data-path='close'] text {
+    cursor: pointer !important;
+    width: 24px !important;
+    height: 24px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] [data-path='close'] text {
+        cursor: pointer !important;
+        width: 24px !important;
+        height: 24px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] [data-path='close'] text {
+        cursor: pointer !important;
+        width: 44px !important;
+        height: 44px !important;
+    }
+}
+
+
+body[data-page='poss_point'] [data-path='form'] text {
+    background-color: rgba(255, 255, 255, 1.0) !important;
+    padding: 20px !important;
+    border-radius: 10px !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    max-width: 500px !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] [data-path='form'] text {
+        padding: 15px !important;
+        border-radius: 10px !important;
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        max-width: 400px !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] [data-path='form'] text {
+        padding: 20px !important;
+        border-radius: 0px !important;
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.wr-fields {
+    border-top: 0px dotted #000000 !important;
+    border-right: 0px dotted #000000 !important;
+    border-bottom: 0px dotted #000000 !important;
+    border-left: 0px dotted #000000 !important;
+}
+
+
+body[data-page='poss_point'] div.wr-fields .content-tit {
+    border-top: 0px solid #ff0000 !important;
+    border-right: 0px solid #ff0000 !important;
+    border-bottom: 0px solid #ff0000 !important;
+    border-left: 0px solid #ff0000 !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    display: block !important;
+    padding-bottom: 10px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.wr-fields .content-tit {
+        font-size: 17px !important;
+        font-weight: 700 !important;
+        display: block !important;
+        padding-bottom: 10px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.wr-fields .content-tit {
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        display: block !important;
+        padding-bottom: 10px !important;
+    }
+}
+
+
+body[data-page='poss_point'] [data-path='form'] button {
+    background-color: rgba(0, 0, 0, 1.0) !important;
+    color: rgba(255, 255, 255, 1.0) !important;
+    border: 0px 0 0 0 0 !important;
+    cursor: ['pointer'] !important;
+    width: 100% !important;
+    padding: 12px !important;
+    border-radius: 5px !important;
+    font-size: 16px !important;
+    min-height: 0px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] [data-path='form'] button {
+        width: 100% !important;
+        padding: 12px !important;
+        border-radius: 5px !important;
+        font-size: 16px !important;
+        min-height: 0px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] [data-path='form'] button {
+        width: 100% !important;
+        padding: 12px !important;
+        border-radius: 5px !important;
+        font-size: 16px !important;
+        min-height: 48px !important;
     }
 }
 
@@ -5139,6 +5989,56 @@ body[data-page='shino'] div.orders_list button {
 [data-path*='div_2'] div.2 {
     width: 80.0% !important;
     max-width: 80.0% !important;
+    box-sizing: border-box !important;
+}
+
+.fp04 {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+}
+
+.gr8 {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 800px) {
+    .gr8 {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+[data-path*='div_field-paymet'] div.field-paymet {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+}
+
+[data-path*='div_1'] div.1 {
+    width: 20.0% !important;
+    max-width: 20.0% !important;
+    box-sizing: border-box !important;
+}
+
+[data-path*='div_field-paymet'] div.field-paymet {
+    grid-template-columns: 20.0% 80.0% !important;
+}
+
+[data-path*='div_2'] div.2 {
+    width: 80.0% !important;
+    max-width: 80.0% !important;
+    box-sizing: border-box !important;
+}
+
+.list {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
     box-sizing: border-box !important;
 }
 

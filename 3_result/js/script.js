@@ -175,6 +175,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     var it = config[src];
                     if (it && typeof it === 'object' && !isIfBlock(it)) {
                         items.push({ src: src, dataSpec: it.data || {}, rowsSelector: it.rowsSelector, radioName: it.radioName, hasData: !!it.data });
+                    } else if (it !== undefined && it !== null && (typeof it === 'string' || typeof it === 'number' || typeof it === 'boolean')) {
+                        out[src] = it;
                     }
                 }
             }
@@ -373,6 +375,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (out[resultKey] && out[resultKey].fin_op) {
                 out.fin_op = out[resultKey].fin_op;
                 delete out[resultKey].fin_op;
+            }
+            // sub_order из ветки (как fin_op): явно берём из branchSpec, т.к. вложенный объект может не попасть в computeFormulas
+            if (branchSpec && branchSpec.sub_order) {
+                out[resultKey] = out[resultKey] || {};
+                out[resultKey].sub_order = resolveLiteralSpec(branchSpec.sub_order);
+            }
+            if (out[resultKey] && out[resultKey].sub_order) {
+                out.sub_order = out[resultKey].sub_order;
+                delete out[resultKey].sub_order;
             }
             break;
         }
@@ -1162,6 +1173,22 @@ class DatabaseRenderer {
             
             // Получаем значение
             let fieldValue = this.resolveValue(content, record, bdSources);
+            // Если задан if:ключ — переводим значение через словарь из if.json (api1:stat_pay + if:stat_pay → подпись)
+            if (value.length >= 3 && typeof value[2] === 'string' && value[2].startsWith('if:')) {
+                const dictKey = value[2].slice(3);
+                const ifLabels = window.ifLabels || (function() {
+                    const el = document.querySelector('script[type="application/json"][data-if-labels]');
+                    window.ifLabels = el ? JSON.parse(el.textContent) : {};
+                    return window.ifLabels;
+                })();
+                if (ifLabels[dictKey] && fieldValue != null && fieldValue !== '') {
+                    let label = ifLabels[dictKey][String(fieldValue).trim()];
+                    if (Array.isArray(label) && label[0]) label = label[0];
+                    if (typeof label === 'string') {
+                        fieldValue = label.startsWith('text:') ? label.replace(/^text:/, '') : this.resolveValue(label, record, bdSources);
+                    }
+                }
+            }
             
             // Создаем элемент
             if (elementType === 'text') {
@@ -1257,6 +1284,12 @@ class DatabaseRenderer {
                 element.appendChild(imgEl);
                 }
                 // Если fieldValue пустое - не создаем элемент img, чтобы не было пустого места
+            } else if (elementType === 'button') {
+                const btnEl = document.createElement('button');
+                btnEl.type = 'button';
+                btnEl.className = `${key} button`;
+                btnEl.textContent = fieldValue != null ? String(fieldValue).trim() : '';
+                element.appendChild(btnEl);
             }
         }
         
@@ -1353,6 +1386,16 @@ class DatabaseRenderer {
 // Инициализация рендерера БД
 // Делаем глобальным для доступа из других скриптов (например, при открытии модального окна)
 window.dbRenderer = new DatabaseRenderer();
+
+// Спойлер в карточках списка заказов: по клику на «Детали» показываем/скрываем блок с текстом
+document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.btn_details');
+    if (!btn) return;
+    var card = btn.closest('.card') || btn.closest('.div_card');
+    if (!card) return;
+    var spoiler = card.querySelector('.spoiler');
+    if (spoiler) spoiler.classList.toggle('open');
+});
 
 
 // modal_1.js

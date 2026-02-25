@@ -35,10 +35,23 @@ try {
     exit;
 }
 
+/** Режим: tables | views */
+$mode = isset($_GET['mode']) && $_GET['mode'] === 'views' ? 'views' : 'tables';
+
 /** Порядок вывода: order → sub_order → price → fin_op → wall (статичный) */
 $tablesDisplay = ['order', 'sub_order', 'price', 'fin_op', 'wall'];
 /** Порядок удаления: сначала дочерние, затем родители */
 $tablesDelete = ['price', 'sub_order', 'order', 'fin_op'];
+
+/** Список представлений из БД (для mode=views) */
+$viewsList = [];
+if ($mode === 'views') {
+    try {
+        $viewsList = $pdo->query("SELECT table_name FROM information_schema.views WHERE table_schema = 'public' ORDER BY table_name")->fetchAll(PDO::FETCH_COLUMN);
+    } catch (PDOException $e) {
+        $viewsList = [];
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_all'])) {
     // 1. Сначала: удалить все записи (функции кнопки «Удалить все записи»)
@@ -74,13 +87,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_balance'])) {
 }
 
 $data = [];
-foreach ($tablesDisplay as $t) {
-    try {
-        $rows = $pdo->query('SELECT * FROM "' . $t . '" ORDER BY 1')->fetchAll(PDO::FETCH_ASSOC);
-        $data[$t] = $rows;
-    } catch (PDOException $e) {
-        $data[$t] = [];
+if ($mode === 'tables') {
+    foreach ($tablesDisplay as $t) {
+        try {
+            $rows = $pdo->query('SELECT * FROM "' . $t . '" ORDER BY 1')->fetchAll(PDO::FETCH_ASSOC);
+            $data[$t] = $rows;
+        } catch (PDOException $e) {
+            $data[$t] = [];
+        }
     }
+}
+
+$dataViews = [];
+if ($mode === 'views') {
+    foreach ($viewsList as $v) {
+        try {
+            $rows = $pdo->query('SELECT * FROM "' . $v . '" ORDER BY 1')->fetchAll(PDO::FETCH_ASSOC);
+            $dataViews[$v] = $rows;
+        } catch (PDOException $e) {
+            $dataViews[$v] = [];
+        }
+    }
+}
+
+/**
+ * Для представлений: если значение — JSON-массив объектов, вернуть HTML вложенной таблицы; иначе текст.
+ */
+function render_view_cell($val) {
+    if ($val === null || $val === '') return '';
+    $arr = null;
+    if (is_string($val)) {
+        $arr = json_decode($val, true);
+    } elseif (is_array($val)) {
+        $arr = $val;
+    }
+    if (is_array($arr) && !empty($arr) && isset($arr[0]) && is_array($arr[0])) {
+        $innerCols = array_keys($arr[0]);
+        $html = '<table class="nested-tbl"><thead><tr>';
+        foreach ($innerCols as $c) {
+            $html .= '<th>' . htmlspecialchars($c) . '</th>';
+        }
+        $html .= '</tr></thead><tbody>';
+        foreach ($arr as $item) {
+            $html .= '<tr>';
+            foreach ($innerCols as $c) {
+                $html .= '<td>' . htmlspecialchars((string)($item[$c] ?? '')) . '</td>';
+            }
+            $html .= '</tr>';
+        }
+        $html .= '</tbody></table>';
+        return $html;
+    }
+    if (is_string($val)) return htmlspecialchars($val);
+    return htmlspecialchars(json_encode($val, JSON_UNESCAPED_UNICODE));
 }
 ?>
 <!DOCTYPE html>
@@ -107,9 +166,25 @@ foreach ($tablesDisplay as $t) {
         .header-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 4px; }
         .header-hint { font-size: 11px; color: #888; margin-bottom: 12px; }
         .cb-wrap label { cursor: pointer; user-select: none; font-size: 12px; }
+        .tabs { display: flex; gap: 0; margin-bottom: 16px; border-bottom: 1px solid #999; }
+        .tabs a { padding: 8px 16px; text-decoration: none; color: #06c; background: #f5f5f5; border: 1px solid #999; border-bottom: none; margin-right: 2px; border-radius: 4px 4px 0 0; font-size: 13px; }
+        .tabs a:hover { background: #eee; }
+        .tabs a.active { background: #fff; color: #000; font-weight: 600; margin-bottom: -1px; padding-bottom: 9px; }
+        .tbl-view-label { font-size: 0.8em; font-weight: normal; color: #06c; background: #e8f4ff; padding: 2px 6px; border-radius: 3px; margin-left: 4px; }
+        .nested-tbl { font-size: 11px; margin: 0; border: 1px solid #ccc; background: #fafafa; }
+        .nested-tbl th, .nested-tbl td { border: 1px solid #ddd; padding: 2px 6px; }
+        .nested-tbl th { background: #e8e8e8; }
+        .table-wrapper { overflow-x: auto; margin-bottom: 12px; -webkit-overflow-scrolling: touch; }
+        .table-wrapper table { margin-bottom: 0; min-width: min-content; }
     </style>
 </head>
 <body>
+<div class="tabs">
+    <a href="view_table.php?mode=tables"<?= $mode === 'tables' ? ' class="active"' : '' ?>>Таблицы</a>
+    <a href="view_table.php?mode=views"<?= $mode === 'views' ? ' class="active"' : '' ?>>Представления</a>
+</div>
+
+<?php if ($mode === 'tables'): ?>
 <div class="header-row">
 <form method="post" id="header-form">
     <input type="hidden" name="delete_all" value="1">
@@ -125,7 +200,9 @@ foreach ($tablesDisplay as $t) {
 </form>
 </div>
 <p class="header-hint">Функции выше действуют только на данные, которые сбрасывают balance в wall до 0.</p>
+<?php endif; ?>
 
+<?php if ($mode === 'tables'): ?>
 <?php foreach ($tablesDisplay as $t): ?>
 <?php $cnt = count($data[$t] ?? []); $word = ($cnt === 1) ? 'запись' : (($cnt >= 2 && $cnt <= 4) ? 'записи' : 'записей'); ?>
 <?php $staticLabel = ($t === 'wall') ? ' <span class="tbl-static">Статичная</span>' : ''; ?>
@@ -134,7 +211,14 @@ foreach ($tablesDisplay as $t) {
 <?php if (empty($rows)): ?>
 <p class="empty">Нет данных</p>
 <?php else: ?>
-<?php $cols = array_diff(array_keys($rows[0]), ['created_at', 'updated_at']); ?>
+<?php
+            $cols = array_diff(array_keys($rows[0]), ['created_at', 'updated_at']);
+            $cols = array_values($cols);
+            if (in_array('num', $cols, true)) {
+                $cols = array_merge(['num'], array_values(array_diff($cols, ['num'])));
+            }
+?>
+<div class="table-wrapper">
 <table>
 <thead><tr><?php foreach ($cols as $col): ?><th><?= htmlspecialchars($col) ?></th><?php endforeach; ?></tr></thead>
 <tbody>
@@ -143,8 +227,38 @@ foreach ($tablesDisplay as $t) {
 <?php endforeach; ?>
 </tbody>
 </table>
+</div>
 <?php endif; ?>
 <?php endforeach; ?>
+<?php endif; ?>
+
+<?php if ($mode === 'views'): ?>
+<?php if (empty($viewsList)): ?>
+<p class="empty">В схеме public нет представлений.</p>
+<?php else: ?>
+<?php foreach ($viewsList as $v): ?>
+<?php $cnt = count($dataViews[$v] ?? []); $word = ($cnt === 1) ? 'запись' : (($cnt >= 2 && $cnt <= 4) ? 'записи' : 'записей'); ?>
+<h2><?= htmlspecialchars($v) ?> <span class="tbl-count">(<?= $cnt ?> <?= $word ?>)</span> <span class="tbl-view-label">Представление</span></h2>
+<?php $rows = $dataViews[$v] ?? []; ?>
+<?php if (empty($rows)): ?>
+<p class="empty">Нет данных</p>
+<?php else: ?>
+<?php $cols = array_keys($rows[0]); ?>
+<div class="table-wrapper">
+<table>
+<thead><tr><?php foreach ($cols as $col): ?><th><?= htmlspecialchars($col) ?></th><?php endforeach; ?></tr></thead>
+<tbody>
+<?php foreach ($rows as $row): ?>
+<tr><?php foreach ($cols as $col): ?><td><?php echo render_view_cell($row[$col] ?? null); ?></td><?php endforeach; ?></tr>
+<?php endforeach; ?>
+</tbody>
+</table>
+</div>
+<?php endif; ?>
+<?php endforeach; ?>
+<?php endif; ?>
+<?php endif; ?>
+
 <script>
 (function(){
     var key = 'save_bd_only_new_data';

@@ -32,6 +32,13 @@ def _resolve_includes(source_dir: Path, data: Dict, objects_css: Dict, objects_f
             page_for_include = current_page
             if key.startswith('/'):
                 page_for_include = key.lstrip('/')
+                # Подмешиваем api в содержимое циклов, чтобы в шаблоне были api1, api2 и генерировались span для PostgreSQL
+                if api and isinstance(html, dict):
+                    for outer_k, outer_v in html.items():
+                        if isinstance(outer_v, dict):
+                            for inner_k, inner_v in list(outer_v.items()):
+                                if isinstance(inner_v, dict):
+                                    outer_v[inner_k] = {**api, **inner_v}
                 data[key] = html
                 _resolve_includes(source_dir, html, objects_css, objects_fun,
                                  objects_css_by_page, page_for_include)
