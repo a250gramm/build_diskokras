@@ -304,14 +304,16 @@ class DatabaseRenderer {
                     const sourceName = span.getAttribute('data-bd-source'); // front_pay_met, front_wall, ...
                     const url = span.getAttribute('data-bd-url');
                     const link = span.getAttribute('data-bd-link');
+                    const filterSpec = span.getAttribute('data-bd-filter'); // "filter:stat_pay=none,part"
                     
-                    console.log('DatabaseRenderer: span ->', apiName, sourceName, url, link);
+                    console.log('DatabaseRenderer: span ->', apiName, sourceName, url, link, filterSpec);
                     
                     if (apiName) {
                         bdSources[apiName] = {
                             source: sourceName, // Имя источника для поиска script тега
                             url: url,
                             link: link,
+                            filter: filterSpec || '',
                             data: null
                         };
                     }
@@ -345,6 +347,26 @@ class DatabaseRenderer {
         
         // Подхватываем input[data-function-sum] из динамически созданных полей (инклуды) и пересчитываем суммы
         functionsManager.refreshAfterRender();
+    }
+
+    /**
+     * Применяет фильтр к массиву записей.
+     * filterSpec: "filter:field=val1,val2" — оставить записи, где record[field] входит в [val1, val2].
+     * Нужно для PostgreSQL (fetch): данные приходят все, фильтр применяем на клиенте.
+     */
+    applyBdFilter(data, filterSpec) {
+        if (!filterSpec || !filterSpec.startsWith('filter:') || !Array.isArray(data)) return data;
+        const opt = filterSpec;
+        const eq = opt.indexOf('=', 'filter:'.length);
+        if (eq <= 0) return data;
+        const field = opt.slice('filter:'.length, eq).trim();
+        const filterValue = opt.slice(eq + 1).trim();
+        if (!field || filterValue === '') return data;
+        const allowed = filterValue.split(',').map(function (v) { return v.trim(); });
+        return data.filter(function (record) {
+            if (!record || typeof record !== 'object') return false;
+            return allowed.indexOf(String(record[field])) !== -1;
+        });
     }
 
     /**
@@ -412,10 +434,13 @@ class DatabaseRenderer {
                 const scriptTag = document.querySelector(`script[type="application/json"][data-bd-source="${config.source}"]`);
                 if (scriptTag) {
                     try {
-                        const data = JSON.parse(scriptTag.textContent);
+                        let data = JSON.parse(scriptTag.textContent);
                         console.log(`✅ ${config.source}: загружено из script тега ${data.length} записей`);
                         this.dataCache[config.url] = data;
-                        config.data = data;
+                        config.data = this.applyBdFilter(data, config.filter);
+                        if (config.filter && config.data.length !== data.length) {
+                            console.log(`   фильтр ${config.filter}: показано ${config.data.length} из ${data.length}`);
+                        }
                         continue; // Пропускаем загрузку через fetch/XHR
                     } catch (e) {
                         console.warn(`⚠️ Ошибка парсинга данных из script тега для ${config.source}:`, e);
@@ -423,7 +448,7 @@ class DatabaseRenderer {
                 }
             }
             
-            // Если нет в script теге, загружаем через fetch/XHR
+            // Если нет в script теге, загружаем через fetch/XHR (PostgreSQL и т.д.)
             if (!this.dataCache[config.url]) {
                 console.log(`DatabaseRenderer: Загружаем ${config.url}...`);
                 promises.push(
@@ -431,7 +456,10 @@ class DatabaseRenderer {
                         .then(data => {
                             console.log(`✅ ${config.url}: загружено ${data.length} записей`);
                             this.dataCache[config.url] = data;
-                            config.data = data;
+                            config.data = this.applyBdFilter(data, config.filter);
+                            if (config.filter && config.data.length !== data.length) {
+                                console.log(`   фильтр ${config.filter}: показано ${config.data.length} из ${data.length}`);
+                            }
                         })
                         .catch(err => {
                             console.error(`❌ Ошибка загрузки ${config.url}:`, err);
@@ -440,7 +468,8 @@ class DatabaseRenderer {
                 );
             } else {
                 console.log(`DatabaseRenderer: Используем кэш для ${config.url}`);
-                config.data = this.dataCache[config.url];
+                const raw = this.dataCache[config.url];
+                config.data = this.applyBdFilter(raw, config.filter);
             }
         }
         

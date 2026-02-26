@@ -12,11 +12,11 @@ from .file_loader import load_json_safe, load_css_variables_safe
 def _resolve_includes(source_dir: Path, data: Dict, objects_css: Dict, objects_fun: Dict,
                       objects_css_by_page: Dict = None, current_page: str = None) -> None:
     """Рекурсивно раскрывает инклюды: ключ с значением ["include", "имя_файла"]
-    читает 2_source/include/имя_файла.json, подставляет api и html, мержит css в objects_css и fun в objects_fun.
+    читает 2_source/1_main/include/имя_файла.json, подставляет api и html, мержит css в objects_css и fun в objects_fun.
     objects_css_by_page: {page: {filename: css}} — стили инклудов по страницам (независимо, без перезаписи)."""
     if not isinstance(data, dict):
         return
-    include_dir = source_dir / 'include'
+    include_dir = source_dir / '1_main' / 'include'
     keys_to_resolve = []
     for key, value in data.items():
         if isinstance(value, list) and len(value) >= 2 and value[0] == 'include':

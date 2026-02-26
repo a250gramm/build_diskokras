@@ -115,16 +115,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             })
-                .then(function(res) { return res.json(); })
+                .then(function(res) {
+                    return res.text().then(function(text) {
+                        try {
+                            var r = JSON.parse(text);
+                            if (!res.ok) r._httpOk = false;
+                            return r;
+                        } catch (e) {
+                            var msg = (text && text.trim()) ? text.slice(0, 300) : ('пустой ответ сервера (код ' + res.status + ')');
+                            return { ok: false, error: res.status + ': ' + msg };
+                        }
+                    });
+                })
                 .then(function(r) {
                     if (r.ok) {
                         window.open('../owner/bd/view_table.php', '_blank');
                     } else {
-                        alert('Ошибка: ' + (r.error || 'unknown'));
+                        alert('Ошибка БД: ' + (r.error || 'неизвестная ошибка'));
                     }
                 })
                 .catch(function(err) {
-                    alert('Ошибка сохранения в БД');
+                    alert('Ошибка сохранения в БД: ' + (err.message || String(err)));
                 });
         }
 

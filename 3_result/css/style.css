@@ -5865,6 +5865,382 @@ body[data-page='poss_point'] [data-path='form'] button {
 }
 
 
+body[data-page='poss_point'] div.orders_list .list {
+    display: contents !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.orders_list .list {
+        display: contents !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.orders_list .list {
+        display: contents !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.orders_list {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 16px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.orders_list {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.orders_list {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.card {
+    background-color: rgba(255, 255, 255, 1.0) !important;
+    border-top: 1px solid #d8d8d8 !important;
+    border-right: 1px solid #d8d8d8 !important;
+    border-bottom: 1px solid #d8d8d8 !important;
+    border-left: 1px solid #d8d8d8 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.card {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 14px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.card {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 12px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.card_header {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    align-items: center !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.card_header {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        align-items: center !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.card_header {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        align-items: center !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.card_content {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+    align-items: baseline !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.card_content {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 4px !important;
+        align-items: baseline !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.card_content {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 4px !important;
+        align-items: baseline !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.card_footer {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.card_footer {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 8px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.card_footer {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 8px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.card_footer .spoiler .content-spoiler_text {
+    display: none !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.card_footer .spoiler .content-spoiler_text {
+        display: none !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.card_footer .spoiler .content-spoiler_text {
+        display: none !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.card_footer .spoiler.open .content-spoiler_text {
+    display: block !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.card_footer .spoiler.open .content-spoiler_text {
+        display: block !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.card_footer .spoiler.open .content-spoiler_text {
+        display: block !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.card_footer .spoiler .btn_details {
+    background-color: rgba(0, 0, 0, 0.25) !important;
+    color: rgba(0, 0, 0, 0.8) !important;
+    width: auto !important;
+    padding: 4px !important;
+    font-size: 12px !important;
+    align-self: flex-start !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.card_footer .spoiler .btn_details {
+        width: auto !important;
+        padding: 6px !important;
+        font-size: 12px !important;
+        align-self: flex-start !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.card_footer .spoiler .btn_details {
+        width: auto !important;
+        padding: 6px !important;
+        font-size: 12px !important;
+        align-self: flex-start !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.card .content-sum_label {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.card .content-sum_label {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.card .content-sum_label {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.card .content-sum_val {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.card .content-sum_val {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.card .content-sum_val {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.card .content-sum_suffix {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.card .content-sum_suffix {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.card .content-sum_suffix {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.orders_list .content-status {
+    color: rgba(0, 0, 0, 0.7) !important;
+    font-size: 14px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.orders_list .content-status {
+        font-size: 14px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.orders_list .content-status {
+        font-size: 14px !important;
+    }
+}
+
+
+body[data-page='poss_point'] div.orders_list button {
+    background-color: rgba(0, 0, 0, 1.0) !important;
+    color: rgba(255, 255, 255, 1.0) !important;
+    border: 0px 0 0 0 0 !important;
+    width: 100% !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+}
+
+
+@media (max-width: 800px) {
+    body[data-page='poss_point'] div.orders_list button {
+        width: 100% !important;
+        padding: 10px !important;
+        border-radius: 6px !important;
+        cursor: pointer !important;
+        font-size: 14px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    body[data-page='poss_point'] div.orders_list button {
+        width: 100% !important;
+        padding: 12px !important;
+        border-radius: 6px !important;
+        cursor: pointer !important;
+        font-size: 14px !important;
+    }
+}
+
+
 
 
 /* ===== СТИЛИ ДЛЯ COL: СИНТАКСИСА ===== */
@@ -6032,6 +6408,13 @@ body[data-page='poss_point'] [data-path='form'] button {
 [data-path*='div_2'] div.2 {
     width: 80.0% !important;
     max-width: 80.0% !important;
+    box-sizing: border-box !important;
+}
+
+.list {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
     box-sizing: border-box !important;
 }
 

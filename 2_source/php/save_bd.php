@@ -8,6 +8,18 @@
  */
 header('Content-Type: application/json; charset=utf-8');
 
+// Если PHP упадёт с фатальной ошибкой — вернуть JSON с текстом (иначе 500 с пустым телом)
+register_shutdown_function(function() {
+    $err = error_get_last();
+    if ($err && in_array($err['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR], true)) {
+        if (!headers_sent()) {
+            header('Content-Type: application/json; charset=utf-8');
+            http_response_code(500);
+        }
+        echo json_encode(['ok' => false, 'error' => 'PHP: ' . $err['message'] . ' (файл ' . basename($err['file']) . ':' . $err['line'] . ')']);
+    }
+});
+
 $configName = $_GET['config'] ?? $_POST['config'] ?? '';
 if ($configName === '') {
     http_response_code(400);
@@ -20,11 +32,14 @@ $replaceAll = !empty($postData['replace_all']);
 unset($postData['replace_all']);
 
 $saveBdDir = __DIR__ . '/../save_bd/';
-
 $includePath = $saveBdDir . 'include.json';
+if (!is_file($includePath) && isset($_SERVER['DOCUMENT_ROOT'])) {
+    $saveBdDir = rtrim($_SERVER['DOCUMENT_ROOT'], '/') . '/save_bd/';
+    $includePath = $saveBdDir . 'include.json';
+}
 if (!is_file($includePath)) {
     http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'include.json not found']);
+    echo json_encode(['ok' => false, 'error' => 'include.json не найден. Путь: ' . $saveBdDir]);
     exit;
 }
 
@@ -70,8 +85,9 @@ try {
     exit;
 }
 
+// Порядок удаления: сначала таблицы со ссылками на другие (fin_op → sub_order), потом sub_order, order
 if ($replaceAll) {
-    foreach (['price', 'sub_order', 'order', 'fin_op'] as $t) {
+    foreach (['price', 'fin_op', 'sub_order', 'order'] as $t) {
         $pdo->exec('DELETE FROM "' . $t . '"');
     }
 }

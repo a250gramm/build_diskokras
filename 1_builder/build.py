@@ -68,7 +68,7 @@ def main():
         (output_dir / 'data' / 'tmp').mkdir(exist_ok=True)
 
         # Копируем конфиги button_json (shino.json, result.json и т.д.)
-        source_button_json_dir = source_dir / 'button_json'
+        source_button_json_dir = source_dir / '1_main' / 'button_json'
         output_button_json_dir = output_dir / 'button_json'
         if source_button_json_dir.exists():
             print("📦 Копирование конфигов button_json...")
@@ -82,7 +82,7 @@ def main():
 
         # Копируем save_bd только из корня папки (include.json, shino2.json, run_*.php и т.д.)
         # Подпапки с * в имени (например sql*) не копируются
-        source_save_bd_dir = source_dir / 'save_bd'
+        source_save_bd_dir = source_dir / '1_main' / 'save_bd'
         output_save_bd_dir = output_dir / 'save_bd'
         if source_save_bd_dir.exists():
             output_save_bd_dir.mkdir(exist_ok=True)

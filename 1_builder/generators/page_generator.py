@@ -197,7 +197,7 @@ class PageGenerator:
         found = set(re.findall(r'data-button-json="([^"]+)"', page_html))
         if not found:
             return ''
-        button_json_dir = self.source_dir / 'button_json'
+        button_json_dir = self.source_dir / '1_main' / 'button_json'
         if not button_json_dir.exists():
             return ''
         scripts = []

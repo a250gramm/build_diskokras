@@ -164,7 +164,7 @@
                 ]
             },
             "/deliv":        ["button", "text:Создать заказ",    "modal",    "form"],
-            "/poss_point":   ["include", "shino/form"]
+            "/poss_point":   ["include", "poss_point/form"]
         }
     },
     "main_btn_new":{
@@ -188,7 +188,7 @@
             "/hranenie":     ["list"],
             "/geo":          ["list"],
             "/deliv":        ["list"],
-            "/poss_point":   ["list"]
+            "/poss_point":   ["include", "poss_point/list"]
         }
     },
     "real_date": ["text", "21 августа 2025",    "api"],

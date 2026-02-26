@@ -1,0 +1,113 @@
+{
+"api":{
+    "api1":        ["bd_local",           "pay_met", "filter:id=pay_met_0,pay_met_1"],
+    "api2":        ["PostgreSQL",   "wall", "link:api1.id_wallet"]
+},
+
+"html":{
+    "cycle_gr8 col:2,1,1": {
+        "div_field-paymet col:2,2,2": {
+            "field": ["input", "required", "radio", "api1:id", "name:pay_method"],
+            "div_1-col:20%": {
+                "photo":     ["img",   "api2:img"]
+            },
+            "div_2-col:80%": {
+                "label":      ["text",  "api1:sub_cat"],
+                "percent":    ["text",  "api1:percent"],
+                "prefix":     ["text",  "api1:prefix"],
+                "id_wallet*": ["text",  "api1:id_wallet"]
+            }
+        }
+    }
+},
+
+"css":{
+    "cycle_gr8": {
+        "gap": [10, 10, 6, "px"],
+        "border": ["0px solid", "1 1 1 1", "green.100"],
+        "margin": "0px",
+        "padding": "0px",
+        "box-sizing": ["border-box", "border-box", "border-box"]
+    },
+    "div_field-paymet":{
+        "position": ["relative", "relative", "relative"],
+        "display": ["grid", "grid", "grid"],
+        "grid-template-columns": ["minmax(0, 20%) minmax(0, 80%)", "minmax(0, 20%) minmax(0, 80%)", "minmax(0, 20%) minmax(0, 80%)"],
+        "align-items": ["stretch", "stretch", "stretch"],
+        "min-height": [48, 72, 56, "px"],
+        "row-gap": [0, 0, 0, "px"],
+        "column-gap": [6, 6, 5, "px"],
+        "box-sizing": ["border-box", "border-box", "border-box"],
+        "min-width": [0, 0, 0],
+        "border": ["1px solid", "1 1 1 1", "black.100"],
+        "padding*": ["10", "8", "6", "px"],
+        "border-radius": [5, 5, 5, "px"]
+    },
+    "div_field-paymet 1-col":{
+        "display": ["flex", "flex", "flex"],
+        "align-items": ["stretch", "stretch", "stretch"],
+        "align-self": ["stretch", "stretch", "stretch"],
+        "min-height": [48, 72, 56, "px"],
+        "border": ["0px solid", "1 1 1 1", "red.100"]
+    },
+    "div_field-paymet 2-col":{
+        "display": ["flex", "flex", "flex"],
+        "flex-wrap": ["wrap", "wrap", "wrap"],
+        "align-items": ["center", "center", "center"],
+        "align-self": ["stretch", "stretch", "stretch"],
+        "width": ["fit-content", "fit-content", "fit-content"],
+        "max-width": ["fit-content", "fit-content", "fit-content"],
+        "justify-self": ["start", "start", "start"],
+        "row-gap": [2, 2, 2, "px"],
+        "border": ["0px solid", "1 1 1 1", "black.100"]
+    },
+    "div_field-paymet:has(input:checked)":{
+        "border": ["2px solid", "1 1 1 1", "blue.100"]
+    },
+    "div_field-paymet input":{
+        "position": ["absolute", "absolute", "absolute"],
+        "inset": "0",
+        "width": ["100%", "100%", "100%"],
+        "height": ["100%", "100%", "100%"],
+        "margin": "0",
+        "opacity": [0, 0, 0],
+        "cursor": ["pointer", "pointer", "pointer"],
+        "z-index": [1, 1, 1]
+    },
+    "div_field-paymet img":{
+        "border": ["0px solid", "1 1 1 1", "green.100"],
+        "height": [100, 100, 100, "%"],
+        "width": [100, 100, 100, "%"],
+        "min-height": [22, 22, 22, "px"],
+        "max-height": ["none", "none", "none"],
+        "max-width": [40, 100, 100, "px"],
+        "object-fit": ["cover", "cover", "cover"],
+        "object-position": ["center", "center", "center"],
+        "display": ["block", "block", "block"],
+        "border-radius": [3, 5, 5, "px"]
+    },
+    "div_field-paymet label":{
+        "flex-basis": ["100%", "100%", "100%"],
+        "white-space": ["nowrap", "nowrap", "nowrap"],
+        "font-size": [16, 16, 16, "px"],
+        "margin-bottom": [0, 0, 0, "px"],
+        "border": ["0px solid", "1 1 1 1", "red.100"]
+    },
+    "div_field-paymet percent":{
+        "display": ["inline-block", "block", "block"],
+        "white-space": ["nowrap", "normal", "normal"],
+        "width": ["fit-content", "auto", "auto"],
+        "font-size": [14, 13, 12, "px"],
+        "margin-top": [-12, -12, -12, "px"],
+        "border": ["0px solid", "1 1 1 1", "red.100"]
+    },
+    "div_field-paymet prefix":{
+        "display": ["inline-block", "block", "block"],
+        "white-space": ["nowrap", "normal", "normal"],
+        "width": ["fit-content", "auto", "auto"],
+        "font-size": [14, 13, 12, "px"],
+        "margin-top": [-12, -12, -12, "px"],
+        "border": ["0px solid", "1 1 1 1", "cyan.100"]
+    }
+}
+}

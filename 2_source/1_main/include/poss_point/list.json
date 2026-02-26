@@ -1,0 +1,116 @@
+{
+    "api": {
+        "api1": ["PostgreSQL", "1_full_order", "filter:stat_pay=none,part"]
+    },
+    "html": {
+        "div_orders_list": {
+            "cycle_list col:1,1,1": {
+                "div_card": {
+                    "div_card_header": {
+                        "num":         ["text", "api1:num"],
+                        "stat_pay":    ["text", "api1:stat_pay", "if:stat_pay"],
+                        "pay_percent": ["text", "api1:pay_percent"],
+                        "sim_percent": ["text", "text:%"],
+                        "stat_ready":  ["text", "api1:stat_ready", "if:stat_ready"]
+                    },
+                    "div_card_content": {
+                        "revenu_100": ["text", "api1:revenu_100"],
+                        "sum_suffix": ["text", "text: тг"]
+                    },
+                    "div_card_footer": {
+                        "div_spoiler": {
+                            "btn_details": ["button", "text:Детали"],
+                            "spoiler_text": ["text", "text:тест это"]
+                        },
+                        "btn_finish": ["button", "text:Завершить заказ"]
+                    }
+                }
+            }
+        }
+    },
+    "css": {
+        "div_orders_list .list": {
+            "display": ["contents", "contents", "contents"]
+        },
+        "div_orders_list": {
+            "display": ["grid", "grid", "grid"],
+            "grid-template-columns": ["repeat(4, 1fr)", "1fr", "1fr"],
+            "gap": [16, 12, 12, "px"],
+            "width": [100, 100, 100, "%"],
+            "min-width": [0, 0, 0],
+            "box-sizing": ["border-box", "border-box", "border-box"]
+        },
+        "div_card": {
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["column", "column", "column"],
+            "gap": [12, 10, 10, "px"],
+            "padding": [16, 14, 12, "px"],
+            "width": [100, 100, 100, "%"],
+            "min-width": [0, 0, 0],
+            "bg-color": ["white", 100],
+            "border": ["1px solid", "1 1 1 1", "black.15"],
+            "border-radius": [10, 8, 8, "px"],
+            "box-sizing": ["border-box", "border-box", "border-box"]
+        },
+        "div_card_header": {
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["row", "row", "row"],
+            "flex-wrap": ["wrap", "wrap", "wrap"],
+            "gap": [8, 6, 6, "px"],
+            "align-items": ["center", "center", "center"]
+        },
+        "div_card_content": {
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["row", "row", "row"],
+            "flex-wrap": ["wrap", "wrap", "wrap"],
+            "gap": [4, 4, 4, "px"],
+            "align-items": ["baseline", "baseline", "baseline"]
+        },
+        "div_card_footer": {
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["column", "column", "column"],
+            "align-items": ["stretch", "stretch", "stretch"],
+            "gap": [8, 8, 8, "px"]
+        },
+        "div_card_footer .spoiler .content-spoiler_text": {
+            "display": ["none", "none", "none"]
+        },
+        "div_card_footer .spoiler.open .content-spoiler_text": {
+            "display": ["block", "block", "block"]
+        },
+        "div_card_footer .spoiler .btn_details": {
+            "width": ["auto", "auto", "auto"],
+            "padding": [4, 6, 6, "px"],
+            "font-size": [12, 12, 12, "px"],
+            "bg-color": ["black", 25],
+            "color": ["black", 80],
+            "align-self": ["flex-start", "flex-start", "flex-start"]
+        },
+        "div_card sum_label": {
+            "font-size": [16, 15, 15, "px"],
+            "font-weight": [600, 600, 600]
+        },
+        "div_card sum_val": {
+            "font-size": [16, 15, 15, "px"],
+            "font-weight": [600, 600, 600]
+        },
+        "div_card sum_suffix": {
+            "font-size": [16, 15, 15, "px"],
+            "font-weight": [600, 600, 600]
+        },
+        "div_orders_list status": {
+            "font-size": [14, 14, 14, "px"],
+            "color": ["black", 70]
+        },
+        "div_orders_list button": {
+            "width": [100, 100, 100, "%"],
+            "padding": [10, 10, 12, "px"],
+            "bg-color": ["black", 100],
+            "color": ["white", 100],
+            "border": ["0px", "0 0 0 0"],
+            "border-radius": [6, 6, 6, "px"],
+            "cursor": ["pointer", "pointer", "pointer"],
+            "font-size": [14, 14, 14, "px"]
+        }
+    }
+}
