@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (trigger) {
             e.preventDefault();
             const modalId = trigger.getAttribute('data-modal');
-            const modal = document.getElementById(modalId);
+            const modal = document.getElementById(modalId) || document.querySelector('[id="' + modalId + '"]');
             if (modal) {
                 modal.classList.add('active');
                 modal.scrollTop = 0; // Прокручиваем модалку к началу
@@ -15,9 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Рендерим данные из БД (если есть контейнеры с data-template внутри модального окна)
                 if (window.dbRenderer) {
-                    // Небольшая задержка, чтобы модальное окно успело отобразиться
-                    setTimeout(() => {
-                        window.dbRenderer.renderAll();
+                    setTimeout(async () => {
+                        try {
+                            await window.dbRenderer.renderAll();
+                            if (window.hideClientSearchLists) window.hideClientSearchLists();
+                        } catch (err) {
+                            console.error('Ошибка при рендере модалки:', err);
+                        }
                     }, 50);
                 }
             }

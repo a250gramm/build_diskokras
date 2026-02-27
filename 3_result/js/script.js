@@ -1437,6 +1437,44 @@ document.addEventListener('click', function(e) {
     if (spoiler) spoiler.classList.toggle('open');
 });
 
+// Поиск клиента по номеру телефона: список скрыт по умолчанию, показывается и фильтруется при вводе
+function getClientSearchListContainer(wrap) {
+    var el = wrap.nextElementSibling;
+    while (el && (!el.hasAttribute || !el.hasAttribute('data-template'))) {
+        el = el.nextElementSibling;
+    }
+    return el;
+}
+document.addEventListener('input', function(e) {
+    var wrap = e.target.closest('.search-client-wrap');
+    if (!wrap) return;
+    var listContainer = getClientSearchListContainer(wrap);
+    if (!listContainer) return;
+    var val = (e.target.value || '').trim().replace(/\D/g, '');
+    if (val === '') {
+        listContainer.style.setProperty('display', 'none', 'important');
+        return;
+    }
+    listContainer.style.setProperty('display', listContainer.dataset.originalDisplay || 'contents', 'important');
+    var rows = listContainer.querySelectorAll('.fp04-field');
+    rows.forEach(function(row) {
+        var label = row.querySelector('label');
+        var phone = (label ? label.textContent : '').replace(/\D/g, '');
+        row.style.display = phone.indexOf(val) !== -1 ? '' : 'none';
+    });
+});
+// Скрыть список клиентов по умолчанию (вызовется после открытия модалки и renderAll)
+window.hideClientSearchLists = function() {
+    document.querySelectorAll('.search-client-wrap').forEach(function(wrap) {
+        var input = wrap.querySelector('input');
+        var listContainer = getClientSearchListContainer(wrap);
+        if (input && listContainer && (!input.value || !input.value.trim())) {
+            listContainer.dataset.originalDisplay = listContainer.style.getPropertyValue('display') || 'contents';
+            listContainer.style.setProperty('display', 'none', 'important');
+        }
+    });
+};
+
 
 // modal_1.js
 // Универсальный скрипт для модальных окон
@@ -1448,7 +1486,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (trigger) {
             e.preventDefault();
             const modalId = trigger.getAttribute('data-modal');
-            const modal = document.getElementById(modalId);
+            const modal = document.getElementById(modalId) || document.querySelector('[id="' + modalId + '"]');
             if (modal) {
                 modal.classList.add('active');
                 modal.scrollTop = 0; // Прокручиваем модалку к началу
@@ -1456,9 +1494,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Рендерим данные из БД (если есть контейнеры с data-template внутри модального окна)
                 if (window.dbRenderer) {
-                    // Небольшая задержка, чтобы модальное окно успело отобразиться
-                    setTimeout(() => {
-                        window.dbRenderer.renderAll();
+                    setTimeout(async () => {
+                        try {
+                            await window.dbRenderer.renderAll();
+                            if (window.hideClientSearchLists) window.hideClientSearchLists();
+                        } catch (err) {
+                            console.error('Ошибка при рендере модалки:', err);
+                        }
                     }, 50);
                 }
             }

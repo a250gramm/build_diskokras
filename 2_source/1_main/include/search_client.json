@@ -1,0 +1,102 @@
+
+{
+    "api":{
+        "api1":        ["PostgreSQL",   "1_client"]
+    
+    },
+    "fun":{
+        "Сумма всех полей с ценой": {
+            "fun": "sum", "format": "number", "result": "total_price"
+        }
+    },
+    "html":{
+        "div_search-client-wrap": {
+            "input_phone":  ["input", "text:Введите часть номера (747)"]
+        },
+        "cycle_fp04 col:1,1,1": {
+            "div_fp04-field": {
+                "label":      ["text", "api1:phone"],
+                "name_line":  ["text", "api1:first_name"],
+                "name_line2": ["text", "api1:last_name"],
+                "comp_line":  ["text", "api1:comp_name"]
+            }
+        },
+        "div_all-sum": {
+            "label":   ["text",  "fun:total_price"]
+        }
+    },
+    
+    "css":{
+        "div_fp04-field":{
+            "display": ["flex", "flex", "flex"],
+            "flex-direction": ["column", "column", "column"],
+            "align-items": ["stretch", "stretch", "stretch"],
+            "width": [100, 100, 100, "%"],
+            "gap": [5, 5, 5, "px"],
+            "min-height": [48, 48, 48, "px"],
+            "border": ["1px solid", "1 1 1 1", "black.60"],
+            "background": ["white", "white", "white"],
+            "box-sizing": ["border-box", "border-box", "border-box"],
+            "overflow": ["hidden", "hidden", "hidden"],
+            "position": ["relative", "relative", "relative"],
+            "margin-bottom*": [10, 10, 10, "px"],
+            "cursor": ["pointer", "pointer", "pointer"],
+            "padding-left": [10, 10, 10, "px"],
+            "padding-right": [10, 10, 10, "px"],
+            "border-radius": [5, 5, 5, "px"]
+        },
+        "div_fp04-field.selected": {
+            "border": ["1px solid", "1 1 1 1", "blue.100"],
+            "box-shadow": ["0 0 0 1px", "1 1 1 1", "blue.100"],
+            "background": ["white", "white", "white"],
+            "padding-left": [10, 10, 10, "px"],
+            "padding-right": [10, 10, 10, "px"]
+        },
+        "div_fp04-field label":{
+            "font-weight": [600, 600, 600],
+            "white-space": ["nowrap", "nowrap", "nowrap"],
+            "cursor": ["pointer", "pointer", "pointer"],
+            "font-size": [16, 16, 16, "px"]
+        },
+        "div_fp04-field .name_line":{
+            "font-size": [14, 14, 14, "px"],
+            "margin-top": [2, 2, 2, "px"]
+        },
+        "div_fp04-field .name_line2":{
+            "font-size": [14, 14, 14, "px"]
+        },
+        "div_fp04-field .comp_line":{
+            "font-size": [14, 14, 14, "px"],
+            "font-style": ["italic", "italic", "italic"]
+        },
+        "div_search-client-wrap": {
+            "margin-bottom": [12, 12, 12, "px"]
+        },
+        "div_search-client-wrap label": {
+            "display": ["block", "block", "block"],
+            "font-size": [14, 14, 14, "px"],
+            "margin-bottom": [6, 6, 6, "px"]
+        },
+        "div_search-client-wrap input": {
+            "width": [100, 100, 100, "%"],
+            "padding": [10, 10, 10, "px"],
+            "border": ["1px solid", "1 1 1 1", "black.60"],
+            "border-radius": [5, 5, 5, "px"],
+            "font-size": [16, 16, 16, "px"]
+        },
+        "div_all-sum": {
+            "text-align": ["right", "right", "right"],
+            "padding-top": [15, 12, 10, "px"]
+        },
+        "div_all-sum label": {
+            "text-align": ["right", "right", "right"]
+        },
+        ".search-client-wrap+span+.fp04": {
+            "display": ["none", "none", "none"]
+        }
+    },
+    "js":{
+        "api1":        ["PostgreSQL",   "1_client"]
+    
+    }
+    }
